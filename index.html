@@ -5,11 +5,202 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Belonging Foundation</title>
-    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
 </head>
 <body>
+  <style>
+    /* Reset some basic elements */
+body, h1, h2, h3, p, ul, li, a {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+/* Body and Font Styles */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+/* Right side menu styles */
+@media screen and (max-width: 992px) { /* Adjust this as needed */
+  .navbar-collapse {
+    width: 25%; /* Adjust to the width you want */
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    overflow-y: auto;
+    background-color: #333; /* Or any color you want */
+    border-left: 1px solid #ccc; /* Adds a slight border to the left of the menu */
+  }
+
+  .navbar-toggler {
+    margin-left: 1rem;
+  }
+  
+  .navbar {
+    justify-content: space-between;
+  }
+
+  .navbar-nav {
+    display: flex;
+    flex-direction: column; /* Stack the links vertically */
+    padding: 1rem;
+  }
+
+  .nav-item {
+    margin-bottom: 0.5rem; /* Add space between links */
+  }
+}
+
+.hamburger-menu {
+  float: right;
+  cursor: pointer;
+}
+
+/* Ensure the dropdown is hidden by default and only shown when the hamburger icon is clicked */
+.hidden {
+  display: none;
+}
+/* This will show the nav-links when the hamburger menu is clicked */
+.responsive {
+  display: block;
+  position: absolute;
+  width: 100%;
+  background-color: #333;
+}
+
+/* Additional responsive adjustments */
+@media screen and (max-width: 600px) {
+  .navbar a, .navbar .dropdown .dropbtn {
+    display: none; /* Hide all navbar links */
+  }
+
+  .navbar .hamburger-menu {
+    display: block; /* Show hamburger menu */
+  }
+
+  .navbar.responsive .hamburger-menu,
+  .navbar.responsive a {
+    display: block; /* Show links when in responsive mode */
+  }
+
+  .navbar.responsive .dropdown .dropbtn {
+    display: block; /* Ensure dropdown buttons are also shown */
+  }
+}
+
+/* Style the sign-up form */
+.signup-form {
+  background-color: #f5f5f5;
+  padding: 20px;
+  text-align: center;
+}
+
+.signup-form h2 {
+  margin-bottom: 20px;
+}
+
+.signup-form form {
+  max-width: 300px;
+  margin: auto;
+}
+
+.signup-form input[type="email"],
+.signup-form input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+}
+
+.signup-form button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Button hover effect */
+.signup-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Hero Section Styles */
+.hero-section {
+  background-image: url('[IMAGE_URL]');
+  background-size: cover;
+  background-position: center;
+  padding: 60px;
+  text-align: center;
+  color: white;
+}
+
+.hero-section h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+}
+
+.hero-section p {
+  font-size: 1.2em;
+  margin-bottom: 1.5em;
+}
+
+/* Call-to-action button styles */
+.hero-section .cta-button {
+  background-color: #008cba;
+  color: white;
+  padding: 10px 30px;
+  display: inline-block;
+  margin-bottom: 2em;
+}
+
+/* Content Section Styles */
+.content-section {
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px 20px;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 600px) {
+  .navbar a, .navbar .dropdown .dropbtn {
+    display: none;
+  }
+
+  .navbar .hamburger-menu {
+    display: block;
+  }
+
+  .navbar.responsive {position: relative;}
+  .navbar.responsive a.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .navbar.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+
+
+
+  </style>
   <header>
     <!-- Bootstrap Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
