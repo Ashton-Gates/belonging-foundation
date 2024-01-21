@@ -391,17 +391,18 @@ body {
 /* Add your new styles for .touts-container and .row here */
 .touts-container {
     display: block;
-    margin-top: -10px;
+    margin-top: -10px; /* Adjusts the position upwards */
     position: relative;
     z-index: 1;
+    padding: 0 10px; /* Adds padding on the left and right */
 }
 
 .row {
     margin: 0 auto;
     max-width: 75rem;
-
-    padding: 0 10px;
+    width: calc(100% - 20px); /* Subtract the padding from the total width */
 }
+
 
 /* Ensure .row clears its children */
 .row:after {
@@ -486,7 +487,7 @@ body {
   <div class="row" style="background-color: #9b51e0;">
     <h2>About the Belonging Foundation</h2>
     <p>HBCUs and their students change lives across the United States. Please give generously to ensure that students of color can get to and through college successfully because of your support!</p>
-    <a href="#donate" class="btn btn-overlay">HOW WE GET RESULTS</a>
+    <a href="about.html" class="btn btn-overlay">HOW WE GET RESULTS</a>
   </div>
 </div>
 <!-- Section with overlay and call to action -->
@@ -494,7 +495,7 @@ body {
   <div class="row" style="background-color: #cf2e2e;">
     <h2>Scholarships</h2>
     <p>HBCUs and their students change lives across the United States. Please give generously to ensure that students of color can get to and through college successfully because of your support!</p>
-    <a href="#donate" class="btn btn-overlay">APPLY NOW</a>
+    <a href="scholarship.html" class="btn btn-overlay">APPLY NOW</a>
   </div>
 </div>
 
@@ -502,7 +503,7 @@ body {
   <div class="row" style="background-color: #fcb900;">
     <h2>Ways to get Involved</h2>
     <p>HBCUs and their students change lives across the United States. Please give generously to ensure that students of color can get to and through college successfully because of your support!</p>
-    <a href="#donate" class="btn btn-overlay">DONATE NIW</a>
+    <a href="involved.html" class="btn btn-overlay">CHECK US OUT</a>
   </div>
 </div>
 
