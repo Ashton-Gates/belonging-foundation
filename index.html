@@ -340,6 +340,55 @@ body {
   transform: translateY(-2px); /* Raise the section */
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for the effects */
 }
+/* Overlay Section Styles */
+.overlay-section {
+  background: url('path_to_your_image.jpg') no-repeat center center; /* Replace with your image path */
+  background-size: cover;
+  text-align: center;
+  color: white;
+  position: relative;
+  padding: 4rem 0;
+}
+
+.overlay-content {
+  position: relative;
+  z-index: 2; /* Ensures the content is above the overlay */
+}
+
+.btn-overlay {
+  background-color: #ff6f00; /* Adjust button color as needed */
+  border: none;
+  padding: 0.75rem 1.5rem; /* Adjust button padding as needed */
+  /* Other button styles as needed */
+}
+
+/* Info Section Styles */
+.info-section {
+  position: relative;
+  color: white;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  /* Set individual background images for each section here */
+}
+
+.info-section:first-of-type {
+  background-image: url('keegan_steph.PNG');
+}
+
+.info-section:last-of-type {
+  background-image: url('article_1.PNG');
+}
+
+.info-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2; /* Ensures the content is above the overlay */
+  /* Additional styling as needed */
+}
+
 
 
   </style>
@@ -406,14 +455,32 @@ body {
   </div>
 </header>
 
-<!-- Main content and hero section: -->
-<div class="feature-section text-center">
-  <div class="container">
-    <h1>HBCUs Matter</h1>
+<!-- Section with overlay and call to action -->
+<div class="overlay-section">
+  <div class="overlay-content">
+    <h2>HBCUs Matter</h2>
     <p>HBCUs and their students change lives across the United States. Please give generously to ensure that students of color can get to and through college successfully because of your support!</p>
-    <a href="#donate" class="btn btn-primary btn-lg">Donate Now</a>
+    <a href="#donate" class="btn btn-overlay">Donate Now</a>
   </div>
 </div>
+
+<!-- Repeated sections like the ones in screenshots 2 and 3 -->
+<div class="info-section">
+  <div class="info-overlay">
+    <h3>UNCF: The nation's largest and most effective minority education organization</h3>
+    <a href="#results" class="btn btn-info-overlay">HOW WE GET RESULTS</a>
+  </div>
+</div>
+
+<!-- Another info section -->
+<div class="info-section">
+  <div class="info-overlay">
+    <h3>Ways to Donate</h3>
+    <p>Talented and deserving young people need your support today. Your donation helps educate over 60,000 students at more than 1,100 schools.</p>
+    <a href="#donate" class="btn btn-info-overlay">DONATE NOW</a>
+  </div>
+</div>
+
 <!-- Additional content sections: -->
 <div class="content-section">
   <h2>News</h2>
