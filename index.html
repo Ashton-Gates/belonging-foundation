@@ -172,47 +172,6 @@ body {
 .signup-form button:hover {
   background-color: #0056b3;
 }
-
-
-/*--------------------Header-Section End -----------------------*/
-
-/*---------------------Body Style Starts------------------------*/
-
-/* Hero Section Styles */
-.hero-section {
-  background-image: url('keegan_steph.jpg'); /* Replace with your hero image path */
-  background-size: cover;
-  background-position: center;
-  text-align: center;
-  color: #fff;
-  position: relative;
-  z-index: 1;
-}
-
-.hero-section h1 {
-  font-size: 2.5em;
-  margin-bottom: 0.5em;
-}
-
-.hero-section p {
-  font-size: 1.2em;
-  margin-bottom: 1.5em;
-}
-
-/* Call-to-action button styles */
-.hero-section .cta-button {
-  background-color: #008cba;
-  color: white;
-  padding: 10px 30px;
-  display: inline-block;
-  margin-bottom: 2em;
-}
-
-/* Content sections below the hero section */
-.content-section {
-  padding: 20px;
-  background-color: #f4f4f4;
-}
 /* Footer Styles */
 .footer {
   background-color: #333;
@@ -357,42 +316,51 @@ body {
   transform: translateY(-2px); /* Raise the section */
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for the effects */
 }
-/* Overlay Section Styles */
-/* Overlay Section Styles */
-.overlay-section {
-  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay color */
+
+/*--------------------Header-Section End -----------------------*/
+
+/*---------------------Body Style Starts------------------------*/
+
+/* Hero Section Styles */
+.hero-section {
+  background-image: url('keegan_steph.jpg'); /* Replace with the path to your hero image */
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  position: relative;
+  color: white;
+  padding: 100px 0; /* Adjust padding to suit your content */
+}
+
+/* Overlay Content Styles */
+.overlay-content {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  color: white;
+  text-align: center;
 }
 
-.overlay-section h1,
-.overlay-section p {
-  color: white; /* Text color */
-  z-index: 3;
-}
-
-.overlay-section .btn-primary {
-  background-color: #ff6f00; /* Button background color */
-  border-color: #ff6f00; /* Button border color */
-  padding: 10px 20px;
+/* This will be your button inside the overlay */
+.overlay-content .cta-button {
+  background-color: #ff6f00; /* Adjust the button color as needed */
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2em; /* Adjust font size as needed */
+  color: white;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
   margin-top: 20px;
 }
 
-/* Adjust button hover effect */
-.overlay-section .btn-primary:hover {
-  background-color: #e65e00; /* Button hover color */
-  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
-  transform: translateY(-2px);
+/* Ensure the overlay content is above all other content */
+.overlay-content .btn:hover {
+  background-color: #cc5800; /* Darken button on hover */
+  transition: background-color 0.3s ease;
 }
-
 /* Info Section Styles */
 .info-section {
   position: relative;
