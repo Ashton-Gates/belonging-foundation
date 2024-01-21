@@ -181,8 +181,9 @@ body {
 /* Hero Section Styles */
 .hero-section {
   background-image: url('[IMAGE_URL]');
-  background-size: cover;
+  background-size: contain;
   background-position: center;
+  background-repeat: no-repeat;
   padding: 60px;
   text-align: center;
   color: black;
@@ -307,9 +308,26 @@ body {
 }
 .feature-section {
   padding: 3rem 0; /* Adjust the padding as needed */
-  background: url('keegan_steph.PNG') no-repeat center center; /* Replace with your image path */
+  background: url('keegan_steph.PNG') no-repeat center center; 
   background-size: cover;
-  color: #fff; /* Text color */
+  background-position: center;
+  text-align: center;
+  padding: 100px 0; /* Adjust padding as needed */
+}
+
+.feature-section .container {
+  position: relative;
+  z-index: 2;
+  color: #fff; /* Or any color you want for the text */
+}
+
+.feature-section .cta-button {
+  background-color: #ff6f00; /* Or any color you want for the button */
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none; /* Remove underline from links */
+  display: inline-block; /* To apply padding and margin */
+  margin-top: 20px;
 }
 
 .feature-section h1 {
