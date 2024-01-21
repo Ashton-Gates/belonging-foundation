@@ -17,7 +17,9 @@ body, h1, h2, h3, p, ul, li, a {
   list-style: none;
   text-decoration: none;
 }
-
+h2{
+  text-align: center;
+}
 /* Body and Font Styles */
 body {
   font-family: Arial, sans-serif;
@@ -305,7 +307,6 @@ body {
   /* Additional styling as needed */
 }
 
-/* Add your new styles for .touts-container and .row here */
 .touts-container {
     display: block;
     margin-top: -10px; /* Adjusts the position upwards */
@@ -317,11 +318,9 @@ body {
 .row {
     margin: 0 auto;
     max-width: 75rem;
-    width: calc(100% - 20px); /* Subtract the padding from the total width */
+    width: calc(100% - 20px); 
 }
 
-
-/* Ensure .row clears its children */
 .row:after {
     content: "";
     display: table;
@@ -549,7 +548,7 @@ body {
 <section class="feature-panel" style="text-align: center;">
   <div class="touts-container">
     <div class="row">
-      <h2 style="text-align: center;">About the Belonging Foundation</h2>
+      <h2 >About the Belonging Foundation</h2>
       <p>HBCUs and their students change lives across the United States. Please give generously to ensure that students of color can get to and through college successfully because of your support!</p>
       <a href="about.html" class="cta-button" style="text-align: center;">HOW WE GET RESULTS</a>
     </div>
