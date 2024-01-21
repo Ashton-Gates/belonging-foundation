@@ -388,7 +388,26 @@ body {
   /* Additional styling as needed */
 }
 
+/* Add your new styles for .touts-container and .row here */
+.touts-container {
+    display: block;
+    margin-top: -40px;
+    position: relative;
+    z-index: 1;
+}
 
+.row {
+    margin: 0 auto;
+    max-width: 75rem;
+    width: 100%;
+}
+
+/* Ensure .row clears its children */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
 
   </style>
   <header>
@@ -463,8 +482,8 @@ body {
 </div>
 
 <!-- Section with overlay and call to action -->
-<div class="overlay-section">
-  <div class="overlay-content">
+<div class="touts-container">
+  <div class="row">
     <h2>HBCUs Matter</h2>
     <p>HBCUs and their students change lives across the United States. Please give generously to ensure that students of color can get to and through college successfully because of your support!</p>
     <a href="#donate" class="btn btn-overlay">Donate Now</a>
