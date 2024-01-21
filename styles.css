@@ -33,6 +33,29 @@ body {
 /* This will show the nav-links when the hamburger menu is clicked */
 .responsive {
   display: block;
+  position: absolute;
+  width: 100%;
+  background-color: #333;
+}
+
+/* Additional responsive adjustments */
+@media screen and (max-width: 600px) {
+  .navbar a, .navbar .dropdown .dropbtn {
+    display: none; /* Hide all navbar links */
+  }
+
+  .navbar .hamburger-menu {
+    display: block; /* Show hamburger menu */
+  }
+
+  .navbar.responsive .hamburger-menu,
+  .navbar.responsive a {
+    display: block; /* Show links when in responsive mode */
+  }
+
+  .navbar.responsive .dropdown .dropbtn {
+    display: block; /* Ensure dropdown buttons are also shown */
+  }
 }
 
 /* Style the sign-up form */
