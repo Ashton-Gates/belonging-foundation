@@ -410,7 +410,18 @@ body {
     display: table;
     clear: both;
 }
-
+.feature-panel {
+  align-items: center;
+  background: #004061 50% 25% no-repeat;
+  background-size: cover;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  padding: 5rem 0 6.25rem;
+  position: relative;
+  text-align: center;
+}
   </style>
   <header>
     <!-- Bootstrap Navigation -->
@@ -483,13 +494,15 @@ body {
   </div>
 </div>
 <!-- Section with overlay and call to action -->
-<div class="touts-container">
-  <div class="row" style="background-color: #9b51e0;">
-    <h2>About the Belonging Foundation</h2>
-    <p>HBCUs and their students change lives across the United States. Please give generously to ensure that students of color can get to and through college successfully because of your support!</p>
-    <a href="about.html" class="btn btn-overlay">HOW WE GET RESULTS</a>
+<section class="feature-panel">
+  <div class="touts-container">
+    <div class="row" style="background-color: #9b51e0;">
+      <h2>About the Belonging Foundation</h2>
+      <p>HBCUs and their students change lives across the United States. Please give generously to ensure that students of color can get to and through college successfully because of your support!</p>
+      <a href="about.html" class="btn btn-overlay">HOW WE GET RESULTS</a>
+    </div>
   </div>
-</div>
+</section>
 <!-- Section with overlay and call to action -->
 <div class="touts-container">
   <div class="row" style="background-color: #cf2e2e;">
