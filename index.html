@@ -6,20 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Belonging Foundation</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
 </head>
 <body>
-    <div class="navbar">
-        <!-- Hamburger menu: -->
-        <div class="hamburger-menu">
-            <a href="javascript:void(0);" onclick="toggleMenu()">&#9776;</a>
+  <header>
+    <!-- Bootstrap Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#home">
+            <img src="path_to_your_logo.png" alt="Belonging Foundation Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#donate">Donate to Belonging Foundation</a>
+                </li>
+                <!-- Add other nav items here -->
+            </ul>
         </div>
-
-        <!-- Navigation links (hidden by default, shown when hamburger is clicked): -->
-        <ul id="nav-links" class="hidden">
-            <li><a href="#donate">Donate to Belonging Foundation</a></li>
-            <li><a href="#scholarships">Scholarships</a></li>
-            <!-- Add other links here -->
-        </ul>
+    </nav>
+</header>
 
         <!-- Sign-up form: -->
         <div class="signup-form">
@@ -31,25 +40,25 @@
             </form>
         </div>
     </div>
+    
+<!-- Main content and hero section: -->
+<div class="hero-section">
+  <h1>HBCUs Matter</h1>
+  <p>Please give generously to ensure that students of color can get to and through college successfully because of your support!</p>
+  <a href="#donate" class="cta-button">Donate Now</a>
+</div>
 
-    <!-- Main content and hero section: -->
-    <div class="hero-section">
-        <h1>HBCUs Matter</h1>
-        <p>Please give generously to ensure that students of color can get to and through college successfully because of your support!</p>
-        <a href="#donate" class="cta-button">Donate Now</a>
-    </div>
+<!-- Additional content sections: -->
+<div class="content-section">
+  <h2>News</h2>
+  <p>Latest updates about our activities...</p>
+  <!-- Add more content here -->
+</div>
 
-    <!-- Additional content sections: -->
-    <div class="content-section">
-        <h2>News</h2>
-        <p>Latest updates about our activities...</p>
-        <!-- Add more content here -->
-    </div>
-
-    <!-- Footer: -->
-    <div class="footer">
-        <p>Footer content like contact info, social media links, etc.</p>
-    </div>
+<!-- Footer: -->
+<div class="footer">
+  <p>Footer content like contact info, social media links, etc.</p>
+</div>
 
     <script>
         // JavaScript to toggle the menu:
@@ -64,5 +73,11 @@ function toggleMenu() {
 
 
     </script>
+
+<!-- Bootstrap JavaScript -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 </body>
 </html>
