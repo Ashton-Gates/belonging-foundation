@@ -185,7 +185,7 @@ body {
   background-position: center;
   padding: 60px;
   text-align: center;
-  color: white;
+  color: black;
 }
 
 .hero-section h1 {
@@ -305,6 +305,41 @@ body {
 .carousel-control-prev, .carousel-control-next {
   width: 5%;
 }
+.feature-section {
+  padding: 3rem 0; /* Adjust the padding as needed */
+  background: url('keegan_bike.PNG') no-repeat center center; /* Replace with your image path */
+  background-size: cover;
+  color: #fff; /* Text color */
+}
+
+.feature-section h1 {
+  font-size: 2.5rem; /* Adjust size as needed */
+  margin-bottom: 1rem;
+}
+
+.feature-section p {
+  margin-bottom: 2rem;
+}
+
+.feature-section .btn-primary {
+  background-color: #ff6f00; /* Adjust button color as needed */
+  border-color: #ff6f00; /* Adjust border color as needed */
+  padding: 0.75rem 1.5rem; /* Adjust button padding as needed */
+}
+
+.feature-section .btn-primary:hover {
+  background-color: #e65e00; /* Darken button on hover */
+  border-color: #e65e00;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.3); /* Add shadow effect on hover */
+  transform: translateY(-2px); /* Raise the button slightly on hover */
+}
+
+/* Optional: If you want the shadow effect on hover for the entire section */
+.feature-section:hover {
+  box-shadow: 0 8px 15px rgba(0,0,0,0.3); /* Shadow effect */
+  transform: translateY(-2px); /* Raise the section */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for the effects */
+}
 
 
   </style>
@@ -380,12 +415,13 @@ body {
 </header>
 
 <!-- Main content and hero section: -->
-<div class="hero-section">
-  <h1>HBCUs Matter</h1>
-  <p>Please give generously to ensure that students of color can get to and through college successfully because of your support!</p>
-  <a href="#donate" class="cta-button">Donate Now</a>
+<div class="feature-section text-center">
+  <div class="container">
+    <h1>HBCUs Matter</h1>
+    <p>HBCUs and their students change lives across the United States. Please give generously to ensure that students of color can get to and through college successfully because of your support!</p>
+    <a href="#donate" class="btn btn-primary btn-lg">Donate Now</a>
+  </div>
 </div>
-
 <!-- Additional content sections: -->
 <div class="content-section">
   <h2>News</h2>
@@ -413,7 +449,7 @@ body {
         <a href="link_to_news_article_2">
           <img class="d-block w-100" src="Article_3.PNG" alt="Second slide">
           <div class="carousel-caption">
-            <h3>News Article Title 2</h3>
+            <h3>News Article Title 3</h3>
             <p>Short description of the article.</p>
           </div>
         </a>
