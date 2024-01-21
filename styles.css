@@ -30,6 +30,10 @@ body {
 .hidden {
   display: none;
 }
+/* This will show the nav-links when the hamburger menu is clicked */
+.responsive {
+  display: block;
+}
 
 /* Style the sign-up form */
 .signup-form {
