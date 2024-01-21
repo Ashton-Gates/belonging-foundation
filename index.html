@@ -278,6 +278,33 @@ body {
   transform: scale(1.03);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
+/* Custom styles for carousel control arrows */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 40px; /* Adjust size */
+  width: 40px;
+  background-size: 100%, 100%;
+  background-image: none;
+}
+
+.carousel-control-prev-icon {
+  border: solid black; /* Change color as needed */
+  border-width: 0 5px 5px 0;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.carousel-control-next-icon {
+  border: solid black; /* Change color as needed */
+  border-width: 0 5px 5px 0;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+/* Increase the size of the clickable area for easier navigation */
+.carousel-control-prev, .carousel-control-next {
+  width: 5%;
+}
 
 
   </style>
