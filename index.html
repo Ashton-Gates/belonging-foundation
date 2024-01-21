@@ -8,47 +8,38 @@
   body {
     font-family: Arial, sans-serif;
   }
-  .navbar {
-    background-color: #333;
-    overflow: hidden;
-    color: white;
-    padding: 0 20px;
+  /* Hides the dropdown content by default */
+  .dropdown-content {
+      display: none;
   }
-  .navbar a {
-    float: left;
-    color: white;
-    text-decoration: none;
-    padding: 14px 20px;
-    text-align: center;
+
+  /* Styles for when the hamburger menu is clicked */
+  .responsive .dropdown-content {
+      display: block;
   }
-          /* Ensure the nav bar takes the full width */
-          .navbar {
-            width: 100%;
-            position: relative; /* This positions the navbar in the flow of the document */
-        }
+  /* Media query for screens larger than 600px wide */
+  @media screen and (min-width: 600px) {
+      .hamburger-menu {
+          display: none; /* Hide hamburger menu on larger screens */
+      }
+      .navbar a {
+          float: none; /* Stack links vertically */
+      }
+      .dropdown:hover .dropdown-content {
+          display: block; /* Show dropdown content on hover */
+      }
+  }
 
-        /* Style adjustments for the hamburger menu */
-        .hamburger-menu {
-            position: absolute; /* This takes it out of the flow of the document */
-            right: 0; /* This aligns the menu to the far right */
-            top: 0; /* This aligns the menu to the top */
-            padding: 14px 16px; /* Adjusts the padding to ensure clickability */
-        }
-
-        /* Ensuring the menu list is not displayed until the hamburger is clicked */
-        #nav-links.responsive {
-            display: block;
-            position: absolute;
-            background-color: #000000;
-            top: 48px; /* Adjust this value based on the height of your hamburger menu */
-            width: 100%;
-        }
-
-        /* Style the sign-up form to appear under the hamburger menu */
-        .nav-footer {
-            clear: both; /* This ensures that the form is below the floated elements */
-            padding-top: 20px; /* This adds space between the nav bar and the form */
-        }
+  /* Media query for screens less than or equal to 600px wide */
+  @media screen and (max-width: 600px) {
+      .navbar a {
+          display: block; /* Make sure all links are stacked vertically */
+          text-align: left; /* Align text to the left */
+      }
+      .nav-footer {
+          margin-top: 20px; /* Add space above the sign-up form */
+      }
+  }
         .signup-form {
             background-color: #f5f5f5; /* Change this to match your desired background color */
             padding: 20px;
@@ -185,12 +176,13 @@
 <script>
   function toggleMenu() {
       var x = document.getElementById("nav-links");
-      if (x.className === "hidden") {
+      if (x.className.indexOf("responsive") === -1) {
           x.className += " responsive";
       } else {
-          x.className = "hidden";
+          x.className = x.className.replace(" responsive", "");
       }
   }
+
 </script>
 
 
