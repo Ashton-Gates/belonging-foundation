@@ -53,14 +53,15 @@
 
     <script>
         // JavaScript to toggle the menu:
-        function toggleMenu() {
-          var x = document.getElementById("nav-links");
-          if (x.className === "hidden") {
-            x.className += " responsive";
-          } else {
-            x.className = "hidden";
-          }
-        }
+function toggleMenu() {
+  var x = document.getElementById("nav-links");
+  if (x.classList.contains("responsive")) {
+    x.classList.remove("responsive");
+  } else {
+    x.classList.add("responsive");
+  }
+}
+
 
     </script>
 </body>
