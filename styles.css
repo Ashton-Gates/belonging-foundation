@@ -16,9 +16,26 @@ body {
 
 /* Navbar Styles */
 .navbar {
+  justify-content: space-between; /* Align logo and toggle */
   background-color: #333;
   color: white;
   padding: 10px 20px;
+}
+.navbar-brand img {
+  max-height: 50px; /* Adjust the size of your logo */
+}
+
+.navbar-toggler {
+  margin-left: 1rem;
+}
+
+.navbar-collapse {
+  width: 25%; /* Set the width of the collapsed menu */
+  position: fixed;
+  top: 0; /* Align the top of the menu with the top of the page */
+  right: 0; /* Align the menu to the right of the page */
+  height: 100vh; /* Full height */
+  overflow-y: auto; /* Enable scrolling if content overflows */
 }
 
 .hamburger-menu {
