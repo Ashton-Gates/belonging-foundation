@@ -14,28 +14,36 @@ body {
   padding: 0;
 }
 
-/* Navbar Styles */
-.navbar {
-  justify-content: space-between; /* Align logo and toggle */
-  background-color: #333;
-  color: white;
-  padding: 10px 20px;
-}
-.navbar-brand img {
-  max-height: 50px; /* Adjust the size of your logo */
-}
+/* Right side menu styles */
+@media screen and (max-width: 992px) { /* Adjust this as needed */
+  .navbar-collapse {
+    width: 25%; /* Adjust to the width you want */
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    overflow-y: auto;
+    background-color: #333; /* Or any color you want */
+    border-left: 1px solid #ccc; /* Adds a slight border to the left of the menu */
+  }
 
-.navbar-toggler {
-  margin-left: 1rem;
-}
+  .navbar-toggler {
+    margin-left: 1rem;
+  }
+  
+  .navbar {
+    justify-content: space-between;
+  }
 
-.navbar-collapse {
-  width: 25%; /* Set the width of the collapsed menu */
-  position: fixed;
-  top: 0; /* Align the top of the menu with the top of the page */
-  right: 0; /* Align the menu to the right of the page */
-  height: 100vh; /* Full height */
-  overflow-y: auto; /* Enable scrolling if content overflows */
+  .navbar-nav {
+    display: flex;
+    flex-direction: column; /* Stack the links vertically */
+    padding: 1rem;
+  }
+
+  .nav-item {
+    margin-bottom: 0.5rem; /* Add space between links */
+  }
 }
 
 .hamburger-menu {
