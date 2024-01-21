@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foundation Page</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  .navbar {
+    background-color: #333;
+    overflow: hidden;
+    color: white;
+    padding: 0 20px;
+  }
+  .navbar a {
+    float: left;
+    color: white;
+    text-decoration: none;
+    padding: 14px 20px;
+    text-align: center;
+  }
+          /* Ensure the nav bar takes the full width */
+          .navbar {
+            width: 100%;
+            position: relative; /* This positions the navbar in the flow of the document */
+        }
+
+        /* Style adjustments for the hamburger menu */
+        .hamburger-menu {
+            position: absolute; /* This takes it out of the flow of the document */
+            right: 0; /* This aligns the menu to the far right */
+            top: 0; /* This aligns the menu to the top */
+            padding: 14px 16px; /* Adjusts the padding to ensure clickability */
+        }
+
+        /* Ensuring the menu list is not displayed until the hamburger is clicked */
+        #nav-links.responsive {
+            display: block;
+            position: absolute;
+            background-color: #000000;
+            top: 48px; /* Adjust this value based on the height of your hamburger menu */
+            width: 100%;
+        }
+
+        /* Style the sign-up form to appear under the hamburger menu */
+        .nav-footer {
+            clear: both; /* This ensures that the form is below the floated elements */
+            padding-top: 20px; /* This adds space between the nav bar and the form */
+        }
+        .signup-form {
+            background-color: #f5f5f5; /* Change this to match your desired background color */
+            padding: 20px;
+            text-align: center;
+        }
+
+        .signup-form h3 {
+            margin-bottom: 20px;
+        }
+
+        .signup-form form {
+            max-width: 300px; /* Adjust the width as needed */
+            margin: 0 auto;
+        }
+
+        .signup-form input[type="email"],
+        .signup-form input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px; /* Adds space between the inputs */
+            border: 1px solid #ccc; /* Adds a border to the inputs */
+        }
+
+        .signup-form button {
+            background-color: #007bff; /* Bootstrap primary color for example */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Adjust the button style on hover */
+        .signup-form button:hover {
+            background-color: #0056b3;
+        }
+  .hero-section {
+    background-image: url('[IMAGE_URL]');
+    background-size: cover;
+    background-position: center;
+    padding: 60px;
+    text-align: center;
+    color: white;
+  }
+  .hero-section h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+  }
+  .hero-section p {
+    font-size: 1.2em;
+    margin-bottom: 1.5em;
+  }
+  .hero-section .cta-button {
+    background-color: #008cba;
+    color: white;
+    padding: 10px 30px;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 2em;
+  }
+  .content-section {
+    padding: 20px;
+    background-color: #f4f4f4;
+  }
+  .footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+  }
+</style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="hamburger-menu">
+        <a href="javascript:void(0);" onclick="toggleMenu()">
+            &#9776;
+        </a>
+    </div>
+    <ul id="nav-links" class="hidden">
+        <li><a href="#link1">Donate to Belonging Foundation</a></li>
+        <li><a href="#link1">Scholarships</a></li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Who Are We</a>
+            <div class="dropdown-content">
+                <a href="#sublink1">Sublink 1</a>
+                <a href="#sublink2">Sublink 2</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Get Involved</a>
+            <div class="dropdown-content">
+                <a href="#sublink1">Sublink 1</a>
+                <a href="#sublink2">Sublink 2</a>
+            </div>
+        </li>
+        <li><a href="#link1">Our Impact</a></li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Belonging for...</a>
+            <div class="dropdown-content">
+                <a href="Students">Students</a>
+                <a href="Parents">Parents</a>
+                <a href="Donors">Major Donors</a>
+                <a href="Vendors" >Want to be a Vendor</a>
+            </div>
+        </li>
+        <div class="nav-footer">
+    <h2>Join us in our fight for better futures.</h2>
+    <form action="YOUR_FORM_ACTION" method="POST">
+        <input type="email" name="email" placeholder="Email*" required>
+        <input type="text" name="zip" placeholder="Zip*" required>
+        <button type="submit">I'm Ready</button>
+    </form>
+</div>
+        <!-- Repeat for other links and dropdowns -->
+    </ul>
+</div>
+
+<div class="hero-section">
+  <h1>HBCUs Matter</h1>
+  <p>Please give generously to ensure that students of color can get to and through college successfully because of your support!</p>
+  <a href="#donate" class="cta-button">Donate Now</a>
+</div>
+
+<div class="content-section">
+  <h2>News</h2>
+  <p>Latest updates about our activities...</p>
+  <!-- Add more content here -->
+</div>
+
+<div class="footer">
+  <p>Footer content like contact info, social media links, etc.</p>
+</div>
+<script>
+  function toggleMenu() {
+      var x = document.getElementById("nav-links");
+      if (x.className === "hidden") {
+          x.className += " responsive";
+      } else {
+          x.className = "hidden";
+      }
+  }
+</script>
+
+
+
+</body>
+</html>
