@@ -1,7 +1,7 @@
 # Repository for The Belonging Foundation
 ------------------------------------------------------------------------------
 
-Please log any changes made plz as it will help me know where to pick up at! I have no implemented any access controls yet, so tread litely...
+Please log any changes made plz as it will help me know where to pick up at! I have not implemented any access controls yet, so tread lightly...
 
 Remember----- CTRL + Z is your friend
 
