@@ -3,3 +3,6 @@
 
 ## This will include Detailed instructions for the following tasks:
 -- on logging into admin.html, adding/removing content from existing pages such as home page, etc. 
+
+
+More content, workflows, CICD implementations and security checks in progress... standby for awesomeness :)
