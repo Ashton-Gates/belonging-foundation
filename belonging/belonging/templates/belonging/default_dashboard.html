@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <ul>
+        {% for item in dashboard_data %}
+            <li>{{ item.title }} - {{ item.content }}</li>
+        {% empty %}
+            <li>No data available.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

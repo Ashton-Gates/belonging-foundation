@@ -1,0 +1,18 @@
+<!-- auction_dashboard.html -->
+{% extends 'base.html' %}
+{% block content %}
+<h2>Auction Dashboard</h2>
+
+<ul>
+    {% for item in items %}
+    <li>
+        <h3>{{ item.name }}</h3>
+        <p>{{ item.description }}</p>
+        <p>Current Bid: {{ item.current_bid }}</p>
+        <a href="{% url 'place_bid' item.id %}">Place Bid</a>
+    </li>
+    {% empty %}
+    <li>No items available for bidding.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

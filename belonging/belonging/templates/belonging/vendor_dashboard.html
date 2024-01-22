@@ -1,0 +1,27 @@
+<!-- vendor_dashboard.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Vendor Dashboard</h1>
+
+<!-- Form to Add New Item -->
+<h2>Add New Item</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ item_form.as_p }}
+    <button type="submit">Add Item</button>
+</form>
+
+<!-- List of Existing Items -->
+<h2>Your Items</h2>
+<ul>
+    {% for item in items %}
+    <li>
+        {{ item.name }} - Current Bid: {{ item.current_bid }}
+        <a href="{% url 'edit_item' item.id %}">Edit</a>
+        <a href="{% url 'delete_item' item.id %}">Delete</a>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

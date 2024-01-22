@@ -3,6 +3,22 @@
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
+    <label for="user_type">I am a:</label>
+    <select name="user_type" id="user_type">
+    <option value="student">Scholarship Applicants</option>
+    <option value="donor">Foundation Donors</option>
+    <option value="recipient">Scholarship Recipients</option>
+    <option value="hosts">Auction Hosts</option>
+    <option value="bidders">Bidders</option>
+    <option value="vendors">Shop Owners/Vendors</option>
+    <!-- Add other options similarly -->
+</select>
     <button type="submit">Register</button>
 </form>
+
+ <!-- Add a button or link for registration -->
+ <div style="text-align: center; margin-top: 20px;">
+    <p>Already have an account?</p>
+    <a href="{% url 'login' %}" class="btn btn-primary">Let's Login</a>
+</div>
 {% endblock %}
