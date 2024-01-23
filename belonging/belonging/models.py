@@ -57,3 +57,41 @@ class Bid(models.Model):
     bidder = models.ForeignKey(Bidder, on_delete=models.CASCADE)
     bid_amount = models.DecimalField(max_digits=10, decimal_places=2)
     bid_time = models.DateTimeField(auto_now_add=True)
+
+
+from django.db import models
+
+class PitchDeck(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # ... other fields such as file upload field, title, etc.
+
+
+class ScholarshipApplication(models.Model):
+    # Existing fields...
+    first_name = models.CharField(null=True, blank=True,max_length=100)
+    last_name = models.CharField(null=True, blank=True,max_length=100)
+    date_of_birth = models.DateField(null=True, blank=True)
+    age = models.IntegerField(null=True, blank=True)
+    education_level = models.CharField(null=True, blank=True, max_length=50)
+    gender = models.CharField(null=True, blank=True, max_length=50)
+    business_name = models.CharField(max_length=200, blank=True, null=True)
+    business_description = models.TextField(blank=True, null=True)
+    # Rest of your model...
+
+
+
+class VendorApplication(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    logo = models.ImageField(upload_to='vendor_logos/', null=True, blank=True)
+    about_me = models.TextField()
+    website_link = models.URLField()
+    business_proposal = models.FileField(upload_to='business_proposals/')
+    fee_structure = models.FileField(upload_to='fee_structures/', null=True, blank=True)
+
+    def __str__(self):
+        return f'Vendor Application by {self.user.username}'
+
+
+
+    def __str__(self):
+        return f'Application {self.id} by {self.user}'  # Adjust as needed

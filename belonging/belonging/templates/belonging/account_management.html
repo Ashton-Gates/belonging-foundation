@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Account Management</title>
+    <!-- Add any additional head content here -->
+</head>
+<body>
+    <h1>Account Management</h1>
+
+    <!-- Account Update Form -->
+    <form method="post">
+        {% csrf_token %}
+        <!-- Display form fields here. Use {{ form.as_p }} or loop over fields
+             if you are using Django forms -->
+        
+        <!-- User Type Dropdown -->
+        <label for="user_type">Account Type:</label>
+        <select name="user_type" id="user_type">
+            <option value="student" {% if request.user.user_type == "student" %}selected{% endif %}>Student</option>
+            <option value="donor" {% if request.user.user_type == "donor" %}selected{% endif %}>Donor</option>
+            <!-- Add other user types here -->
+        </select>
+        
+        <input type="submit" value="Update Account">
+    </form>
+
+
+</body>
+</html>

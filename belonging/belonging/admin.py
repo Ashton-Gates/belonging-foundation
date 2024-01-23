@@ -2,7 +2,9 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User  # Import the User model
+from .models import ScholarshipApplication
 
+admin.site.register(ScholarshipApplication)
 
 class CustomUserAdmin(UserAdmin):
     list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff', 'date_joined')
@@ -21,3 +23,4 @@ class CustomUserAdmin(UserAdmin):
             'fields': ('username', 'email', 'password1', 'password2'),
         }),
     )
+
