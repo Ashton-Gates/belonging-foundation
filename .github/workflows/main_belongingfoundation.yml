@@ -26,12 +26,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run database migrations
-        run: python manage.py migrate --noinput
-
-      - name: Collect static files
-        run: python manage.py collectstatic --noinput
-
       - name: Make startup script executable
         run: chmod +x belonging/startup.sh
 
@@ -67,9 +61,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_15100F3CE7D544519AB577E89681DB88 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_9A1D10329B6E4B0CB130B28D3B016B86 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_284A7D7448CA41EAB04F6847C77BAC51 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_2EE39C5475E140278B3B1778376DC00E }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D2D1D253C9004D63ABB41CFEE3E93AD7 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_DB5B5351BC944B56A3F48279DFF0C1B6 }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
