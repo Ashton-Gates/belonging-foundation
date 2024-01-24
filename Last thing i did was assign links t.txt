@@ -1,0 +1,51 @@
+Last thing i did was assign links to all buttons. Need to add content to the rest of the pages. Shouldnt take long. 
+
+
+Django application to handle the account management to login/register for donors, vendors, students, applicant referee. Use admin.py to display current scholarship opportunities for 2024
+
+
+
+
+
+
+
+
+Silent Auction Portal --- As a Site Visitor, I want to be able to view the Public Silent Auction so that I can bid on items from local vendors
+
+Student application portals
+
+
+Need to migrate to Django functionalities.
+
+
+Student Page>apply for scholarship> go to django app to login
+
+superuser logins:
+
+Ashton Kinnell:
+	ashtonkinnell8@gmail.com
+	H1ng3isgro$$
+
+Stephanie Delong:
+	stephdelong93@gmail.com
+	B3long1ng
+
+Corporate Match Fundraising Goal: $55,000
+Silent Auction Fundraising Goal: $30,000
+Scholarship Distribution: August 2024 
+Scholarship Applicant Goal: 1,000 Applicants by April 30,2024
+Scholarship Fundraising Goal: $100k by April 30, 2024
+
+
+1/22 tasks:
+to add donation content to donate.html.
+Add all the static html files to the template tolder and add the views.
+Connect with stephg to get the banking info up and running for Strip
+
+
+
+Connect azure email to Django def scholarship_application_view(request): :)
+
+
+Need to work on vendor and events dashboard, WSGI for django server, work on Azure email server for email notifications for scholarships. 
+
