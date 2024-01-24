@@ -1,0 +1,29 @@
+<!-- involved.html -->
+{% extends 'base.html' %}
+{% block content %}
+
+
+<!-- calendar.html -->
+{% extends 'base.html' %}
+{% block content %}
+    <h1>My Events</h1>
+    <div id='calendar'></div>
+{% endblock %}
+
+    <h1>Involved Venues</h1>
+    <ul>
+        {% for venue in venues %}
+            <li>
+                <h2>{{ venue.user.username }}</h2>
+                <p>Address: {{ venue.address }}</p>
+                <a href="{{ venue.navigation_link }}">Get Directions</a>
+                <a href="{{ venue.social_media_link }}">Social Media</a>
+                {% if venue.image %}
+                    <img src="{{ venue.image.url }}" alt="Image for {{ venue.user.username }}">
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No venues available.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

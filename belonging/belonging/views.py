@@ -8,11 +8,33 @@ from django.core.mail import EmailMessage
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.decorators import login_required
-from .models import PitchDeck, Dashboard, Item, Vendor, ScholarshipApplication, VendorApplication  
-from .forms import ScholarshipApplicationForm
-from django.http import HttpResponseForbidden
+from .models import PitchDeck, Dashboard, Item, Vendor, ScholarshipApplication, VendorApplication, Venue, Event, Scholarship  
+from .forms import ScholarshipApplicationForm, EventForm, VendorApplicationForm
+from django.http import HttpResponseForbidden, JsonResponse
 
 
+def calendar_data(request):
+    events = Event.objects.filter(venue=request.user)
+    event_data = [{
+        'title': event.name,
+        'start': event.date.strftime("%Y-%m-%d"),
+        'time': event.time.strftime("%H:%M:%S"),
+        # Add other necessary event data
+    } for event in events]
+    return JsonResponse(event_data, safe=False)
+
+@login_required
+def add_event_view(request):
+    if request.method == 'POST':
+        form = EventForm(request.POST, request.FILES)
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.venue = request.user
+            event.save()
+            return redirect('vendor_dashboard.html')
+    else:
+        form = EventForm()
+    return render(request, 'vendor_dashboard.html', {'form': form})
 
 def register_view(request):
     if request.method == 'POST':
@@ -92,18 +114,17 @@ def student_dashboard(request):
 
 def student_dashboard_view(request):
     user_pitch_decks = PitchDeck.objects.filter(user=request.user)
-    scholarships = ScholarshipApplication.objects.all()
+    scholarships = Scholarship.objects.all()  # Fetch scholarships
     vendor_applications = VendorApplication.objects.all()  # Fetch vendor applications
 
-    # Add any additional context data as needed
+    # Prepare the context with all necessary data
     context = {
+        'user_pitch_decks': user_pitch_decks,
         'scholarships': scholarships,
         'vendor_applications': vendor_applications,
-        # ... other context data ...
     }
 
-
-    return render(request, 'belonging/applicant_dashboard.html', context, {'scholarships': scholarships})
+    return render(request, 'belonging/applicant_dashboard.html', context)
 
 @login_required
 def scholarship_application_view(request):
@@ -169,71 +190,40 @@ def scholarship_application_view(request):
 
 @login_required
 def vendor_application_view(request):
-    # Check if the user is a student
-    if not request.user.user_type == 'student':
+    # Check if the user is a vendor
+    if not request.user.user_type == 'vendor':
         return HttpResponseForbidden("You are not authorized to view this page.")
 
     if request.method == 'POST':
-        # Initialize filenames as None
-        video_filename = None
-        slide_deck_filename = None
-        pdf_filename = None
-        
-        # Process form data
-        full_name = request.POST.get('first_name') + ' ' + request.POST.get('last_name')
-        date_of_birth = request.POST.get('date_of_birth')
-        age = request.POST.get('age')
-        education_level = request.POST.get('education_level')
-        gender = request.POST.get('gender')
-        business_description = request.POST.get('business_description')
-        business_name = request.POST.get('business_name')
+        form = VendorApplicationForm(request.POST, request.FILES)
+        if form.is_valid():
+            vendor_application = form.save(commit=False)
+            vendor_application.user = request.user
+            vendor_application.save()
 
-                # New fields processing
-        logo = request.FILES.get('logo')
-        about_me = request.POST.get('about_me')
-        website_link = request.POST.get('website_link')
-        business_proposal = request.FILES.get('business_proposal')
-        fee_structure = request.FILES.get('fee_structure')  # Optional
+            # Prepare the email
+            email = EmailMessage(
+                subject='New Vendor Application',
+                body='A new vendor application has been submitted.',
+                to=['stephdelong93@gmail.com']
+            )
 
-        # File uploads
-        video = request.FILES.get('video')
-        slide_deck = request.FILES.get('slide_deck')
-        pdf = request.FILES.get('pdf')
+            # Create a CSV file
+            csv_file = os.path.join(settings.MEDIA_ROOT, 'vendor_applications.csv')
+            with open(csv_file, 'w', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerow(['Username', 'Full Name', 'Date of Birth', 'Age', 'Education Level', 'Gender', 'Business Description', 'Business Name', 'Website Link', 'About Me', 'Logo URL', 'Business Proposal URL', 'Fee Structure URL'])
+                writer.writerow([request.user.username, form.cleaned_data.get('full_name'), form.cleaned_data.get('date_of_birth'), form.cleaned_data.get('age'), form.cleaned_data.get('education_level'), form.cleaned_data.get('gender'), form.cleaned_data.get('business_description'), form.cleaned_data.get('business_name'), form.cleaned_data.get('website_link'), form.cleaned_data.get('about_me'), form.instance.logo.url if form.instance.logo else None, form.instance.business_proposal.url if form.instance.business_proposal else None, form.instance.fee_structure.url if form.instance.fee_structure else None])
 
-        # Save files
-        fs = FileSystemStorage()
-        if logo:
-            logo_filename = fs.save(logo.name, logo)
-        if business_proposal:
-            business_proposal_filename = fs.save(business_proposal.name, business_proposal)
-        if fee_structure:
-            fee_structure_filename = fs.save(fee_structure.name, fee_structure)
+            # Attach the CSV file to the email
+            email.attach_file(csv_file)
+            email.send()
 
-        # Prepare the email
-        email = EmailMessage(
-            subject='New Scholarship Application',
-            body='A new scholarship application has been submitted.',
-            to=['stephdelong93@gmail.com']
-        )
-
-        # Create a CSV file
-        csv_file = os.path.join(settings.MEDIA_ROOT, 'scholarship_applications.csv')
-        with open(csv_file, 'w', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow(['Full Name', 'Date of Birth', 'Age', 'Education Level', 'Gender', 'Business Description', 'Business Name', 'Video URL', 'Slide Deck URL', 'PDF URL'])
-            writer.writerow([full_name, date_of_birth, age, education_level, gender, business_description, business_name, fs.url(video_filename), fs.url(slide_deck_filename), fs.url(pdf_filename)])
-
-        # Attach the CSV file to the email
-        email.attach_file(csv_file)
-
-        # Send the email
-        email.send()
-
-        # Redirect to a success page or dashboard
-        return redirect('applicant_dashboard/')
+            return redirect('applicant_dashboard')
     else:
-        # If it's a GET request, render the scholarship application form
-        return render(request, 'belonging/vendor_app.html')
+        form = VendorApplicationForm()
+
+    return render(request, 'belonging/vendor_app.html', {'form': form})
 
 
 
@@ -258,7 +248,9 @@ def index_view(request):
     return render(request, 'belonging/index.html')
 
 def involved_view(request):
-    return render(request, 'belonging/involved.html')
+    venues = Venue.objects.all()
+    return render(request, 'involved.html', {'venues': venues})
+
 
 @login_required
 def vendor_dashboard(request):

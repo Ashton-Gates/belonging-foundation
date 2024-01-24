@@ -5,12 +5,14 @@
     <title>Dashboard</title>
 </head>
 <body>
-        <!-- Dashboard View Links -->
-    <!-- Dashboard View Links -->
     <h2>Dashboard Views</h2>
     <ul>
-        <!-- Add other dashboard links here -->
         <li><a href="{% url 'donor_dashboard' %}">Donor Dashboard</a></li>
+
+    </ul>
+    
+    <ul>
+        <!-- Add other dashboard links here -->
         <li><a href="{% url 'vendor_app' %}">Apply as Vendor</a></li>
         <li><a href="{% url 'scholarship_application' %}">Apply for Scholarship</a></li>
     </ul>
@@ -18,35 +20,28 @@
         
 
 
-        This needs to be a page to display current scholarships available and to give access to scholarship application 
+        This needs is to be a page to display current scholarships available and to give access to scholarship application 
     <h1>Dashboard</h1>
-    <ul>
-        {% for item in dashboard_data %}
-            <li>{{ item.title }} - {{ item.content }}</li>
-        {% empty %}
-            <li>No data available.</li>
-        {% endfor %}
-    </ul>
-    <!-- Display scholarships -->
-    <div id="scholarshipCarousel" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            {% for scholarship in scholarships %}
-            <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                <!-- Adjust according to your model fields -->
-                <h3>{{ scholarship.title }}</h3>
-                <p>{{ scholarship.description }}</p>
-            </div>
-            {% endfor %}
+<!-- Display scholarships -->
+<div id="scholarshipCarousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        {% for scholarship in scholarships %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <h3>{{ scholarship.title }}</h3>
+            <p>{{ scholarship.description }}</p>
+            <!-- Add other fields if necessary, like an image -->
         </div>
-        <a class="carousel-control-prev" href="#scholarshipCarousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#scholarshipCarousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+        {% endfor %}
     </div>
+    <a class="carousel-control-prev" href="#scholarshipCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#scholarshipCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
 
         <!-- Display vendor applications -->
         <h2>Submitted Vendor Applications</h2>
@@ -73,13 +68,3 @@
 
 </body>
 {% endblock %}
- 
-
-Needs to be able to choose to be a vendor or a scholarship
-
-the dashboard should display applications submitted
-
-application should include general questions
-
-
-put pitch deck template here: Pitch_Prep.pptx

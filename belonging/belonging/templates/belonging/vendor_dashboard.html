@@ -511,6 +511,19 @@ body {
     <button type="submit">Add Item</button>
 </form>
 
+<!-- add_event.html -->
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Add Event</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Event</button>
+    </form>
+{% endblock %}
+
+
+
 <!-- List of Existing Items -->
 <h2>Your Items</h2>
 <ul>
