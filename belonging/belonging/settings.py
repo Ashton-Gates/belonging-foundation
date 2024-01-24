@@ -58,7 +58,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'belonging.wsgi:application'
+WSGI_APPLICATION = 'belonging.wsgi.application'
 
 
 # Database

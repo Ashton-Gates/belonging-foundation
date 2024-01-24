@@ -10,4 +10,5 @@ python manage.py migrate
 python manage.py collectstatic --no-input
 
 # Start Gunicorn
-gunicorn --bind=0.0.0.0:8000 --timeout 600 belonging.wsgi:application
+gunicorn --bind=0.0.0.0 --timeout 600 belonging.wsgi:application
+
