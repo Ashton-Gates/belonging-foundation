@@ -80,4 +80,5 @@ jobs:
           slot-name: 'Production'
         env:
           DJANGO_SETTINGS_MODULE: 'belonging.settings'
+          PYTHONPATH: '/home/site/wwwroot/belonging'
           
