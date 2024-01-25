@@ -76,4 +76,6 @@ jobs:
         with:
           app-name: 'BelongingFoundation'
           slot-name: 'Production'
+        env:
+          DJANGO_SETTINGS_MODULE: 'belonging.settings'
           
