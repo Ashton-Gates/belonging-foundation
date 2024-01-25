@@ -82,5 +82,5 @@ jobs:
           slot-name: 'Production'
           # Add this step to move requirements.txt to wwwroot
       - name: Move requirements.txt to wwwroot
-        run: mv belonging/requirements.txt site/wwwroot/requirements.txt
+        run: mv belonging/requirements.txt ./wwwroot/requirements.txt
           
