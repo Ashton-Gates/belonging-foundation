@@ -33,9 +33,7 @@ jobs:
           pip install -r belonging/requirements.txt
           pip install django
 
-          # Add this step to move requirements.txt to wwwroot
-      - name: Move requirements.txt to wwwroot
-        run: mv belonging/requirements.txt site/wwwroot/requirements.txt
+
 
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
@@ -82,4 +80,7 @@ jobs:
         with:
           app-name: 'Belonging-prod'
           slot-name: 'Production'
+          # Add this step to move requirements.txt to wwwroot
+      - name: Move requirements.txt to wwwroot
+        run: mv belonging/requirements.txt site/wwwroot/requirements.txt
           
