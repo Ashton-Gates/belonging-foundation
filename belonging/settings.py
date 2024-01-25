@@ -130,3 +130,4 @@ DEFAULT_FROM_EMAIL = 'ashtonkinnell8@gmail.com'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
