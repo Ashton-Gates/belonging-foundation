@@ -116,6 +116,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+DJANGO_SETTINGS_MODULE = 'belonging.settings'
 
 AUTH_USER_MODEL = 'belonging.CustomUser'
 
