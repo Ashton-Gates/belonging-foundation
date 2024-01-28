@@ -134,5 +134,6 @@ MEDIA_URL = '/media/'
 
 CSRF_COOKIE_SECURE = True
 
+CSRF_COOKIE_DOMAIN = 'belonging.foundation'
 
 CSRF_TRUSTED_ORIGINS = ['https://belonging.foundation', 'https://www.belonging.foundation']
