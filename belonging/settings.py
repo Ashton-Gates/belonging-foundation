@@ -133,3 +133,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 CSRF_COOKIE_SECURE = True
+
+
+CSRF_TRUSTED_ORIGINS = ['https://belonging.foundation', 'https://www.belonging.foundation']
