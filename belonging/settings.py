@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-mq@((#x!tz0)v5bojl!ymb6s*5#s((h$ve9y88+j1(m%u427*o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*','belonging.foundation', 'www.belonging.foundation']
 #'belonging.foundation', 'www.belonging.foundation'
 
 # Application definition
