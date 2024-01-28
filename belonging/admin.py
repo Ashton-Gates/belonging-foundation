@@ -67,3 +67,5 @@ class ScholarshipAdmin(admin.ModelAdmin):
     # You can add search_fields, list_filter, etc. for better admin interface
 
 admin.site.register(Scholarship, ScholarshipAdmin)
+
+####
