@@ -443,11 +443,21 @@ body {
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         
         
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="/index/">
             <img src="belong_logo.jpg" alt="Belonging Foundation Logo" style="max-height: 50px;">
         </a>
 
-        <a class="btn btn-primary" href="/donate/">Donate</a>
+        <div class="stipe-donate">
+          <script async
+            src="https://js.stripe.com/v3/buy-button.js">
+          </script>
+        
+          <stripe-buy-button
+            buy-button-id="buy_btn_1ObE4FKj0Am5FA1UQVIrQT9D"
+            publishable-key="pk_test_51ObDcEKj0Am5FA1UXZR8BaefNnGDzw6pOrmSSHX499OWIxsrNZCwjxHAG1HbgitVA0c4GhTwOOwaPqLIQazy0o6W00GZroVGqf"
+          >
+          </stripe-buy-button>
+        </div>    
         
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -506,10 +516,10 @@ body {
   </div>
 </header>
 
-<div class="feature-section">
+<div class="feature-section" >
   <div class="container">
-    <h3>WHO WE ARE</h3>
-    <h1> Our Mission</h1>
+    <h3 style="color: black;">WHO WE ARE</h3>
+    <h1 style="color: black;"> Our Mission</h1>
     <div style="text-align: left; color:#333;">
       <p><strong> Our vision is to build a more connected community on a national scale that actively seeks to support those who have a spark they need help transforming into a roaring flame.  </strong></p> <br><br>
 

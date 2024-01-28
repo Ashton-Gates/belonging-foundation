@@ -20,6 +20,9 @@ body, h1, h2, h3, p, ul, li, a {
   padding: 0;
   list-style: none;
   text-decoration: none;
+  font-family: Arial, sans-serif;
+  background-image: url('./photos/keegan_dad.jpg'); 
+  background-size: cover;
 }
 p{
 
@@ -490,7 +493,42 @@ body {
 .social-icons a:hover {
   color: #ddd;
 }
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; /* This will distribute the space around the items */
+  height: 100vh; /* This will make the container take the full height of the viewport */
 
+  margin: 0 auto;
+  padding: 20px;
+  }
+
+.stats-item {
+  display: flex;
+  justify-content: space-between; /* This will push the number to the left and the text to the right */
+  align-items: center; /* This will vertically align them in the center */
+
+}
+
+  .stats-item h1 {
+    font-size: 3em; /* Size of numbers */
+    margin: 0;
+    color: black;
+  }
+
+  .stats-item p {
+    font-size: 1.5em; /* Size of text */
+    margin: 0;
+    color: black;
+    text-align: left; /* Align the text to the left */ 
+  }
+
+  hr {
+  border: none; 
+  border-top: 1px solid #000; /* Set a single line at the top with a color of your choice */
+  margin: 20px 0; /* Add some vertical space around the line */
+  width: 100%; /* Set the width of the line */
+}
   </style>
   
   <header>
@@ -521,15 +559,15 @@ body {
             <ul class="navbar-nav ml-auto">
                 <!-- Dropdown items -->
                 <li class="nav-item dropdown">
-                  <a class="nav-item nav-link active" href="index.html">Home <span class="sr-only">(current)</span></a>
-                  <a class="nav-item nav-link" href="donate.html">Donate to Belonging</a>
-                  <a class="nav-item nav-link" href="scholarship.html">Scholarships</a>
+                  <a class="nav-item nav-link active" href="/index/">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-item nav-link" href="/donate/">Donate to Belonging</a>
+                  <a class="nav-item nav-link" href="/scholarship/">Scholarships</a>
                     <a class="nav-link dropdown-toggle" href="#" id="whoWeAreDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Who We Are
                     </a>
                     <div class="dropdown-menu" aria-labelledby="whoWeAreDropdown">
-                        <a class="dropdown-item" href="about.html">Our History</a>
-                        <a class="dropdown-item" href="impact.html">Our Impact</a>
+                        <a class="dropdown-item" href="/about/">Our History</a>
+                        <a class="dropdown-item" href="/impact/">Our Impact</a>
                         <!-- More links -->
                     </div>
                 </li>
@@ -569,6 +607,62 @@ body {
     </nav>
   </div>
 </header>
+<body>
+  <div class="stats-container">
+    <div class="stats-item">
+      <div class="number"><h1>100K</h1></div>
+      <div class="text"><p>:SCHOLARSHIP FUNDRAISING</p></div>
+    </div>
+    <div class="stats-item">
+      <div class="number"><h1>1K</h1></div>
+      <div class="text"><p>:SCHOLARSHIP APPLICATIONS</p></div>
+    </div>
+    <div class="stats-item">
+      <div class="number"><h1>55K</h1></div>
+      <div class="text"><p>:CORPORATE MATCH FUNDRAISING</p></div>
+    </div>
+    <div class="stats-item">
+      <div class="number"><h1>30K</h1></div>
+      <div class="text"><p>:SILENT AUCTION FUNDRAISING</p></div>
+    </div> 
 
+    <br><hr><br>
+    
+    <div><p><i>Notice:</i> Donations to non-profit organizations are federally tax deductible and are deductions on most state tax returns as well. These deductions lower your tax liability each year and contribute to the next generation's dreams of a better tomorrow. Check with your state to confirm deduction eligibility.  </p></div>
+    
+  </div>
+</body>
+
+<footer>
+
+  <!-- Footer: -->
+<div class="footer">
+  <div class="social-icons">
+    <a href="https://www.instagram.com/yourusername" target="_blank">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="mailto:your@email.com">
+      <i class="fas fa-envelope"></i>
+    </a>
+    <a href="https://www.facebook.com/yourusername" target="_blank">
+      <i class="fab fa-facebook"></i>
+    </a>
+  </div>
+                          <!-- Sign-up form -->
+   <div class="signup-form">
+      <h3>Join us in our fight for better futures.</h3>
+      <form action="YOUR_FORM_ACTION" method="POST">
+        <input type="email" name="email" placeholder="Email*" required>
+        <input type="text" name="zip" placeholder="Zip*" required>
+        <button type="submit">I'm Ready</button>
+      </form>
+   </div>
+</div>
+
+</footer>
+<!-- Bootstrap JavaScript -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 {% endblock %}

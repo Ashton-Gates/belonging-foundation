@@ -495,11 +495,21 @@ body {
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         
         
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="/index/">
             <img src="belong_logo.jpg" alt="Belonging Foundation Logo" style="max-height: 50px;">
         </a>
 
-        <a class="btn btn-primary" href="#donate">Donate</a>
+        <div class="stipe-donate">
+          <script async
+            src="https://js.stripe.com/v3/buy-button.js">
+          </script>
+        
+          <stripe-buy-button
+            buy-button-id="buy_btn_1ObE4FKj0Am5FA1UQVIrQT9D"
+            publishable-key="pk_test_51ObDcEKj0Am5FA1UXZR8BaefNnGDzw6pOrmSSHX499OWIxsrNZCwjxHAG1HbgitVA0c4GhTwOOwaPqLIQazy0o6W00GZroVGqf"
+          >
+          </stripe-buy-button>
+        </div>    
         
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -509,15 +519,15 @@ body {
             <ul class="navbar-nav ml-auto">
                 <!-- Dropdown items -->
                 <li class="nav-item dropdown">
-                  <a class="nav-item nav-link active" href="index">Home <span class="sr-only">(current)</span></a>
-                  <a class="nav-item nav-link" href="donate">Donate to Belonging</a>
-                  <a class="nav-item nav-link" href="scholarship">Scholarships</a>
+                  <a class="nav-item nav-link active" href="/index/">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-item nav-link" href="/donate/">Donate to Belonging</a>
+                  <a class="nav-item nav-link" href="/scholarship/">Scholarships</a>
                     <a class="nav-link dropdown-toggle" href="#" id="whoWeAreDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Who We Are
                     </a>
                     <div class="dropdown-menu" aria-labelledby="whoWeAreDropdown">
-                        <a class="dropdown-item" href="about">Check Us Out</a>
-                        <a class="dropdown-item" href="impact">Our Impact</a>
+                        <a class="dropdown-item" href="/about/">Check Us Out</a>
+                        <a class="dropdown-item" href="/impact/">Our Impact</a>
                         <!-- More links -->
                     </div>
                 </li>
@@ -555,123 +565,7 @@ body {
   </div>
 </header>
 
-<div class="feature-section">
-  <div class="container">
-    <h1>You Belong!</h1>
-    <p>The Belonging Foundation and it's vendors change the way we convert dreams into reality! Please give generously to ensure that dreamers can get to embrace their entrepreneurial spirit because of your support!
-    </p>
-    <a href="donate" class="cta-button">Donate Now!</a>
-  </div>
-</div>
-<!-- Section with overlay and call to action -->
-<section class="feature-panel" style="text-align: center;">
-  <div class="touts-container">
-    <div class="row">
-      <h2 >About the Belonging Foundation</h2>
-      <p>HBCUs and their students change lives across the United States. Please give generously to ensure that students of color can get to and through college successfully because of your support!</p>
-      <a href="about" class="cta-button" style="text-align: center;">HOW WE GET RESULTS</a>
-    </div>
-  </div>
-</section>
-<!-- Section with overlay and call to action -->
-<div class="touts-container">
-  <div class="row" style="background-color: #ff3333;">
-    <h2  >Scholarships</h2>
-    <p>HBCUs and their students change lives across the United States. Please give generously to ensure that students of color can get to and through college successfully because of your support!</p>
-    <a href="scholarship" class="cta-button" >APPLY NOW</a>
-  </div>
-</div>
-
-<div class="touts-container">
-  <div class="row" style="background-color: #ffb84d;">
-    <h2 >Ways to get Involved</h2>
-    <p>HBCUs and their students change lives across the United States. Please give generously to ensure that students of color can get to and through college successfully because of your support!</p>
-    <a href="involved" class="cta-button" >CHECK US OUT</a>
-  </div>
-</div>
-
-
-
-<!-- Additional content sections: -->
-<div class="content-section">
-  <h2>News</h2>
-  <div id="newsCarousel" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <a href="link_to_news_article_1">
-          <img class="d-block w-100" src="article_1.jpg" alt="First slide">
-          <div class="carousel-caption">
-            <h3>News Article Title 1</h3>
-            <p>Short description of the article.</p>
-          </div>
-        </a>
-      </div>
-      <div class="carousel-item">
-        <a href="link_to_news_article_2">
-          <img class="d-block w-100" src="Article_2.PNG" alt="Second slide">
-          <div class="carousel-caption">
-            <h3>News Article Title 2</h3>
-            <p>Short description of the article.</p>
-          </div>
-        </a>
-      </div>
-      <div class="carousel-item">
-        <a href="link_to_news_article_2">
-          <img class="d-block w-100" src="Article_3.PNG" alt="Second slide">
-          <div class="carousel-caption">
-            <h3>News Article Title 3</h3>
-            <p>Short description of the article.</p>
-          </div>
-        </a>
-      </div>
-      <div class="carousel-item">
-        <a href="link_to_news_article_2">
-          <img class="d-block w-100" src="Article_4.PNG" alt="Second slide">
-          <div class="carousel-caption">
-            <h3>News Article Title 2</h3>
-            <p>Short description of the article.</p>
-          </div>
-        </a>
-      </div>
-      <div class="carousel-item">
-        <a href="link_to_news_article_2">
-          <img class="d-block w-100" src="Article_5.PNG" alt="Second slide">
-          <div class="carousel-caption">
-            <h3>News Article Title 2</h3>
-            <p>Short description of the article.</p>
-          </div>
-        </a>
-      </div>
-      <div class="carousel-item">
-        <a href="link_to_news_article_2">
-          <img class="d-block w-100" src="Article_6.PNG" alt="Second slide">
-          <div class="carousel-caption">
-            <h3>News Article Title 2</h3>
-            <p>Short description of the article.</p>
-          </div>
-        </a>
-      </div>
-      <div class="carousel-item">
-        <a href="link_to_news_article_2">
-          <img class="d-block w-100" src="Article_7.PNG" alt="Second slide">
-          <div class="carousel-caption">
-            <h3>News Article Title 2</h3>
-            <p>Short description of the article.</p>
-          </div>
-        </a>
-      </div>
-    </div>
-    <a class="carousel-control-prev" href="#newsCarousel" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#newsCarousel" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
-</div>
-
+How does belonging make an impact?? 
 <!-- Footer: -->
 <div class="footer">
   <div class="social-icons">

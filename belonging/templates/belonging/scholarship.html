@@ -24,7 +24,7 @@ body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
   margin: 0;
-  padding: 0;
+
 }
 
 
@@ -132,7 +132,6 @@ body {
 }
 .feature-section {
   padding: 3rem 0; /* Adjust the padding as needed */
-  background-image: url('keegan_dad.jpg');
   background-size: cover;
   background-position: center;
   text-align: center;
@@ -188,13 +187,12 @@ body {
 /*---------------------Body Style Starts------------------------*/
 
 /* Hero Section Styles */
-.hero-section {
-  background-image: url('keegan_steph.jpg'); /* Replace with the path to your hero image */
+.hero-section { /* Replace with the path to your hero image */
   background-size: cover;
   background-position: center;
   text-align: center;
   position: relative;
-  color: white;
+  color: #333;
   padding: 100px 0; /* Adjust padding to suit your content */
 }
 
@@ -205,7 +203,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  color: white;
+  color: #333;
   text-align: center;
 }
 
@@ -215,7 +213,7 @@ body {
   border: none;
   padding: 15px 30px;
   font-size: 1.2em; /* Adjust font size as needed */
-  color: white;
+  color: #333;
   text-transform: uppercase;
   text-decoration: none;
   display: inline-block;
@@ -287,6 +285,7 @@ body {
   padding: 5rem 0 6.25rem;
   position: relative;
   text-align: center;
+  color: #333;
 }
 /* Additional responsive adjustments */
 @media screen and (max-width: 600px) {
@@ -545,17 +544,37 @@ body {
   color: #ddd;
 }
 
+hr {
+  border: none; 
+  border-top: 1px solid #000; /* Set a single line at the top with a color of your choice */
+  margin: 20px 0; /* Add some vertical space around the line */
+  width: 100%; /* Set the width of the line */
+}
+.orange{
+  background-image: url("orange.png");
+  width: 100%;
+}
   </style>
   <header>
     <!-- Bootstrap Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         
         
-        <a class="navbar-brand" href="#index.html">
+        <a class="navbar-brand" href="/index/">
             <img src="belong_logo.jpg" alt="Belonging Foundation Logo" style="max-height: 50px;">
         </a>
 
-        <a class="btn btn-primary" href="#donate">Donate</a>
+        <div class="stipe-donate">
+          <script async
+            src="https://js.stripe.com/v3/buy-button.js">
+          </script>
+        
+          <stripe-buy-button
+            buy-button-id="buy_btn_1ObE4FKj0Am5FA1UQVIrQT9D"
+            publishable-key="pk_test_51ObDcEKj0Am5FA1UXZR8BaefNnGDzw6pOrmSSHX499OWIxsrNZCwjxHAG1HbgitVA0c4GhTwOOwaPqLIQazy0o6W00GZroVGqf"
+          >
+          </stripe-buy-button>
+        </div>    
         
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -565,15 +584,15 @@ body {
             <ul class="navbar-nav ml-auto">
                 <!-- Dropdown items -->
                 <li class="nav-item dropdown">
-                  <a class="nav-item nav-link active" href="index.html">Home <span class="sr-only">(current)</span></a>
-                  <a class="nav-item nav-link" href="donate.html">Donate to Belonging</a>
-                  <a class="nav-item nav-link" href="scholarship.html">Scholarships</a>
+                  <a class="nav-item nav-link active" href="/index/">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-item nav-link" href="/donate/">Donate to Belonging</a>
+                  <a class="nav-item nav-link" href="/scholarship/">Scholarships</a>
                     <a class="nav-link dropdown-toggle" href="#" id="whoWeAreDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Who We Are
                     </a>
                     <div class="dropdown-menu" aria-labelledby="whoWeAreDropdown">
-                        <a class="dropdown-item" href="about.html">Our History</a>
-                        <a class="dropdown-item" href="impact.html">Our Impact</a>
+                        <a class="dropdown-item" href="/about/">Our History</a>
+                        <a class="dropdown-item" href="/impact/">Our Impact</a>
                         <!-- More links -->
                     </div>
                 </li>
@@ -583,13 +602,10 @@ body {
                         Get Involved
                     </a>
                     <div class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
-                        <a class="dropdown-item" href="#volunteer">Volunteer</a>
-                        <a class="dropdown-item" href="#partnerships">Partnerships</a>
-                        <a class="dropdown-item" href="#partnerships">Events</a>
-                        <a class="dropdown-item" href="#partnerships">Federal Policy and Advocacy</a>
-                        <a class="dropdown-item" href="#partnerships">K-12 Advocacy</a>
-                        <a class="dropdown-item" href="#partnerships">Ways to Donate to Help Students</a>
-                        <a class="dropdown-item" href="#partnerships">Partnerships</a>
+                        <a class="dropdown-item" href="/volunteer/">Volunteer</a>
+                        <a class="dropdown-item" href="/events/">Events</a>
+                        <a class="dropdown-item" href="/donate/">Ways to Donate to Help Students</a>
+                        <a class="dropdown-item" href="/partnership/">Partnerships</a>
                         <!-- More links -->
                     </div>
                 </li>
@@ -613,11 +629,97 @@ body {
   </div>
 </header>
 <div class="feature-section">
-  <div class="container">
-    <h1>For Students</h1>
-    <p>The Belonging Foundation is more than just scholarships. We're here to to find out: if one family can endure this much pain in one year, then how much good can we do with all of you in the same time period?</p><br><br>
-    <p>Our vision is to build a more connected community on a national scale that actively seeks to support those who have a spark they need help transforming into a roaring flame. </p><br><br>
-    <a href="https://opportunities.belonging.foundation" class="cta-button">Apply for Scholarships</a>
+  <div class="orange" style="color: #333;">
+    <div><h1>Belonging Foundation Scholarships</h1></div>
+  </div>
+<br>
+<br>
+
+  <div class="container; text-left" style="color:#333; padding: 30px;">
+    <div><h2>What Are Our Scholarships</h2></div>
+
+    <br>
+
+    <div><p>The Belonging Foundation provides more than just scholarships, it provides opportunityies. We want to make sure the best of all opportunities, get the chance to shine bright!</p></div>
+
+    <br><hr><br>
+
+    <div><h2>Why Do We Have Scholarships?</h2></div>
+
+    <br>
+
+    <div><p>Our vision is to build a more connected community on a national scale that actively seeks to support those who have a spark they need help transforming into a roaring flame. 
+      <br>
+      <br>
+    We're here to find out when one family can endure this much pain in one year, then how much good can we do with all of you in the same time period?</p></div>
+
+    <br><hr><br>
+    <div>
+    <div><h2>How Do We Choose Our Scholarships?</h2></div>
+
+    <br>
+    
+        <div><p>
+          Our scholarship selection process involves several stages to ensure fairness and transparency:
+      </p>
+      
+      <ol>
+          <li>
+              <strong>Application Review:</strong> We invite all applicants to complete a template. Our dedicated panel of judges, which includes volunteers and representatives from our organization, reviews all submissions via email.
+          </li>
+          <br>
+          <li>
+              <strong>Feedback and In-Person Pitch Round:</strong> Applicants in the top 22% receive valuable feedback. The top 50 finalists are invited for an in-person pitch round at a location to be determined. This step allows us to get to know our applicants better.
+          </li>
+          <br>
+          <li>
+              <strong>Scholarship Awards:</strong> Our goal is to offer substantial scholarships, with the top 10 winners receiving the highest awards. The distribution plan is as follows:
+<br>
+              <div><ol>
+                  <li>Grand Prize: $25,000</li>
+                  <li>Second Place: $15,000</li>
+                  <li>Third Place: $9,000</li>
+                  <li>The remaining $7,000 will be evenly distributed among the other 7 winners.</li>
+              </ol></div>
+          </li>
+      </ol>
+      <br>
+
+    </div>
+    </div>
+
+    <br><hr><br>
+
+    <div><h2>Who Can Apply?</h2></div>
+    <br>
+    <div><p>This is how</p></div>
+    <div> <dl>
+      <dt>High School Students</dt>
+      <dd>Junior / Senior</dd>
+      <dt>College Students</dt>
+      <dd>Freshman / Sophomore</dd>
+      <dt>Self-Identified Black Sheep</dt>
+      <dd>This can be anyone of any age or education background.</dd>
+    </dl></div>
+    <br>
+    <div><h4><i>Note:</i> People who do not meet this criteria may still apply with a referral attached by third party.</h4></div>
+
+
+    <br><hr><br>
+
+    <div><h2>What Do We Offer?</h2></div>
+
+    <br>
+
+    <div><p>This is what</p></div>
+
+    <br><hr><br>
+
+    <div style="align-items: center; justify-content: center; display: flex;"><a href="/login/" class="cta-button">Apply for Scholarships</a></div>
+  
+    <br><br>
+
+    <div><i>DISCLAIMER:</i> Scholarship funds will not be distributed to personal bank accounts, peer-to-peer payment, or other individual fund transfer methods unless under special circumstances to be determined by the Foundation. Scholarships are payable to businesses/colleges/professional organizations confirmed by the Foundation's Board.</div>
   </div>
 </div>
 

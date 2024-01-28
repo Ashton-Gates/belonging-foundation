@@ -499,7 +499,17 @@ body {
             <img src="photos/belong_logo.jpg" alt="Belonging Foundation Logo" style="max-height: 50px;">
         </a>
 
-        <a class="btn btn-primary" href="/donate/">Donate</a>
+        <div class="stipe-donate">
+          <script async
+            src="https://js.stripe.com/v3/buy-button.js">
+          </script>
+        
+          <stripe-buy-button
+            buy-button-id="buy_btn_1ObE4FKj0Am5FA1UQVIrQT9D"
+            publishable-key="pk_test_51ObDcEKj0Am5FA1UXZR8BaefNnGDzw6pOrmSSHX499OWIxsrNZCwjxHAG1HbgitVA0c4GhTwOOwaPqLIQazy0o6W00GZroVGqf"
+          >
+          </stripe-buy-button>
+        </div>    
         
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
