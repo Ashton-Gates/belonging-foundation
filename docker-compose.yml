@@ -10,6 +10,8 @@ services:
       - "8001:8000"
     environment:
       - DEBUG=0
+      - SECRET_KEY=${SECRET_KEY}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
 
   nginx:
     image: nginx:1.17
