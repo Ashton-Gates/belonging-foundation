@@ -16,3 +16,5 @@ Remember----- CTRL + Z is your friend
 -- **Vendor Dashboard** - https://belonging.foundation/vendor_dashboard/<br>
 -- **Donor Information** - https://belonging.foundation/donor/<br>
 -- **Donor Stripe Portal** - https://donate.stripe.com/test_bIYaHGdWK5gz1K8aEE?locale=en&__embed_source=buy_btn_1ObE4FKj0Am5FA1UQVIrQT9D ***(will switch to live mode once we have Bank Information and PO Box)***
+
+
