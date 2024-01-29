@@ -191,7 +191,7 @@ def scholarship_application_view(request):
 @login_required
 def vendor_application_view(request):
     # Check if the user is a vendor
-    if not request.user.user_type == 'vendor':
+    if not request.user.user_type == 'student':
         return HttpResponseForbidden("You are not authorized to view this page.")
 
     if request.method == 'POST':

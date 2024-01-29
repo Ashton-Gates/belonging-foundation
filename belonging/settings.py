@@ -27,6 +27,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
     'belonging',
 ]
 
@@ -38,9 +44,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
+    # ... other middleware ...
+]
+AUTHENTICATION_BACKENDS = [
+    # ... other backends ...
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-ROOT_URLCONF = 'belonging.urls'
 
 TEMPLATES = [
     {
@@ -152,3 +164,17 @@ CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_DOMAIN = 'belonging.foundation'
 
 CSRF_TRUSTED_ORIGINS = ['https://belonging.foundation', 'https://www.belonging.foundation']
+
+
+SITE_ID = 1
+
+ROOT_URLCONF = 'belonging.urls'
+
+
+
+
+# allauth specific settings
+LOGIN_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True

@@ -481,83 +481,137 @@
     }
     
       </style>
+
+<!-- Styles for the form navigation -->
+    <style>
+      .form-section {
+          display: none;
+      }
+
+      .form-section.active {
+          display: block;
+      }
+
+      .form-navigation {
+          margin-top: 20px;
+          text-align: center;
+      }
+
+      .form-navigation button {
+          padding: 10px 20px;
+          margin: 0 5px;
+      }
+      
+  </style>
 </head>
 <body>
-    <h1>Scholarship Application Form</h1>
+    <h1>Vendor Application Form</h1>
 
     <div class="signup-form">
-        <h2>Apply for Scholarship</h2>
+        <h2>Let's Be Partners!</h2>
         <form action="{% url 'vendor_app' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <div>
+            <div class="form-section" id="page1">
                 <input type="text" name="first_name" placeholder="First Name" required>
                 <input type="text" name="last_name" placeholder="Last Name" required>
+                <div>
+                    <input type="text" name="email" placeholder="Email" required>
+                    <input type="text" name="phone_number" placeholder="Phone Number" required>
+                    <input type="text" name="business_name" placeholder="Business Name">
+                    <textarea name="text" placeholder="Brief description of your business"></textarea>
+                    <div>
+                        <label>Upload Logo:</label>
+                        <input type="file" name="logo" accept="image/*">
+                    </div>
+                    <div class="form-navigation">
+                      <button type="button" id="prevBtn" onclick="navigate(-1)">Previous</button>
+                      <button type="button" id="nextBtn" onclick="navigate(1)">Next</button>
+                  </div>              </div>
+            </div> 
+
+
+            <div class="form-section" id="page2">
+                
                 <textarea name="question1" placeholder="Why do you want to be involved with the Belonging Foundation?"></textarea>
                 <textarea name="question2" placeholder="How will this partnership benefit your community?"></textarea>
                 <textarea name="product_suite_overview" placeholder="Product Suite Overview"></textarea>
                 <textarea name="url_api_details" placeholder="URLs / API Details"></textarea>
                 <textarea name="partnership_outcome" placeholder="How can we ensure you get the most out of this partnership?"></textarea>
-                <!-- Rest of your form fields -->
+                <div>
+                  <textarea name="about_me" placeholder="About me blurb"></textarea>
+                </div>
+                <div>
+                      <input type="url" name="website_link" placeholder="Website Link">
+                </div>
+                <div class="form-navigation">
+                  <button type="button" id="prevBtn" onclick="navigate(-1)">Previous</button>
+                  <button type="button" id="nextBtn" onclick="navigate(1)">Next</button>
+              </div> 
             </div>
-            <div>
-                <input type="date" name="date_of_birth" required>
+
+
+            <div class="form-section" id="page3">
+              <div>
+                  <label>Upload Business Proposal:</label>
+                  <label>Upload a PDF, Word, TXT, or ODT:</label>
+                  <input type="file" name="business_proposal" accept=".pdf, .docx, .otd, .doc, .txt">
+              </div>
+              <div>
+                  <label>Upload Fee Structure (Optional):</label>
+                  <label>Upload a PDF:</label>
+                  <input type="file" name="fee_structure" accept=".pdf">
+              </div>
+              <div>
+                  <label>Upload a Video:</label>
+                  <input type="file" name="video" accept="video/*">
+              </div>
+              <div>
+                  <label>Upload a Slide Deck:</label>
+                  <label>Upload a .ppt or .pptx:</label></label>
+                  <input type="file" name="slide_deck" accept=".ppt, .pptx"> 
+              </div>
+
+              <div>
+                  <button type="submit">Submit Application</button>
+              </div>
+              <div class="form-navigation">
+                <button type="button" id="prevBtn" onclick="navigate(-1)">Previous</button>
+                <button type="button" id="nextBtn" onclick="navigate(1)">Next</button>
+              </div>
             </div>
-            <div>
-                <input type="number" name="age" placeholder="Age" required>
-            </div>
-            <div>
-                <select name="education_level">
-                    <option value="high_school">High School</option>
-                    <option value="college">College</option>
-                    <!-- Add other education levels here -->
-                </select>
-            </div>
-            <div>
-                <input type="radio" name="gender" value="male" id="male">
-                <label for="male">Male</label>
-                <input type="radio" name="gender" value="female" id="female">
-                <label for="female">Female</label>
-                <input type="radio" name="gender" value="prefer_not_to_say" id="prefer_not_to_say">
-                <label for="prefer_not_to_say">Prefer not to say</label>
-            </div>
-            <div>
-                <input type="text" name="business_name" placeholder="Business Name">
-                <textarea name="business_description" placeholder="Brief description of your business"></textarea>
-            </div>
-            <div>
-                <label>Upload Logo:</label>
-                <input type="file" name="logo" accept="image/*">
-            </div>
-            <div>
-                <textarea name="about_me" placeholder="About me blurb"></textarea>
-            </div>
-            <div>
-                <input type="url" name="website_link" placeholder="Website Link">
-            </div>
-            <div>
-                <label>Upload Business Proposal:</label>
-                <input type="file" name="business_proposal" accept=".pdf">
-            </div>
-            <div>
-                <label>Upload Fee Structure (Optional):</label>
-                <input type="file" name="fee_structure" accept=".pdf">
-            </div>
-            <div>
-                <label>Upload a Video:</label>
-                <input type="file" name="video" accept="video/*">
-            </div>
-            <div>
-                <label>Upload a Slide Deck:</label>
-                <input type="file" name="slide_deck" accept=".ppt, .pptx">
-            </div>
-            <div>
-                <label>Upload a PDF:</label>
-                <input type="file" name="pdf" accept=".pdf">
-            </div>
-            <div>
-                <button type="submit">Submit Application</button>
-            </div>
+
+
+            
+
+
+
+
         </form>
+        
+        <a href="/student_dashboard/" style="color: white; padding-top: 10px;"> Back to Dashboard</a>
     </div>
+
+    <script>
+      let currentSection = 0;
+      const sections = document.querySelectorAll('.form-section');
+      const totalSections = sections.length;
+
+      function showSection(section) {
+          sections.forEach((sec, index) => {
+              sec.style.display = (index === section) ? 'block' : 'none';
+          });
+          document.querySelector('.form-navigation button:first-child').style.display = (section > 0) ? 'inline' : 'none';
+          document.querySelector('.form-navigation button:last-child').style.display = (section < totalSections - 1) ? 'inline' : 'none';
+      }
+
+      function navigate(direction) {
+          currentSection = Math.max(0, Math.min(currentSection + direction, totalSections - 1));
+          showSection(currentSection);
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+          navigate(0);  // Show the first section
+      });
+    </script>
 </body>
 </html>

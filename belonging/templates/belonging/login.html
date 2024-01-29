@@ -622,6 +622,15 @@ body {
     <button type="submit">Login</button>
 </form>
 
+<a href="{% url 'socialaccount_login' provider='google' %}" class="btn btn-google">
+  Sign in with Google
+</a>
+
+<a href="{% url 'socialaccount_login' provider='facebook' %}" class="btn btn-facebook">
+  Sign in with Facebook
+</a>
+
+
  <!-- Add a button or link for to go back to index.html -->
  <div style="text-align: center; margin-top: 20px;">
     <p>Go back to Home?</p>
