@@ -63,11 +63,26 @@ WSGI_APPLICATION = 'belonging.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'belonging-foundation:us-central1:belonging-prod',  # The name of your database in Cloud SQL
+        'USER': 'root',  # The username for your database
+        'PASSWORD': 'H1ng3isgro$$',  # The password for your database
+        'HOST': '35.184.123.203',  # The IP address of your Cloud SQL instance
+        # If connecting via UNIX socket (e.g., using Cloud SQL Proxy), use '/cloudsql/your_connection_name'
+        'PORT': '3306',  # The port number, default MySQL port is 3306
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
+    }
+}'''
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',  # Path to database file
     }
 }
 
