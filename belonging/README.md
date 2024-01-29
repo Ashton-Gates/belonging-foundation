@@ -7,8 +7,10 @@ Please log any changes made plz as it will help me know where to pick up at! I h
 Remember----- CTRL + Z is your friend
 
 ## Important Scipts:
--- **URL Configuration** - (belonging/urls.py) <br>
--- **Admin Admin** - https://belonging.foundation/admin/ <br>
+-- **URL Configuration** - ('belonging/urls.py') - URL Notes - ('Instructions/urls.md')
+<br>
+-- **Admin Configuration** - ('belonging/admin.py') - Admin Notes - ('Instructions/admin.md')
+  <br>
 -- **Login Portal** - https://belonging.foundation/login/ <br>
 -- **Applicant Dashboard** - https://belonging.foundation/student_dashboard/<br>
 -- **Scholarship Information** - https://belonging.foundation/scholarship/<br>
