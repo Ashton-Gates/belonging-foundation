@@ -122,7 +122,10 @@ def student_dashboard_view(request):
         'user_pitch_decks': user_pitch_decks,
         'scholarships': scholarships,
         'vendor_applications': vendor_applications,
+        
     }
+    scholarships = Scholarship.objects.all()  # Get all scholarship objects
+    context = {'scholarships': scholarships}
 
     return render(request, 'belonging/applicant_dashboard.html', context)
 

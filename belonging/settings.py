@@ -155,7 +155,6 @@ EMAIL_HOST_USER = 'ashtonkinnell8@gmail.com'
 EMAIL_HOST_PASSWORD = 'H1ng3isgro$$'
 DEFAULT_FROM_EMAIL = 'ashtonkinnell8@gmail.com'
 
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
@@ -165,13 +164,20 @@ CSRF_COOKIE_DOMAIN = 'belonging.foundation'
 
 CSRF_TRUSTED_ORIGINS = ['https://belonging.foundation', 'https://www.belonging.foundation']
 
-
 SITE_ID = 1
 
 ROOT_URLCONF = 'belonging.urls'
 
-
-
+# Add Google provider configuration
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': '1002728390308-vak0cu5k7mba0jiuf3u70hrm35ivbjv4.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        }
+    }
+}
 
 # allauth specific settings
 LOGIN_REDIRECT_URL = '/'
