@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'belonging',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +51,7 @@ AUTHENTICATION_BACKENDS = [
     # ... other backends ...
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
+    'social_core.backends.google.GoogleOAuth2',
 ]
 
 
@@ -190,3 +192,10 @@ LOGIN_REDIRECT_URL = 'vendor_dashboard'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1002728390308-vak0cu5k7mba0jiuf3u70hrm35ivbjv4.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/account_management/'
+SOCIAL_AUTH_LOGIN_URL = '/'

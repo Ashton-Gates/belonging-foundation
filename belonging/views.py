@@ -11,6 +11,20 @@ from django.contrib.auth.decorators import login_required
 from .models import PitchDeck, Dashboard, Item, Vendor, ScholarshipApplication, VendorApplication, Venue, Event, Scholarship  
 from .forms import ScholarshipApplicationForm, EventForm, VendorApplicationForm
 from django.http import HttpResponseForbidden, JsonResponse
+from social_django.models import UserSocialAuth
+
+
+
+
+def google_login(request):
+    user = request.user
+    try:
+        user_social_auth = user.social_auth.get(provider='google-oauth2')
+        # Handle authenticated user here
+    except UserSocialAuth.DoesNotExist:
+        # Handle unauthenticated user here
+        return redirect('login')
+    return redirect('home')
 
 def account_onboard(request):
     return render(request, 'account_onboard.html')

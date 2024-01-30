@@ -38,6 +38,7 @@ urlpatterns = [
     path('vendor_registration/', vendor_registration_view, name='vendor_registration'),
     path('vendor/', vendor_about, name='vendor_about'),
     path('account_onboard/', account_onboard, name='onboard'),
+    path('social-auth/', include('social_django.urls', namespace='social')),
 
 ]
 

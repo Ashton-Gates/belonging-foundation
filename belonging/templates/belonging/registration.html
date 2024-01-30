@@ -22,6 +22,23 @@
     </form>
     </div>
 
+    <div id="g_id_onload"
+    data-client_id="1002728390308-vak0cu5k7mba0jiuf3u70hrm35ivbjv4.apps.googleusercontent.com"
+    data-context="signin"
+    data-ux_mode="popup"
+    data-login_uri="http://localhost:8081/accounts/google/login/callback"
+    data-itp_support="true">
+</div>
+
+<div class="g_id_signin"
+    data-type="standard"
+    data-shape="pill"
+    data-theme="filled_blue"
+    data-text="signup_with"
+    data-size="large"
+    data-logo_alignment="left">
+</div>
+
 <script>
   let currentSection = 0;
   const sections = document.querySelectorAll('.form-section');
@@ -37,7 +54,7 @@
       navigate(0);  // Show the first section
   });
 </script>
-
+<script src="https://accounts.google.com/gsi/client" async></script>
   
  <!-- Add a button or link for registration -->
  <div style="text-align: center; margin-top: 20px;">
