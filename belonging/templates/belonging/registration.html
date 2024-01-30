@@ -1,20 +1,43 @@
 {% block content %}
-<h2>Register</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <label for="user_type">I am a:</label>
-    <select name="user_type" id="user_type">
-    <option value="recipient">Scholarship Recipients</option>
-    <option value="bidders">Bidders</option>
-    <option value="applicant">Applications</option>
-    <!-- Add other options similarly -->
-</select>
-    <button type="submit">Register</button>
-</form>
-<a href="{% url 'socialaccount_signup' provider='google' %}" class="btn btn-google">
-    Sign up with Google
-  </a>
+
+<h1>Account Registration</h1>
+
+<div class="signup-form">
+    <h2>Let's Be Partners!</h2>
+    <form action="{% url 'registration' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-section" id="page1">
+            <input type="text" name="first_name" placeholder="First Name" required>
+            <input type="text" name="last_name" placeholder="Last Name" required>
+            <div>
+                <input type="text" name="email" placeholder="Email" required>
+                <input type="text" name="phone_number" placeholder="Phone Number" required>
+                <input type="text" name="password" placeholder="Password" required>
+                <input type="text" name="confirm_password" placeholder="Confirm Password" required>          
+            </div>
+            <div>
+                <button type="submit">Submit Application</button>
+            </div>
+        </div> 
+    </form>
+    </div>
+
+<script>
+  let currentSection = 0;
+  const sections = document.querySelectorAll('.form-section');
+  const totalSections = sections.length;
+
+
+  function navigate(direction) {
+      currentSection = Math.max(0, Math.min(currentSection + direction, totalSections - 1));
+      showSection(currentSection);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+      navigate(0);  // Show the first section
+  });
+</script>
+
   
  <!-- Add a button or link for registration -->
  <div style="text-align: center; margin-top: 20px;">

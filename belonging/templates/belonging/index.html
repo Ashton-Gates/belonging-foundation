@@ -488,6 +488,111 @@ body {
 .social-icons a:hover {
   color: #ddd;
 }
+*{
+  margin: 0;
+  padding: 0;
+  font-family: Sans-serif;
+}
+
+body{
+  background-color: #eee;
+
+}
+nav{
+  margin: 20px;
+  position: relative;
+}
+ul{
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+.display-picture{
+  margin-left: auto;
+}
+.display-picture img{
+  width: 50px;
+  border-radius: 50%;
+  border:2px solid #fff;
+}
+.display-picture img:hover{
+border:2px solid #E78341;
+}
+.card{
+  transition: 0.5s ease;
+}
+
+.card ul{
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  background: #E78341;
+  position: absolute;
+  top: 4rem;
+  right:0rem;
+border-radius: 10px;
+padding: 10px 50px 10px 20px;
+}
+.card ul li{
+ 
+  padding: 5px 0;
+  color: #FFF;
+  font-size: 14px;
+}
+.hidden{
+  display: none;
+}
+a{
+  text-decoration: none;
+  color:#fff;
+}
+/* Profile Image */
+.navbar .nav-link img.rounded-circle {
+  border: 2px solid #fff;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.navbar .nav-link img.rounded-circle:hover {
+  border-color: #E78341;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 2px 10px rgba(0,0,0,.2);
+}
+
+/* Dropdown Item */
+.dropdown-item:hover {
+  background-color: #E78341;
+  color: #FFF;
+}
+/* Google Sign in/Sign up styles */
+.dropdown-item img {
+  margin-right: 8px; /* Space between the icon and text */
+}
+
+/* Adjustments for the dropdown item with icon */
+.dropdown-item {
+  display: flex;
+  align-items: center;
+}
+.hidden {
+  display: none;
+}
+
+/* Additional styling for the dropdown card */
+.card ul {
+  list-style: none;
+  /* Other styles... */
+}
+
+.card li a {
+  text-decoration: none;
+  color: white;
+  /* Other styles... */
+}
 
   </style>
   <header>
@@ -509,7 +614,40 @@ body {
             publishable-key="pk_test_51ObDcEKj0Am5FA1UXZR8BaefNnGDzw6pOrmSSHX499OWIxsrNZCwjxHAG1HbgitVA0c4GhTwOOwaPqLIQazy0o6W00GZroVGqf"
           >
           </stripe-buy-button>
-        </div>    
+        </div>
+        <nav><!--Navigation Bar Starts Here-->
+          <!-- Profile Dropdown or Login/Register Dropdown -->
+          {% if user.is_authenticated %}
+            <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="{{ user.profile_picture.url }}" alt="Profile" class="rounded-circle" width="30">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+              <a class="dropdown-item" href="/profile/">Profile</a>
+              <a class="dropdown-item" href="/account/">Account</a>
+              <a class="dropdown-item" href="/settings/">Settings</a>
+              <a class="dropdown-item" href="/logout/">Log Out</a>
+            </div>
+          {% else %}
+            <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Login
+            </a>
+            <div class="dropdown-menu dropdown-menu-right p-4" aria-labelledby="loginDropdown">
+              <!-- Login Form -->
+              <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                  <input type="email" class="form-control" name="email" placeholder="Email address" required>
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" name="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                <a href="{% url 'account_signup' %}" class="btn btn-secondary btn-block">Register</a>
+                <a href="{% url 'socialaccount_login' 'google' %}" class="btn btn-danger btn-block">Sign in with Google</a>
+              </form>
+            </div>
+          {% endif %}
+        </nav><!--Navigation Bar Ends Here-->
         
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -586,30 +724,37 @@ body {
 <!-- Section with overlay and call to action -->
 <div class="touts-container">
   <div class="row" style="background-color: #ff3333;">
-    <h2  >Scholarships</h2>
+    <h2 >Scholarship Opportunities</h2>
     <p>Do you have an awesome idea that you'd like to see come true? Login to our scholarship portal to see what's available to you and apply!</p>
-    <a href="/scholarship/" class="cta-button" >APPLY NOW</a>
+    <a href="/scholarship/" class="cta-button" >Scholarship</a>
   </div>
 </div>
-
+<div class="touts-container">
+  <div class="row" style="background-color: #2e720f;">
+    <h2 >Vendor Opportunities</h2>
+    <p>There's lots of ways for individuals to get involved with our cause! Check out how you can be involved and support in all ways!</p>
+    <a href="/vendor/" class="cta-button" >Vendors</a>
+  </div>
+</div>
 <div class="touts-container">
   <div class="row" style="background-color: #ffb84d;">
     <h2 >Ways to get Involved</h2>
     <p>There's lots of ways for individuals to get involved with our cause! Check out how you can be involved and support in all ways!</p>
-    <a href="/involved/" class="cta-button" >CHECK US OUT</a>
+    <a href="/involved/" class="cta-button" >Get Involved</a>
   </div>
 </div>
+
 
 
 
 <!-- Additional content sections: -->
 <div class="content-section">
-  <h2>News</h2>
+  <h2>Events</h2>
   <div id="newsCarousel" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
         <a href="link_to_news_article_1">
-          <img class="d-block w-100" src="photos/article_1.jpg" alt="First slide">
+          <img class="d-block w-100" src="/photos/article_1.jpg" alt="First slide">
           <div class="carousel-caption">
             <h3>News Article Title 1</h3>
             <p>Short description of the article.</p>
@@ -705,7 +850,24 @@ body {
       </form>
    </div>
 </div>
+<script>
 
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the dropdown and the toggle element (assumed to be the profile image)
+  var profileToggle = document.getElementById('profileDropdown');
+  var dropdownMenu = document.querySelector('.dropdown-menu');
+
+  // Listen for click events on the toggle element
+  profileToggle.addEventListener('click', function(event) {
+    // Prevent the default navigation
+    event.preventDefault();
+
+    // Toggle the visibility of the dropdown menu
+    dropdownMenu.classList.toggle('show'); // Bootstrap 4 uses 'show' class for dropdowns
+  });
+});
+
+</script>
 <!-- Bootstrap JavaScript -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>

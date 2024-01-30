@@ -2,7 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 from .models import ScholarshipApplication, Event, VendorApplication
-
+from django.core.validators import MaxLengthValidator
+from django.utils.translation import gettext_lazy as _
 
 
 
@@ -12,7 +13,9 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
         fields = UserCreationForm.Meta.fields + ('email',)
-
+        help_texts = {
+            'username': _("Please use between 8 and 15 characters."),
+        }
 class CustomAuthenticationForm(forms.ModelForm):
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
 
@@ -41,3 +44,18 @@ class VendorApplicationForm(forms.ModelForm):
     class Meta:
         model = VendorApplication
         fields = ['logo', 'about_me', 'website_link', 'business_proposal', 'fee_structure', 'question1', 'question2', 'product_suite_overview', 'url_api_details', 'partnership_outcome']
+
+
+
+class RegistrationFormStepOne(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password']
+        widgets = {
+            'password': forms.PasswordInput(),
+        }
+
+class RegistrationFormStepTwo(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'user_type']

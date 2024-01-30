@@ -32,7 +32,6 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.facebook',
     'belonging',
 ]
 
@@ -57,7 +56,7 @@ AUTHENTICATION_BACKENDS = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR / 'belonging' / 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -171,16 +170,23 @@ ROOT_URLCONF = 'belonging.urls'
 # Add Google provider configuration
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
         'APP': {
             'client_id': '1002728390308-vak0cu5k7mba0jiuf3u70hrm35ivbjv4.apps.googleusercontent.com',
             'secret': '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',
-            'key': ''
+            'key': 'AIzaSyDTvLNzp7bZTN0eMiAaMWmAPXz6T9qCVw0'
         }
     }
 }
 
 # allauth specific settings
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'vendor_dashboard'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True

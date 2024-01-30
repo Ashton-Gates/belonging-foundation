@@ -12,6 +12,38 @@ from .models import PitchDeck, Dashboard, Item, Vendor, ScholarshipApplication, 
 from .forms import ScholarshipApplicationForm, EventForm, VendorApplicationForm
 from django.http import HttpResponseForbidden, JsonResponse
 
+def account_onboard(request):
+    return render(request, 'account_onboard.html')
+
+
+def vendor_about(request):
+    return render(request, 'belonging/vendor.html')
+
+
+def vendor_login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None and user.user_type == 'vendor':
+            login(request, user)
+            return redirect('vendor_dashboard')
+        else:
+            return render(request, 'vendor_login.html', {'error': 'Invalid credentials or not a vendor'})
+    return render(request, 'belonging/vendor_login.html')
+
+
+def vendor_registration_view(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('dashboard')
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'account_onboard.html', {'form': form})
+
 
 def calendar_data(request):
     events = Event.objects.filter(venue=request.user)
@@ -42,10 +74,10 @@ def register_view(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('dashboard')
+            return redirect('account_onboard')
     else:
         form = CustomUserCreationForm()
-    return render(request, 'belonging/registration.html', {'form': form})
+    return render(request, 'account_onboard', {'form': form})
 
 def login_view(request):
     if request.method == 'POST':

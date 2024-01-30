@@ -1,7 +1,8 @@
-from django.contrib.auth.models import User, AbstractUser
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+
 from django.conf import settings
 from django.db import models
-
 
 class CustomUser(AbstractUser):
     USER_TYPES = (
@@ -19,6 +20,18 @@ class CustomUser(AbstractUser):
         db_table = 'custom_user'
         swappable = 'AUTH_USER_MODEL'
         unique_together = ('email',)
+
+
+
+class CustomUserCreationForm(UserCreationForm):
+    class Meta:
+        model = CustomUser
+        fields = ('username', 'email', 'password1', 'password2', 'user_type')
+
+class CustomAuthenticationForm(AuthenticationForm):
+    class Meta:
+        model = CustomUser
+        fields = ('username', 'password')
 
 
 class Scholarship(models.Model):

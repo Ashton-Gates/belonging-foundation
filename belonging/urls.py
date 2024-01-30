@@ -7,7 +7,9 @@ from .views import (vendor_application_view, scholarship_application_view,
                     scholarship_view, impact_view, about_view, home_page, 
                     donate_stripe, register_view, login_view, default_dashboard, 
                     auction_dashboard, bidder_dashboard, donor_dashboard, 
-                    recipient_dashboard, student_dashboard, vendor_dashboard)
+                    recipient_dashboard, student_dashboard, vendor_dashboard, 
+                    vendor_login_view, vendor_registration_view, vendor_about,
+                    register_view, account_onboard)
 
 urlpatterns = [
     path('', home_page, name='home_page'),
@@ -32,6 +34,11 @@ urlpatterns = [
     path('vendor_app/', vendor_application_view, name='vendor_app'),
     # Include the allauth URLs for social account handling
     path('accounts/', include('allauth.urls')),
+    path('vendor_login/', vendor_login_view, name='vendor_login'),
+    path('vendor_registration/', vendor_registration_view, name='vendor_registration'),
+    path('vendor/', vendor_about, name='vendor_about'),
+    path('account_onboard/', account_onboard, name='onboard'),
+
 ]
 
 if settings.DEBUG:
