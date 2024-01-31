@@ -2,7 +2,7 @@ version: '2.2'
 
 services:
   web:
-    build: .
+    image: ashtongkinnell/beloning-prod:latest
     command: gunicorn belonging.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - .:/belonging
