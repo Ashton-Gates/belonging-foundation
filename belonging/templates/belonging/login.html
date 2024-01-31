@@ -627,7 +627,7 @@ body {
             <div class="card">
                 <div class="card-header">Profile Login</div>
                 <div class="card-body">
-                    <form method="post" action="{% url 'vendor_login' %}">
+                  <form method="post" action="{% url 'login' %}">
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="username">Username</label>
@@ -649,7 +649,7 @@ body {
      data-client_id="1002728390308-vak0cu5k7mba0jiuf3u70hrm35ivbjv4.apps.googleusercontent.com"
      data-context="signin"
      data-ux_mode="popup"
-     data-login_uri="http://localhost:8081/accounts/google/login/callback"
+     data-login_uri="http://localhost:8081/accounts/google/login/callback/"
      data-itp_support="true">
 </div>
 
@@ -671,7 +671,7 @@ body {
  <!-- Add a button or link for registration -->
  <div style="text-align: center; margin-top: 20px;">
     <p>Don't have an account?</p>
-    <a href="{% url 'registration' %}" class="btn btn-primary">Need to Register</a>
+    <a href="/registration/" class="btn btn-primary">Need to Register</a>
 </div>
 <script>
     function getCookie(name) {

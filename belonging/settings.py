@@ -21,8 +21,11 @@ ALLOWED_HOSTS = ['*','belonging.foundation', 'www.belonging.foundation']
 # Application definition
 
 INSTALLED_APPS = [
+    'belonging',
+    'django.contrib.auth',    
+    #'belonging.apps.BelongingConfig',
     'django.contrib.admin',
-    'django.contrib.auth',
+
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -32,9 +35,12 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'belonging',
     'social_django',
+
+    
 ]
+
+AUTH_USER_MODEL = 'belonging.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -47,6 +53,9 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
     # ... other middleware ...
 ]
+
+
+
 AUTHENTICATION_BACKENDS = [
     # ... other backends ...
     'django.contrib.auth.backends.ModelBackend',
@@ -146,7 +155,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DJANGO_SETTINGS_MODULE = 'belonging.settings'
 
-AUTH_USER_MODEL = 'belonging.CustomUser'
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.yourmailserver.com'  # For Gmail use 'smtp.gmail.com'
@@ -188,8 +197,8 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 # allauth specific settings
-LOGIN_REDIRECT_URL = 'vendor_dashboard'
-ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/default_dashboard/'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/default_dashboard/'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 
@@ -197,5 +206,5 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1002728390308-vak0cu5k7mba0jiuf3u70hrm35ivbjv4.
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/account_management/'
-SOCIAL_AUTH_LOGIN_URL = '/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/default_dashboard/'
+SOCIAL_AUTH_LOGIN_URL = '/default_dashboard/'

@@ -1,8 +1,8 @@
-from django.contrib.auth.models import AbstractUser
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-
+from django.contrib.auth.models import User, AbstractUser
 from django.conf import settings
 from django.db import models
+
+
 
 class CustomUser(AbstractUser):
     USER_TYPES = (
@@ -14,24 +14,12 @@ class CustomUser(AbstractUser):
         ('bidder', 'Bidder'),
         ('owner', 'Local Shop Owner'),
     )
-    user_type = models.CharField(max_length=10, choices=USER_TYPES, default='student')
+    user_type = models.CharField(max_length=20, choices=USER_TYPES, default='student')  # Adjusted max_length
 
     class Meta:
         db_table = 'custom_user'
         swappable = 'AUTH_USER_MODEL'
-        unique_together = ('email',)
-
-
-
-class CustomUserCreationForm(UserCreationForm):
-    class Meta:
-        model = CustomUser
-        fields = ('username', 'email', 'password1', 'password2', 'user_type')
-
-class CustomAuthenticationForm(AuthenticationForm):
-    class Meta:
-        model = CustomUser
-        fields = ('username', 'password')
+        unique_together = ('email',)  # Consider revising this part
 
 
 class Scholarship(models.Model):

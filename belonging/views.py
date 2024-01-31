@@ -1,4 +1,3 @@
-
 import csv
 import os
 from django.shortcuts import render, redirect
@@ -8,12 +7,13 @@ from django.core.mail import EmailMessage
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.decorators import login_required
-from .models import PitchDeck, Dashboard, Item, Vendor, ScholarshipApplication, VendorApplication, Venue, Event, Scholarship  
-from .forms import ScholarshipApplicationForm, EventForm, VendorApplicationForm
+from .models import PitchDeck, Dashboard, Item, VendorApplication, Venue, Event, Scholarship  
+from .forms import EventForm, VendorApplicationForm
 from django.http import HttpResponseForbidden, JsonResponse
 from social_django.models import UserSocialAuth
+from django.contrib.auth import get_user_model
 
-
+User = get_user_model()
 
 
 def google_login(request):
@@ -24,7 +24,7 @@ def google_login(request):
     except UserSocialAuth.DoesNotExist:
         # Handle unauthenticated user here
         return redirect('login')
-    return redirect('home')
+    return redirect('belonging/default_dashboard')
 
 def account_onboard(request):
     return render(request, 'account_onboard.html')
@@ -32,32 +32,6 @@ def account_onboard(request):
 
 def vendor_about(request):
     return render(request, 'belonging/vendor.html')
-
-
-def vendor_login_view(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None and user.user_type == 'vendor':
-            login(request, user)
-            return redirect('vendor_dashboard')
-        else:
-            return render(request, 'vendor_login.html', {'error': 'Invalid credentials or not a vendor'})
-    return render(request, 'belonging/vendor_login.html')
-
-
-def vendor_registration_view(request):
-    if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('dashboard')
-    else:
-        form = CustomUserCreationForm()
-    return render(request, 'account_onboard.html', {'form': form})
-
 
 def calendar_data(request):
     events = Event.objects.filter(venue=request.user)
@@ -88,10 +62,11 @@ def register_view(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('account_onboard')
+            # Redirect to the account onboarding page after registration
+            return redirect('onboard')
     else:
         form = CustomUserCreationForm()
-    return render(request, 'account_onboard', {'form': form})
+    return render(request, 'belonging/registration.html', {'form': form})
 
 def login_view(request):
     if request.method == 'POST':
@@ -101,10 +76,9 @@ def login_view(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return dashboard_redirect_view(request)
-
+            return redirect('default_dashboard')
         else:
-    # If the login is unsuccessful, re-render the page with the form and an error message
+            # If the login is unsuccessful, re-render the page with the form and an error message
             return render(request, 'belonging/login.html', {'form': form, 'error': 'Invalid username or password'})
     else:
         form = CustomAuthenticationForm()
@@ -113,21 +87,6 @@ def login_view(request):
 @login_required
 def dashboard_redirect_view(request):
     if request.user.is_authenticated:
-        user_type = request.user.user_type
-        if user_type == 'student':
-            return redirect('student_dashboard')
-        elif user_type == 'donor':
-            return redirect('donor_dashboard')
-        elif user_type == 'recipient':
-            return redirect('recipient_dashboard')
-        elif user_type == 'hosts':
-            return redirect('host_dashboard')
-        elif user_type == 'bidders':
-            return redirect('bidder_dashboard')
-        elif user_type == 'vendors':
-            return redirect('vendor_dashboard')
-        # Add other conditions for different user types
-    else:
         return redirect('default_dashboard')
 
 @login_required
