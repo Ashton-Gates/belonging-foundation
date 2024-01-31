@@ -5,7 +5,14 @@
 
 version: 2
 updates:
-  - package-ecosystem: "" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  # Python project dependencies
+  - package-ecosystem: "pip" # For Python projects
+    directory: "/" # Assuming your Python package manifest (requirements.txt or Pipfile) is in the root
     schedule:
-      interval: "daily"
+      interval: "daily" # How often to check for updates
+
+  # Docker images
+  - package-ecosystem: "docker" # For Docker images
+    directory: "/" # Assuming your Dockerfile is in the root
+    schedule:
+      interval: "daily" # How often to check for updates
