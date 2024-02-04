@@ -14,8 +14,10 @@ class CustomUser(AbstractUser):
         ('host', 'Auction Host'),
         ('bidder', 'Bidder'),
         ('owner', 'Local Shop Owner'),
+        ('internal', 'Employee')
     )
     user_type = models.CharField(max_length=10, choices=USER_TYPES, default='student')
+    is_internal_user = models.BooleanField(default=False)
 
     class Meta:
         db_table = 'custom_user'
@@ -76,6 +78,7 @@ class PitchDeck(models.Model):
 
 
 class ScholarshipApplication(models.Model):
+    status = models.CharField(max_length=100, default='pending')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     first_name = models.CharField(max_length=100, null=True)
     last_name = models.CharField(max_length=100, null=True)
@@ -103,7 +106,25 @@ class ScholarshipApplication(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}'s Scholarship Application"
-
+class VendorApplication(models.Model):
+    status = models.CharField(null=True, blank=True, max_length=50, default='pending')  # Example status field
+    first_name = models.CharField(max_length=100, null=True)
+    last_name = models.CharField(max_length=100, null=True)
+    phone_number = models.CharField(max_length=15, null=True)
+    question1 = models.TextField(null=True, blank=True, verbose_name="Why do you want to be involved with the Belonging Foundation?")
+    question2 = models.TextField(null=True, blank=True, verbose_name="How will this partnership benefit your community?")
+    product_suite_overview = models.TextField(null=True, blank=True, verbose_name="Product Suite Overview")
+    url_api_details = models.TextField(null=True, blank=True, verbose_name="URLs / API Details")
+    partnership_outcome = models.TextField(null=True, blank=True, verbose_name="How can we ensure you get the most out of this partnership?")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    logo = models.ImageField(upload_to='vendor_logos/', null=True, blank=True)
+    about_me = models.TextField(null=True, blank=True)
+    website_link = models.URLField(null=True, blank=True)
+    business_proposal = models.FileField(null=True, blank=True, upload_to='business_proposals/')
+    fee_structure = models.FileField(upload_to='fee_structures/', null=True, blank=True)
+    business_name = models.CharField(null=True, blank=True, max_length=255)  # Assuming it's a CharField
+    status = models.CharField(null=True, blank=True, max_length=50, default='pending')  # Example status field
+    business_desciption = models.URLField(null=True, blank=True)
 class Event(models.Model):
     name = models.CharField(max_length=200)
     date = models.DateField()
@@ -122,20 +143,9 @@ class Event(models.Model):
         return self.name
 
 
-class VendorApplication(models.Model):
-    question1 = models.TextField(null=True, blank=True, verbose_name="Why do you want to be involved with the Belonging Foundation?")
-    question2 = models.TextField(null=True, blank=True, verbose_name="How will this partnership benefit your community?")
-    product_suite_overview = models.TextField(null=True, blank=True, verbose_name="Product Suite Overview")
-    url_api_details = models.TextField(null=True, blank=True, verbose_name="URLs / API Details")
-    partnership_outcome = models.TextField(null=True, blank=True, verbose_name="How can we ensure you get the most out of this partnership?")
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    logo = models.ImageField(upload_to='vendor_logos/', null=True, blank=True)
-    about_me = models.TextField(null=True, blank=True)
-    website_link = models.URLField(null=True, blank=True)
-    business_proposal = models.FileField(null=True, blank=True, upload_to='business_proposals/')
-    fee_structure = models.FileField(upload_to='fee_structures/', null=True, blank=True)
-    business_name = models.CharField(null=True, blank=True, max_length=255)  # Assuming it's a CharField
-    status = models.CharField(null=True, blank=True, max_length=50, default='pending')  # Example status field
+
+
+
 
     def __str__(self):
         return f'Vendor Application {self.id} by {self.user.username}'

@@ -27,8 +27,8 @@
     <div class="carousel-inner">
         {% for scholarship in scholarships %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
-            <h3>{{ scholarship.title }}</h3>
-            <p>{{ scholarship.description }}</p>
+            <h3>{{ application.name }}</h3>
+            <p>{{ application.summary }}</p>
             <!-- Add other fields if necessary, like an image -->
         </div>
         {% endfor %}
@@ -47,7 +47,7 @@
         <h2>Submitted Vendor Applications</h2>
         <ul>
             {% for application in vendor_applications %}
-                <li>{{ application.business_name }} - {{ application.about_me }}</li>
+                <li>{{ application.name }} - {{ application.business_description }}</li>
             {% empty %}
                 <li>No vendor applications available.</li>
             {% endfor %}
@@ -64,6 +64,30 @@
         <a href="/scholarship/" style="color: black; padding : 10px;"> Back to Scholarship</a>
 
 
-
+        <script>
+            function fetchApplications() {
+              fetch('/internal/get-latest-applications/')
+                .then(response => response.json())
+                .then(data => {
+                  // Assume you have a div with id="applications-list" to display applications
+                  const applicationsList = document.getElementById('applications-list');
+                  applicationsList.innerHTML = ''; // Clear current list
+                  data.forEach(app => {
+                    // Create a new element for each application and add it to the list
+                    // This is a basic example; you might need to adjust based on your data structure
+                    const appElement = document.createElement('div');
+                    appElement.textContent = `Application ID: ${app.id}, Submitted: ${app.date_submitted}`;
+                    applicationsList.appendChild(appElement);
+                  });
+                })
+                .catch(error => console.error('Error fetching new applications:', error));
+            }
+            
+            // Poll for new applications every 30 seconds
+            setInterval(fetchApplications, 30000);
+            
+            // Also, fetch applications on page load
+            document.addEventListener('DOMContentLoaded', fetchApplications);
+            </script>
 </body>
 {% endblock %}

@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.microsoft',
     'social_django',
 
     
@@ -68,7 +69,7 @@ AUTHENTICATION_BACKENDS = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR / 'belonging' / 'templates')],
+        'DIRS': [os.path.join(BASE_DIR / 'intenal' / 'belonging' / 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

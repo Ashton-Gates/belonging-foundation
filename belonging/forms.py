@@ -30,8 +30,8 @@ class CustomAuthenticationForm(forms.ModelForm):
 
 class ScholarshipApplicationForm(forms.ModelForm):
     class Meta:
-        modUserModelel = ScholarshipApplication
-        fields = ['first_name', 'last_name', 'date_of_birth', 'age', 'education_level', 'gender', 'business_name', 'business_description', 'video', 'slide_deck', 'pdf']
+        model = ScholarshipApplication
+        fields = '__all__'
 
 
 class EventForm(forms.ModelForm):
