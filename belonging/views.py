@@ -1,17 +1,21 @@
+# views.py
 import csv
 import os
+import requests
+from django.conf import settings
+from django.contrib.auth import login
+from .forms import CustomUserCreationForm
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.conf import settings
-from django.contrib import messages
 from django.core.mail import EmailMessage
 from .forms import CustomUserCreationForm, CustomAuthenticationForm, VendorApplicationForm, ScholarshipApplicationForm
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.decorators import login_required
 from .models import PitchDeck, Dashboard, VendorApplication, Venue, Scholarship  
-
 from social_django.models import UserSocialAuth
 from django.contrib.auth import get_user_model
+from django_eventstream import send_event
 
 
 User = get_user_model()
@@ -19,17 +23,11 @@ User = get_user_model()
 
 
 
+######################################################################
+
 def vendor_about(request):
     return render(request, 'belonging/vendor.html')
-
-
-
-
-# views.py
-from django.contrib.auth import login
-from .forms import CustomUserCreationForm
-
-
+#########################################################################
 def register_view(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -43,7 +41,7 @@ def register_view(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'belonging/registration.html/', {'form': form})
-
+#####################################################################################
 def login_view(request):
     if request.method == 'POST':
         form = CustomAuthenticationForm(request.POST)
@@ -61,7 +59,7 @@ def login_view(request):
         return render(request, 'belonging/login.html', {'form': form})
     #should make a route if their application has been approved, to route to 'default_dashboard'
 
-
+##############################################################################
 @login_required
 def default_dashboard(request):
     dashboard_data = Dashboard.objects.all()
@@ -93,7 +91,8 @@ def scholarship_application(request):
             application = form.save(commit=False)
             application.user = request.user
             application.save()
-            
+            send_event('applications', 'new_scholarship_application', {'id': application.id})
+
             # Prepare the email
             email = EmailMessage(
                 subject='New Scholarship Application',
@@ -131,15 +130,14 @@ def scholarship_application(request):
 
 @login_required
 def vendor_application(request):
-    # Initialize the form for both GET and POST requests
-    form = VendorApplicationForm()
     
-    if request.method == 'POST':
         form = VendorApplicationForm(request.POST, request.FILES)
-        if form.is_valid():
+        if request.method == 'POST' and form.is_valid():
             vendor_application = form.save(commit=False)
             vendor_application.user = request.user
             vendor_application.save()
+            send_event('applications', 'new_vendor_application', {'id': vendor_application.id})
+
             # Prepare the email
             email = EmailMessage(
                 subject='New Vendor Application',
@@ -160,8 +158,8 @@ def vendor_application(request):
 
             return redirect('applicant_dashboard')
 
-    # If it's not a POST request, or the form is not valid, render the page with the form
-    return render(request, 'belonging/vendor_app.html', {'form': form})
+        # If it's not a POST request, or the form is not valid, render the page with the form
+        return render(request, 'belonging/vendor_app.html', {'form': form})
 
 
 

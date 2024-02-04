@@ -8,7 +8,9 @@ from django.contrib.auth.decorators import login_required, permission_required
 from belonging.models import ScholarshipApplication, VendorApplication
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import get_object_or_404
+from django.http import JsonResponse, HttpResponse
 from django.urls import reverse
 
 
@@ -78,3 +80,5 @@ def get_latest_applications(request):
 
     applications = list(scholarship_applications) + list(vendor_applications)
     return JsonResponse(applications, safe=False)
+
+

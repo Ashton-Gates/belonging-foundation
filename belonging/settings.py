@@ -210,3 +210,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/default_dashboard/'
 SOCIAL_AUTH_LOGIN_URL = '/default_dashboard/'
+
+
+# settings.py of the belonging app
+INTERNAL_WEBHOOK_URL = 'https://abc123.ngrok.io/internal/webhook/'

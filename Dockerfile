@@ -20,4 +20,8 @@ COPY . .
 RUN python manage.py collectstatic --noinput
 
 # Run the application
-CMD ["gunicorn", "-b", "0.0.0.0:8000", "belonging.wsgi:application"]
+#CMD ["gunicorn", "-b", "0.0.0.0:8000", "belonging.wsgi:application"]
+
+
+# Dockerfile
+CMD ["gunicorn", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "belonging.asgi:application"]

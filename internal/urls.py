@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
@@ -8,6 +8,7 @@ urlpatterns = [
     path('internal_registration/', views.internal_registration, name='internal_registration'),
     path('review_applications/', views.review_applications, name='review_applications'),  # Add this line
     path('get-latest-applications/', views.get_latest_applications, name='get_latest_applications'),
-
+    path('webhook/', views.webhook_listener, name='webhook_listener'),
+    path('events/', include('django_eventstream.urls')),
 
 ]
