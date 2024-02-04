@@ -529,6 +529,13 @@ body {
   margin: 20px 0; /* Add some vertical space around the line */
   width: 100%; /* Set the width of the line */
 }
+.stipe-donate{
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+}
   </style>
   
   <header>
@@ -536,21 +543,11 @@ body {
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         
         
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="/index/">
             <img src="belong_logo.jpg" alt="Belonging Foundation Logo" style="max-height: 50px;">
         </a>
 
-        <div class="stipe-donate">
-          <script async
-            src="https://js.stripe.com/v3/buy-button.js">
-          </script>
-        
-          <stripe-buy-button
-            buy-button-id="buy_btn_1ObE4FKj0Am5FA1UQVIrQT9D"
-            publishable-key="pk_test_51ObDcEKj0Am5FA1UXZR8BaefNnGDzw6pOrmSSHX499OWIxsrNZCwjxHAG1HbgitVA0c4GhTwOOwaPqLIQazy0o6W00GZroVGqf"
-          >
-          </stripe-buy-button>
-        </div>        
+     
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -627,6 +624,18 @@ body {
     </div> 
 
     <br><hr><br>
+
+    <div class="stipe-donate">
+      <script async
+        src="https://js.stripe.com/v3/buy-button.js">
+      </script>
+    
+      <stripe-buy-button
+        buy-button-id="buy_btn_1ObE4FKj0Am5FA1UQVIrQT9D"
+        publishable-key="pk_test_51ObDcEKj0Am5FA1UXZR8BaefNnGDzw6pOrmSSHX499OWIxsrNZCwjxHAG1HbgitVA0c4GhTwOOwaPqLIQazy0o6W00GZroVGqf"
+      >
+      </stripe-buy-button>
+    </div>
     
     <div><p><i>Notice:</i> Donations to non-profit organizations are federally tax deductible and are deductions on most state tax returns as well. These deductions lower your tax liability each year and contribute to the next generation's dreams of a better tomorrow. Check with your state to confirm deduction eligibility.  </p></div>
     

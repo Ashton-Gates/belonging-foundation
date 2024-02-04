@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.auth',    
     #'belonging.apps.BelongingConfig',
     'django.contrib.admin',
+    'internal',
 
     'django.contrib.contenttypes',
     'django.contrib.sessions',

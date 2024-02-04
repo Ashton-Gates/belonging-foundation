@@ -562,8 +562,8 @@
                   <input type="file" name="fee_structure" accept=".pdf">
               </div>
               <div>
-                  <label>Upload a Video:</label>
-                  <input type="file" name="video" accept="video/*">
+                  <label>Upload a Video Link:</label>
+                  <textarea name="about_me" placeholder="About me blurb"></textarea>
               </div>
               <div>
                   <label>Upload a Slide Deck:</label>
@@ -576,7 +576,6 @@
               </div>
               <div class="form-navigation">
                 <button type="button" id="prevBtn" onclick="navigate(-1)">Previous</button>
-                <button type="button" id="nextBtn" onclick="navigate(1)">Next</button>
               </div>
             </div>
 
@@ -588,7 +587,7 @@
 
         </form>
         
-        <a href="/student_dashboard/" style="color: white; padding-top: 10px;"> Back to Dashboard</a>
+        <a href="/applicant_dashboard/" style="color: white; padding-top: 10px;"> Back to Dashboard</a>
     </div>
 
     <script>

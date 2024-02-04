@@ -1,6 +1,7 @@
-from django.contrib.auth.models import User, AbstractUser
+from django.contrib.auth.models import AbstractUser, BaseUserManager, PermissionsMixin
 from django.conf import settings
 from django.db import models
+from django.contrib.auth.models import BaseUserManager
 
 
 
@@ -14,14 +15,12 @@ class CustomUser(AbstractUser):
         ('bidder', 'Bidder'),
         ('owner', 'Local Shop Owner'),
     )
-    user_type = models.CharField(max_length=20, choices=USER_TYPES, default='student')  # Adjusted max_length
+    user_type = models.CharField(max_length=10, choices=USER_TYPES, default='student')
 
     class Meta:
         db_table = 'custom_user'
         swappable = 'AUTH_USER_MODEL'
-        unique_together = ('email',)  # Consider revising this part
-
-
+        unique_together = ('username',) # unique_together for 'email' alone is unnecessary as 'email' is already marked unique.
 class Scholarship(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
@@ -77,16 +76,33 @@ class PitchDeck(models.Model):
 
 
 class ScholarshipApplication(models.Model):
-    # Existing fields...
-    first_name = models.CharField(null=True, blank=True,max_length=100)
-    last_name = models.CharField(null=True, blank=True,max_length=100)
-    date_of_birth = models.DateField(null=True, blank=True)
-    age = models.IntegerField(null=True, blank=True)
-    education_level = models.CharField(null=True, blank=True, max_length=50)
-    gender = models.CharField(null=True, blank=True, max_length=50)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    first_name = models.CharField(max_length=100, null=True)
+    last_name = models.CharField(max_length=100, null=True)
+    phone_number = models.CharField(max_length=15, null=True)
+    email = models.EmailField(null=True)
+    date_of_birth = models.DateField(null=True)
+    education_level = models.CharField(null=True, max_length=50, choices=[
+        ('high_school', 'High School'),
+        ('college', 'College'),
+        ('graduate_school', 'Graduate School'),
+        ('blacksheep', 'Blacksheep'),
+    ])
+    gender = models.CharField(null=True, max_length=20, choices=[
+        ('male', 'Male'),
+        ('female', 'Female'),
+        ('prefer_not_to_say', 'Prefer not to say'),
+    ])
     business_name = models.CharField(max_length=200, blank=True, null=True)
     business_description = models.TextField(blank=True, null=True)
-    # Rest of your model...
+    video_link = models.URLField(blank=True, null=True)
+    pdf = models.FileField(upload_to='scholarship_pdfs/', blank=True, null=True)
+    question1 = models.TextField(blank=True, null=True)
+    question2 = models.TextField(blank=True, null=True)
+    question3 = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}'s Scholarship Application"
 
 class Event(models.Model):
     name = models.CharField(max_length=200)

@@ -2,7 +2,22 @@
 <html>
 <head>
     <title>Scholarship Application</title>
-    <style>
+<style>
+      #step-1 {
+    /* Show the first step by default */
+    display: block;
+}
+
+#step-2 {
+    /* Hide the second step by default */
+    display: none;
+}
+
+#step-3 {
+    /* Hide the third step by default */
+    display: none;
+}
+
         /* Reset some basic elements */
     body, h1, h2, h3, p, ul, li, a {
       margin: 0;
@@ -48,10 +63,13 @@
     
     /* Style the sign-up form */
     .signup-form {
+      max-width: 100%;
       color: white;
       background-color: #333;
       padding: 20px;
       text-align: center;
+      margin-left: 25px;
+      margin-right: 25px;
     }
     
     .signup-form h2 {
@@ -59,7 +77,7 @@
     }
     
     .signup-form form {
-      max-width: 300px;
+      max-width: 50%;
       margin: auto;
     }
     
@@ -483,58 +501,163 @@
       </style>
 </head>
 <body>
-    <h1>Scholarship Application Form</h1>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <div class="signup-form">
+    <h2>Apply for Scholarship</h2>
+    <form action="{% url 'scholarship_application' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    <div id="multi-step-form">
+        <!-- Step 1 -->
+        <div class="form-step" id="step-1">
+            <!-- Your Step 1 form fields go here -->
+            <div>
+              <input type="text" name="first_name" placeholder="First Name" required>
+              <input type="text" name="last_name" placeholder="Last Name" required>
+              <input type="text" name="phone_number" placeholder="Phone Number" required>
+              <input type="text" name="email" placeholder="Email" required>
+            </div>
+          <div>
+            <label for="date_of_birth">Date of Birth</label>
+              <input type="date" name="date_of_birth" required>
+          </div>
+
+          <div>
+              <select name="education_level">
+                  <option value="high_school">High School</option>
+                  <option value="college">College</option>                  
+                  <option value="graduate_school">Graduate School</option>
+                  <option value="blacksheep">Blacksheep</option>
+              </select>
+          </div>
+          <div>
+              <input type="radio" name="gender" value="male" id="male">
+              <label for="male">Male</label>
+              <input type="radio" name="gender" value="female" id="female">
+              <label for="female">Female</label>
+              <input type="radio" name="gender" value="prefer_not_to_say" id="prefer_not_to_say">
+              <label for="prefer_not_to_say">Prefer not to say</label>
+          </div>
+            <button type="button" class="next-btn" data-next="step-2">Next</button>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="form-step" id="step-2" style="display:none;">
+            <!-- Your Step 2 form fields go here -->
+          <div class="text-area">
+              <input type="text" name="business_name" placeholder="Business Name">
+              <textarea name="business_description" placeholder="Brief description of your business"></textarea>
+          </div>
+          <div class="text-area">
+            <label for="video_link">Upload a Video (Please provide a link to video of your pitch):</label>
+            <input type="url" name="video_link" placeholder="https://">
+        </div>
+        <div>
+            <label for="pdf">Upload Your PDF:</label>
+            <input type="file" name="pdf" accept=".pdf">
+        </div>
+          <!-- The End of the fields for page 2 -->
+
+            <button type="button" class="prev-btn" data-prev="step-1">Previous</button>
+            <button type="button" class="next-btn" data-next="step-3">Next</button>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="form-step" id="step-3" style="display:none;">
+            <!-- Your Step 3 form fields go here -->
+            <div class="text-area">
+              <label for="question1">Have you ever heard yourself say, "I'm the black sheep", "I just don't feel like I belong here", "Nobody listens to me", or "Someday my life will be different"?</label>
+              <textarea name="question1" placeholder="Answer here..." required></textarea>
+          </div>
+          <div class="text-area">
+              <label for="question2">When you dream of a better tomorrow or a brighter future, what does that look like?</label>
+              <textarea name="question2" placeholder="Answer here..." required></textarea>
+          </div>
+          <div class="text-area">
+              <label for="question3">If you are selected as a Scholarship Recipient, what impact would it have on your life? How will you measure the good you do in the world as a result?</label>
+              <textarea name="question3" placeholder="Answer here..." required></textarea>
+          </div>
+            <button type="button" class="prev-btn" data-prev="step-2">Previous</button>
+            <button type="submit">Submit Application</button>
+        </div>
+    </div>
+
+        <a href="/applicant_dashboard/" style="color: white; padding : 10px;"> Back to Dashboard</a>
+    </div>
+</body>
+<script>
+
+$(document).ready(function() {
+    $('.next-btn').click(function() {
+        var nextId = $(this).data('next');
+        $('.form-step').hide();
+        $('#' + nextId).show();
+    });
+
+    $('.prev-btn').click(function() {
+        var prevId = $(this).data('prev');
+        $('.form-step').hide();
+        $('#' + prevId).show();
+    });
+});
+</script>
+
+<!-- <h1>Scholarship Application Form</h1>
 
     <div class="signup-form">
         <h2>Apply for Scholarship</h2>
         <form action="{% url 'scholarship_application' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div>
-                <input type="text" name="first_name" placeholder="First Name" required>
-                <input type="text" name="last_name" placeholder="Last Name" required>
-            </div>
-            <div>
-                <input type="date" name="date_of_birth" required>
-            </div>
-            <div>
-                <input type="number" name="age" placeholder="Age" required>
-            </div>
-            <div>
-                <select name="education_level">
-                    <option value="high_school">High School</option>
-                    <option value="college">College</option>
-                    <!-- Add other education levels here -->
-                </select>
-            </div>
-            <div>
-                <input type="radio" name="gender" value="male" id="male">
-                <label for="male">Male</label>
-                <input type="radio" name="gender" value="female" id="female">
-                <label for="female">Female</label>
-                <input type="radio" name="gender" value="prefer_not_to_say" id="prefer_not_to_say">
-                <label for="prefer_not_to_say">Prefer not to say</label>
-            </div>
-            <div>
-                <input type="text" name="business_name" placeholder="Business Name">
-                <textarea name="business_description" placeholder="Brief description of your business"></textarea>
-            </div>
-            <div>
-                <label>Upload a Video:</label>
-                <input type="file" name="video" accept="video/*">
-            </div>
-            <div>
-                <label>Upload a Slide Deck:</label>
-                <input type="file" name="slide_deck" accept=".ppt, .pptx">
-            </div>
-            <div>
-                <label>Upload a PDF:</label>
-                <input type="file" name="pdf" accept=".pdf">
-            </div>
+              <input type="text" name="first_name" placeholder="First Name" required>
+              <input type="text" name="last_name" placeholder="Last Name" required>
+          </div>
+          <div>
+              <input type="date" name="date_of_birth" required>
+          </div>
+          <div>
+              <input type="number" name="age" placeholder="Age" required>
+          </div>
+          <div>
+              <select name="education_level">
+                  <option value="high_school">High School</option>
+                  <option value="college">College</option>
+              </select>
+          </div>
+          <div>
+              <input type="radio" name="gender" value="male" id="male">
+              <label for="male">Male</label>
+              <input type="radio" name="gender" value="female" id="female">
+              <label for="female">Female</label>
+              <input type="radio" name="gender" value="prefer_not_to_say" id="prefer_not_to_say">
+              <label for="prefer_not_to_say">Prefer not to say</label>
+          </div>-->
+            <!--<div class="text-area">
+              <input type="text" name="business_name" placeholder="Business Name">
+              <textarea name="business_description" placeholder="Brief description of your business"></textarea>
+          </div>
+          <div class="text-area">
+              <label for="video_link">Upload a Video (Please provide a link to video of your pitch):</label>
+              <input type="url" name="video_link" placeholder="http://">
+          </div>
+          <div>
+              <label for="pdf">Upload Your PDF:</label>
+              <input type="file" name="pdf" accept=".pdf">
+          </div>-->
+          <!--<div class="text-area">
+              <label for="question1">Question 1: Have you ever heard yourself say, "I'm the black sheep", "I just don't feel like I belong here", "Nobody listens to me", or "Someday my life will be different"?</label>
+              <textarea name="question1" placeholder="Answer here..." required></textarea>
+          </div>
+          <div class="text-area">
+              <label for="question2">Question 2:</label>
+              <textarea name="question2" placeholder="Answer here..." required></textarea>
+          </div>
+          <div class="text-area">
+              <label for="question3">Question 3:</label>
+              <textarea name="question3" placeholder="Answer here..." required></textarea>
+          </div>
             <div>
                 <button type="submit">Submit Application</button>
             </div>
-        </form>
-        <a href="/student_dashboard/" style="color: white; padding : 10px;"> Back to Dashboard</a>
-    </div>
-</body>
+        </form>-->
 </html>

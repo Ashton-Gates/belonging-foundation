@@ -4,25 +4,26 @@
 
 <div class="signup-form">
     <h2>Let's Be Partners!</h2>
-    <form action="{% url 'registration' %}" method="post" enctype="multipart/form-data">
+    <form action="{% url 'registration' %}" method="post">
         {% csrf_token %}
         <div class="form-section" id="page1">
+            <!-- Username is typically needed for UserCreationForm -->
+            <input type="text" name="username" placeholder="Username" required>
             <input type="text" name="first_name" placeholder="First Name" required>
             <input type="text" name="last_name" placeholder="Last Name" required>
-            <div>
-                <input type="text" name="email" placeholder="Email" required>
-                <input type="text" name="phone_number" placeholder="Phone Number" required>
-                <input type="text" name="password" placeholder="Password" required>
-                <input type="text" name="confirm_password" placeholder="Confirm Password" required>          
-            </div>
+            <input type="email" name="email" placeholder="Email" required>
+            <!-- Phone number is not included by default in UserCreationForm -->
+            <input type="text" name="phone_number" placeholder="Phone Number" required>
+            <input type="password" name="password1" placeholder="Password" required>
+            <input type="password" name="password2" placeholder="Confirm Password" required>          
             <div>
                 <button type="submit">Submit Application</button>
             </div>
         </div> 
     </form>
-    </div>
+</div>
 
-    <div id="g_id_onload"
+<div id="g_id_onload"
     data-client_id="1002728390308-vak0cu5k7mba0jiuf3u70hrm35ivbjv4.apps.googleusercontent.com"
     data-context="signin"
     data-ux_mode="popup"
@@ -55,6 +56,8 @@
   });
 </script>
 <script src="https://accounts.google.com/gsi/client" async></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
   
  <!-- Add a button or link for registration -->
  <div style="text-align: center; margin-top: 20px;">
