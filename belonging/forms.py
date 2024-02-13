@@ -8,17 +8,21 @@ User = get_user_model()
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True, help_text='Enter your email address.')
+    phone_number = forms.CharField(required=True)
+
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = UserCreationForm.Meta.fields + ('email',)  # Add all required fields.
+        fields = UserCreationForm.Meta.fields + ('email', 'phone_number')
 
-    # If you have custom fields that require validation, add them here.
-    def clean_custom_field(self):
-        # Perform custom validation for a field named 'custom_field'.
-        custom_field = self.cleaned_data.get('custom_field')
-        # Validation logic...
-        return custom_field
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.email = self.cleaned_data.get('email')  # Ensure email is saved.
+        user.phone_number = self.cleaned_data.get('phone_number')
+        user.is_customer = True
+        if commit:
+            user.save()
+        return user
 
 class CustomAuthenticationForm(forms.ModelForm):
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
@@ -31,6 +35,7 @@ class CustomAuthenticationForm(forms.ModelForm):
 class ScholarshipApplicationForm(forms.ModelForm):
     class Meta:
         model = ScholarshipApplication
+        exclude = ('user', 'status', 'date_submitted', 'date_approved', 'date_rejected')
         fields = '__all__'
 
 
@@ -43,6 +48,7 @@ class VendorApplicationForm(forms.ModelForm):
     class Meta:
         model = VendorApplication
         fields = '__all__'
+        exclude = ('user', 'status')
 
 
 
@@ -57,4 +63,4 @@ class RegistrationFormStepOne(forms.ModelForm):
 class RegistrationFormStepTwo(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'user_type']
+        fields = ['first_name', 'last_name']

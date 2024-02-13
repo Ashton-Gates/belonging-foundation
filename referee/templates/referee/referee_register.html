@@ -1,0 +1,35 @@
+<!-- belonging-foundation/referee/templates/referee/referee_register.html -->
+{% block content %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card my-5">
+        <div class="card-header bg-success text-white">
+          <h4 class="mb-0">Sponsor Registration</h4>
+        </div>
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %}
+
+            {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }} {{ field }}
+
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                        {% endfor %}
+
+                </div>
+            {% endfor %}
+            <button type="submit">Submit</button>
+            <a href="{% url 'referee:login' %}" class="btn btn-link">Already have an account?</a>            
+
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

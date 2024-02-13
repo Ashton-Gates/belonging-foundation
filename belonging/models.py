@@ -1,12 +1,26 @@
-from django.contrib.auth.models import AbstractUser, BaseUserManager, PermissionsMixin
+# belonging-foundation/belonging/models.py
+
+from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import BaseUserManager
 
+
+class Referee(models.Model):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='belonging_referee_profile',  # Ensure this is unique
+    )
+    referee_id = models.CharField(max_length=10, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.user.username} ({self.referee_id})"
 
 
 class CustomUser(AbstractUser):
-    USER_TYPES = (
+    '''USER_TYPES = (
         ('student', 'Student'),
         ('donor', 'Foundation Donor'),
         ('applicant', 'Scholarship Applicant'),
@@ -15,17 +29,22 @@ class CustomUser(AbstractUser):
         ('bidder', 'Bidder'),
         ('owner', 'Local Shop Owner'),
         ('internal', 'Employee')
-    )
-    user_type = models.CharField(max_length=10, choices=USER_TYPES, default='student')
+    )'''
+    is_customer = models.BooleanField(default=False, verbose_name='Customer account')
+    is_staff = models.BooleanField(default=False, verbose_name='Staff account')
     is_internal_user = models.BooleanField(default=False)
+
 
     class Meta:
         db_table = 'custom_user'
         swappable = 'AUTH_USER_MODEL'
         unique_together = ('username',) # unique_together for 'email' alone is unnecessary as 'email' is already marked unique.
+
+
 class Scholarship(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
+    deadline = models.DateTimeField(null=True, blank=True)
     # You can add other fields like image, deadline, etc.
 
     def __str__(self):
@@ -76,10 +95,31 @@ class PitchDeck(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     # ... other fields such as file upload field, title, etc.
 
+class UserApplication(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="user_applications")
+    scholarship_applications = models.ManyToManyField('ScholarshipApplication', blank=True)
+    vendor_applications = models.ManyToManyField('VendorApplication', blank=True)
+    # Include other application types as needed
+
+    def __str__(self):
+        return f"Applications for {self.user.username}"
+
+    @property
+    def all_applications(self):
+        # This method aggregates all applications related to the user across different types
+        applications = []
+        applications.extend(list(self.scholarship_applications.all()))
+        applications.extend(list(self.vendor_applications.all()))
+        # Extend with other application types as needed
+        return applications
+
 
 class ScholarshipApplication(models.Model):
+    denial_feedback = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
     status = models.CharField(max_length=100, default='pending')
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)    
     first_name = models.CharField(max_length=100, null=True)
     last_name = models.CharField(max_length=100, null=True)
     phone_number = models.CharField(max_length=15, null=True)
@@ -100,23 +140,26 @@ class ScholarshipApplication(models.Model):
     business_description = models.TextField(blank=True, null=True)
     video_link = models.URLField(blank=True, null=True)
     pdf = models.FileField(upload_to='scholarship_pdfs/', blank=True, null=True)
-    question1 = models.TextField(blank=True, null=True)
-    question2 = models.TextField(blank=True, null=True)
-    question3 = models.TextField(blank=True, null=True)
+    squestion1 = models.TextField(blank=True, null=True)
+    squestion2 = models.TextField(blank=True, null=True)
+    squestion3 = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}'s Scholarship Application"
 class VendorApplication(models.Model):
+    denial_feedback = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
     status = models.CharField(null=True, blank=True, max_length=50, default='pending')  # Example status field
     first_name = models.CharField(max_length=100, null=True)
     last_name = models.CharField(max_length=100, null=True)
     phone_number = models.CharField(max_length=15, null=True)
-    question1 = models.TextField(null=True, blank=True, verbose_name="Why do you want to be involved with the Belonging Foundation?")
-    question2 = models.TextField(null=True, blank=True, verbose_name="How will this partnership benefit your community?")
+    vquestion1 = models.TextField(null=True, blank=True, verbose_name="Why do you want to be involved with the Belonging Foundation?")
+    vquestion2 = models.TextField(null=True, blank=True, verbose_name="How will this partnership benefit your community?")
     product_suite_overview = models.TextField(null=True, blank=True, verbose_name="Product Suite Overview")
     url_api_details = models.TextField(null=True, blank=True, verbose_name="URLs / API Details")
     partnership_outcome = models.TextField(null=True, blank=True, verbose_name="How can we ensure you get the most out of this partnership?")
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     logo = models.ImageField(upload_to='vendor_logos/', null=True, blank=True)
     about_me = models.TextField(null=True, blank=True)
     website_link = models.URLField(null=True, blank=True)
@@ -124,7 +167,7 @@ class VendorApplication(models.Model):
     fee_structure = models.FileField(upload_to='fee_structures/', null=True, blank=True)
     business_name = models.CharField(null=True, blank=True, max_length=255)  # Assuming it's a CharField
     status = models.CharField(null=True, blank=True, max_length=50, default='pending')  # Example status field
-    business_desciption = models.URLField(null=True, blank=True)
+    business_desciption = models.TextField(null=True, blank=True, verbose_name="Brief description of your business")
 class Event(models.Model):
     name = models.CharField(max_length=200)
     date = models.DateField()
@@ -140,7 +183,7 @@ class Event(models.Model):
     video = models.FileField(upload_to='events/videos/', blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return f"{self.business_name} by {self.user.username} - {self.status}"
 
 
 
@@ -160,3 +203,5 @@ class Venue(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+

@@ -501,7 +501,44 @@
           padding: 10px 20px;
           margin: 0 5px;
       }
-      
+
+  .text_area {
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    width: 100%; /* Adjust this value to control width */
+    max-width: 800px; 
+}
+
+.text_area textarea,
+.text_area input[type="url"] {
+    width: 100%; /* Adjust this value to control width */
+    max-width: 800px; /* Example: Sets a maximum width */
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.text_area textarea {
+    height: 100px; /* Adjust height of textarea */
+    resize: vertical; /* Allows the user to vertically resize the textarea (no horizontal resize) */
+}
+
+.text_area input[type="url"] {
+    height: 40px;
+}
+
+/* Enhance the focus state for accessibility */
+.text_area textarea:focus,
+.text_area input[type="url"]:focus {
+    border-color: #007bff;
+    outline: none; /* Removes the default focus outline */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
   </style>
 </head>
 <body>
@@ -512,6 +549,7 @@
         <form action="{% url 'vendor_app' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-section" id="page1">
+                <h3>Personal Information</h3>
                 <input type="text" name="first_name" placeholder="First Name" required>
                 <input type="text" name="last_name" placeholder="Last Name" required>
                 <div>
@@ -531,18 +569,26 @@
 
 
             <div class="form-section" id="page2">
-                
-                <textarea name="question1" placeholder="Why do you want to be involved with the Belonging Foundation?"></textarea>
-                <textarea name="question2" placeholder="How will this partnership benefit your community?"></textarea>
-                <textarea name="product_suite_overview" placeholder="Product Suite Overview"></textarea>
-                <textarea name="url_api_details" placeholder="URLs / API Details"></textarea>
-                <textarea name="partnership_outcome" placeholder="How can we ensure you get the most out of this partnership?"></textarea>
+                <h3>Business Information</h3>
+              <div class="text_area" style="color: black;">
+                <label>Why do you want to be involved with the Belonging Foundation?</label>
+                <textarea name="vquestion1" placeholder="Tell Us Everything"></textarea>
+                <label>How will this partnership benefit your community?</label>
+                <textarea name="vquestion2" placeholder="Tell Us Everything"></textarea>
+                <label>What is your business model?</label>
+                <textarea name="product_suite_overview" placeholder="Tell Us Everything"></textarea>
+                <label>Do you have an API Availble?</label>
+                <input type="url" name="url_api_details" placeholder="https://" required="false"></input>
+                <label>How can we ensure you get the most out of this partnership?</label>
+                <textarea name="partnership_outcome" placeholder="Tell Us Everything"></textarea>
+                <label>What made you excited to start your business?</label>
+                <textarea name="about_me" placeholder="Tell Us Everything"></textarea>
+
                 <div>
-                  <textarea name="about_me" placeholder="About me blurb"></textarea>
+                    <label>Do you have a website?</label>
+                    <input type="url" name="website_link" placeholder="https://" required="true">
                 </div>
-                <div>
-                      <input type="url" name="website_link" placeholder="Website Link">
-                </div>
+              </div>
                 <div class="form-navigation">
                   <button type="button" id="prevBtn" onclick="navigate(-1)">Previous</button>
                   <button type="button" id="nextBtn" onclick="navigate(1)">Next</button>
@@ -551,24 +597,20 @@
 
 
             <div class="form-section" id="page3">
+                <h3>Marketable Information</h3>                
               <div>
                   <label>Upload Business Proposal:</label>
-                  <label>Upload a PDF, Word, TXT, or ODT:</label>
-                  <input type="file" name="business_proposal" accept=".pdf, .docx, .otd, .doc, .txt">
+                  <label>Upload a PDF</label>
+                  <input type="file" name="business_proposal" accept=".pdf">
               </div>
               <div>
-                  <label>Upload Fee Structure (Optional):</label>
+                  <label>Upload Your Pitch Deck:</label>
                   <label>Upload a PDF:</label>
                   <input type="file" name="fee_structure" accept=".pdf">
               </div>
               <div>
-                  <label>Upload a Video Link:</label>
-                  <textarea name="about_me" placeholder="About me blurb"></textarea>
-              </div>
-              <div>
-                  <label>Upload a Pitch Deck:</label>
-                  <label>Upload a .ppt or .pptx:</label></label>
-                  <input type="file" name="slide_deck" accept=".ppt, .pptx"> 
+                  <label>Upload a Video Link (Optional):</label>
+                  <input type="url" name="about_me" placeholder="https://" required="false"></input>
               </div>
 
               <div>
@@ -577,6 +619,13 @@
               <div class="form-navigation">
                 <button type="button" id="prevBtn" onclick="navigate(-1)">Previous</button>
               </div>
+              {% if messages %}
+                  {% for message in messages %}
+                      <div class="alert {{ message.tags }}">
+                          {{ message }}
+                      </div>
+                  {% endfor %}
+              {% endif %}
             </div>
 
 

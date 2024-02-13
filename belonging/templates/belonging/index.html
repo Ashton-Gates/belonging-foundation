@@ -1,3 +1,6 @@
+
+
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +10,6 @@
     <title>The Belonging Foundation</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-
-
 </head>
 <body>
   <style>
@@ -52,9 +53,6 @@ body {
   width: 100%;
   background-color: #333;
 }
-
-
-
 /* Style the sign-up form */
 .signup-form {
   color: white;
@@ -148,42 +146,7 @@ body {
 .header-height {
   height: 70px; /* Example header height, adjust as needed */
 }
-.carousel-item a {
-  display: block;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
 
-.carousel-item a:hover {
-  transform: scale(1.03);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-/* Custom styles for carousel control arrows */
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  height: 40px; /* Adjust size */
-  width: 40px;
-  background-size: 100%, 100%;
-  background-image: none;
-}
-
-.carousel-control-prev-icon {
-  border: solid black; /* Change color as needed */
-  border-width: 0 5px 5px 0;
-  transform: rotate(135deg);
-  -webkit-transform: rotate(135deg);
-}
-
-.carousel-control-next-icon {
-  border: solid black; /* Change color as needed */
-  border-width: 0 5px 5px 0;
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-}
-
-/* Increase the size of the clickable area for easier navigation */
-.carousel-control-prev, .carousel-control-next {
-  width: 5%;
-}
 .feature-section {
   padding: 3rem 0; /* Adjust the padding as needed */
   background-image: url('keegan_steph.jpg');
@@ -467,24 +430,7 @@ body {
     text-align: left;
   }
 }
-.social-icons {
-  font-size: 24px;
-}
 
-.social-icons a {
-  margin: 0 10px;
-  color: white;
-  text-decoration: none;
-}
-
-.social-icons a:hover {
-  color: #ddd;
-}
-*{
-  margin: 0;
-  padding: 0;
-  font-family: Sans-serif;
-}
 
 body{
   background-color: #eee;
@@ -587,99 +533,46 @@ a{
 }
 
   </style>
-  <header>
+</head>
+<body>
+<header>
     <!-- Bootstrap Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        
-        
-        <a class="navbar-brand" href="/index/">
-            <img src="photos/belong_logo.jpg" alt="Belonging Foundation Logo" style="max-height: 50px;">
-        </a>
-
-        <nav><!--Navigation Bar Starts Here-->
-          <!-- Profile Dropdown or Login/Register Dropdown -->
-          {% if user.is_authenticated %}
-            <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img src="{{ user.profile_picture.url }}" alt="Profile" class="rounded-circle" width="30">
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" href="/profile/">Profile</a>
-              <a class="dropdown-item" href="/account/">Account</a>
-              <a class="dropdown-item" href="/settings/">Settings</a>
-              <a class="dropdown-item" href="/logout/">Log Out</a>
-            </div>
-          {% else %}
+      <a class="navbar-brand" href="/index/">
+        <img src="stephanie_fathead_body.jpg" alt="Belonging Foundation Logo" style="max-height: 50px;">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
+        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ml-auto">          
+          <li class="nav-item active">
+            <a class="nav-link" href="/index/">Home</a>
+          </li>
+          <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Login
             </a>
-            <div class="dropdown-menu dropdown-menu-right p-4" aria-labelledby="loginDropdown">
-              <!-- Login Form -->
-              <form method="post" action="{% url 'login' %}">
-                {% csrf_token %}
-                <div class="form-group">
-                  <input type="email" class="form-control" name="email" placeholder="Email address" required>
-                </div>
-                <div class="form-group">
-                  <input type="password" class="form-control" name="password" placeholder="Password" required>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-                <a href="{% url 'registration' %}" class="btn btn-secondary btn-block">Register</a>
-              </form>
+            <div class="dropdown-menu" aria-labelledby="loginDropdown">
+              <a class="dropdown-item" href="/referee/referee_login/">Sponsor Login</a>
+              <a class="dropdown-item" href="/donation/donor_login/">Donor Login</a>
+              <a class="dropdown-item" href="/login/">Applicant Login</a>
             </div>
-          {% endif %}
-        </nav><!--Navigation Bar Ends Here-->
-        
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarContent">
-            <ul class="navbar-nav ml-auto">
-                <!-- Dropdown items -->
-                <li class="nav-item dropdown">
-                  <a class="nav-item nav-link active" href="/index/">Home <span class="sr-only">(current)</span></a>
-                  <a class="nav-item nav-link" href="/donate/">Donate to Belonging</a>
-                  <a class="nav-item nav-link" href="/scholarship/">Scholarships</a>
-                  <a class="nav-item nav-link" href="/scholarship/">Vendors</a>
-                  <a class="nav-link dropdown-toggle" href="#" id="whoWeAreDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Who Are We
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="whoWeAreDropdown">
-                        <a class="dropdown-item" href="/about/">Check Us Out</a>
-                        <a class="dropdown-item" href="/impact/">Our Impact</a>
-                        <!-- More links -->
-                  </div>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Get Involved
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
-                        <a class="dropdown-item" href="vendor/">Want to sell your stuff??</a>
-                        <a class="dropdown-item" href="partnerships/">Partnerships</a>
-                        <a class="dropdown-item" href="events/">Events</a>
-                        <a class="dropdown-item" href="donate/">Ways to Donate to Help Students</a>
-                        <!-- More links -->
-                    </div>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="belongingForDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Belonging For
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="belongingForDropdown">
-                        <a class="dropdown-item" href="#students">Students</a>
-                        <a class="dropdown-item" href="#parents">Vendors</a>
-                        <a class="dropdown-item" href="#donors">Major Donors</a>
-                        <!-- More links -->
-                    </div>
-                </li>
-
-                <!-- More nav-items can be added here -->
-            </ul>
-
-        </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/donate/">Donate to Belonging</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">Who Are We?</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/involved/">Want to Get Involved?</a>
+          </li>
+          <!-- Other items -->
+        </ul>
+      </div>
     </nav>
   </div>
 </header>
@@ -851,9 +744,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 <!-- Bootstrap JavaScript -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 </body>
 </html>
+{% endblock %}

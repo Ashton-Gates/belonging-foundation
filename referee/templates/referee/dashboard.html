@@ -1,0 +1,20 @@
+{% block content %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="container mt-5">
+    <h1>Welcome, {{ request.user.username }}</h1>
+    <h2>Available Scholarships</h2>
+    <ul>
+        {% for scholarship in scholarships %}
+            <li>{{ scholarship.title }} - {{ scholarship.description }}</li>
+        {% empty %}
+            <li>No scholarships available at the moment.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'referee:submit_referral' %}" class="btn btn-primary">Submit a Referral</a>
+    <a href="{% url 'referee:logout' %}" class="btn btn-secondary">Logout</a>
+    <a href="{% url 'referee:delete_account' %}" class="btn btn-warning">Delete Account</a>
+
+
+</div>
+{% endblock %}

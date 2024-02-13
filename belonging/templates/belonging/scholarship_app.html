@@ -512,50 +512,68 @@
         <div class="form-step" id="step-1">
             <!-- Your Step 1 form fields go here -->
             <div>
-              <input type="text" name="first_name" placeholder="First Name" required>
-              <input type="text" name="last_name" placeholder="Last Name" required>
-              <input type="text" name="phone_number" placeholder="Phone Number" required>
-              <input type="text" name="email" placeholder="Email" required>
+              <label for="first_name">First Name</label>
+              <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
+              
+              <label for="last_name">Last Name</label>
+              <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
+              
+              <label for="phone_number">Phone Number</label>
+              <input type="text" id="phone_number" name="phone_number" placeholder="Phone Number" required>
+              
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="Email" required>
             </div>
-          <div>
-            <label for="date_of_birth">Date of Birth</label>
-              <input type="date" name="date_of_birth" required>
-          </div>
+            <div>
+              <label for="date_of_birth">Date of Birth</label>
+              <input type="date" id="date_of_birth" name="date_of_birth" required>
+            </div>
 
-          <div>
-              <select name="education_level">
+            <div>
+              <label for="education_level">Education Level</label>
+              <select id="education_level" name="education_level">
                   <option value="high_school">High School</option>
                   <option value="college">College</option>                  
                   <option value="graduate_school">Graduate School</option>
                   <option value="blacksheep">Blacksheep</option>
               </select>
-          </div>
-          <div>
+            </div>
+            <!-- Add a container for the refereeID input, initially hidden -->
+            <div id="refereeIDContainer" style="display: none;">
+              <label for="refereeID">Referee ID</label>
+              <input type="text" id="refereeID" name="refereeID" placeholder="Enter Referee ID">
+              <!-- Add a place to display the validation message -->
+              <p id="refereeIDValidationMessage"></p>
+            </div>
+            <div>
               <input type="radio" name="gender" value="male" id="male">
               <label for="male">Male</label>
               <input type="radio" name="gender" value="female" id="female">
               <label for="female">Female</label>
               <input type="radio" name="gender" value="prefer_not_to_say" id="prefer_not_to_say">
               <label for="prefer_not_to_say">Prefer not to say</label>
-          </div>
+            </div>
             <button type="button" class="next-btn" data-next="step-2">Next</button>
         </div>
 
         <!-- Step 2 -->
         <div class="form-step" id="step-2" style="display:none;">
             <!-- Your Step 2 form fields go here -->
-          <div class="text-area">
-              <input type="text" name="business_name" placeholder="Business Name">
-              <textarea name="business_description" placeholder="Brief description of your business"></textarea>
-          </div>
-          <div class="text-area">
-            <label for="video_link">Upload a Video (Please provide a link to video of your pitch):</label>
-            <input type="url" name="video_link" placeholder="https://">
-        </div>
-        <div>
-            <label for="pdf">Upload Your PDF:</label>
-            <input type="file" name="pdf" accept=".pdf">
-        </div>
+            <div class="text-area">
+              <label for="business_name">Business Name</label>
+              <input type="text" id="business_name" name="business_name" placeholder="Business Name">
+              <label for="business_description">Brief Description of Your Business</label>
+              <textarea id="business_description" name="business_description" placeholder="Brief description of your business"></textarea>
+            </div>
+            <div class="text-area">
+              <label for="video_link">Video Link (Upload a URL to your video)</label>
+              <input type="url" id="video_link" name="video_link" placeholder="https://">
+            </div>
+            <div>
+              <label for="pdf">Upload Your PDF</label>
+              <input type="file" id="pdf" name="pdf" accept=".pdf">
+            </div>
+            
           <!-- The End of the fields for page 2 -->
 
             <button type="button" class="prev-btn" data-prev="step-1">Previous</button>
@@ -566,16 +584,16 @@
         <div class="form-step" id="step-3" style="display:none;">
             <!-- Your Step 3 form fields go here -->
             <div class="text-area">
-              <label for="question1">Have you ever heard yourself say, "I'm the black sheep", "I just don't feel like I belong here", "Nobody listens to me", or "Someday my life will be different"?</label>
-              <textarea name="question1" placeholder="Answer here..." required></textarea>
+              <label for="squestion1">Have you ever heard yourself say, "I'm the black sheep", "I just don't feel like I belong here", "Nobody listens to me", or "Someday my life will be different"?</label>
+              <textarea id="squestion1" name="squestion1" placeholder="Answer here..." required></textarea>
           </div>
           <div class="text-area">
-              <label for="question2">When you dream of a better tomorrow or a brighter future, what does that look like?</label>
-              <textarea name="question2" placeholder="Answer here..." required></textarea>
+              <label for="squestion2">When you dream of a better tomorrow or a brighter future, what does that look like?</label>
+              <textarea id="squestion2" name="squestion2" placeholder="Answer here..." required></textarea>
           </div>
           <div class="text-area">
-              <label for="question3">If you are selected as a Scholarship Recipient, what impact would it have on your life? How will you measure the good you do in the world as a result?</label>
-              <textarea name="question3" placeholder="Answer here..." required></textarea>
+              <label for="squestion3">If you are selected as a Scholarship Recipient, what impact would it have on your life? How will you measure the good you do in the world as a result?</label>
+              <textarea id="squestion3" name="squestion3" placeholder="Answer here..." required></textarea>
           </div>
             <button type="button" class="prev-btn" data-prev="step-2">Previous</button>
             <button type="submit">Submit Application</button>
@@ -583,9 +601,20 @@
     </div>
 
         <a href="/applicant_dashboard/" style="color: white; padding : 10px;"> Back to Dashboard</a>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
 </body>
 <script>
+
+$(document).on('submit', 'form', function(e) {
+    console.log('Form submitted!');
+});
 
 $(document).ready(function() {
     $('.next-btn').click(function() {
@@ -601,6 +630,47 @@ $(document).ready(function() {
     });
 });
 </script>
+<script>
+  // Add an event listener for when the education_level field changes
+  document.getElementById('education_level').addEventListener('change', function() {
+      // Check if 'blacksheep' is selected
+      if (this.value === 'blacksheep') {
+          // Show the refereeID input
+          document.getElementById('refereeIDContainer').style.display = 'block';
+      } else {
+          // Hide the refereeID input
+          document.getElementById('refereeIDContainer').style.display = 'none';
+      }
+  });
+  
+  // Add an event listener for real-time validation of the refereeID
+  document.getElementById('refereeID').addEventListener('input', function() {
+      // Get the input value
+      var refereeID = this.value;
+      
+      // Use AJAX to send a request to your Django backend
+      $.ajax({
+          url: '/validate_referee_id/', // URL to your view that will handle the validation
+          type: 'GET',
+          data: {'refereeID': refereeID},
+          dataType: 'json',
+          success: function(response) {
+              // Display validation message
+              if (data.is_valid) {
+                  document.getElementById('refereeIDValidationMessage').textContent = 'Valid Referee ID';
+                  // You can also add logic to enable the submit button here if needed
+              } else {
+                  document.getElementById('refereeIDValidationMessage').textContent = 'Invalid Referee ID';
+                  // You can also add logic to disable the submit button here if needed
+              }
+          },
+          error: function(xhr, status, error) {
+              // Handle any errors here
+              console.error('An error occurred during validation');
+          }
+      });
+  });
+  </script>
 
 <!-- <h1>Scholarship Application Form</h1>
 

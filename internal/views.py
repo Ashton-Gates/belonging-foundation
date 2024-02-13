@@ -8,10 +8,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from belonging.models import ScholarshipApplication, VendorApplication
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import get_object_or_404
-from django.http import JsonResponse, HttpResponse
-from django.urls import reverse
+from django.http import JsonResponse
 
 
 
@@ -68,17 +65,76 @@ def list_vendor_applications(request):
 
 @login_required
 def get_latest_applications(request):
-    scholarship_applications = ScholarshipApplication.objects.all().order_by('-id')[:10].values(
-        'id', 'user_id', 'status', 'first_name', 'last_name', 'phone_number', 'email', 'date_of_birth', 'education_level', 'gender', 'business_name', 'business_description', 'video_link', 'pdf', 'question1', 'question2', 'question3'
-    )
-    vendor_applications = VendorApplication.objects.all().order_by('-id')[:10].values(
-        'id', 'user_id', 'status', 'business_name', 'website_link', 'logo', 'question1', 'question2', 'product_suite_overview', 'partnership_outcome', 'url_api_details', 'business_proposal', 'fee_structure', 'about_me'
-    )
+    # Fetch the latest applications.
+    scholarship_applications = ScholarshipApplication.objects.all().order_by('-created_at')[:10]
+    vendor_applications = VendorApplication.objects.all().order_by('-created_at')[:10]
+
+    # Serialize the data for JSON response.
+    applications_data = {
+        'scholarship_applications': list(scholarship_applications.values()),
+        'vendor_applications': list(vendor_applications.values()),
+    }
+
+    return JsonResponse(applications_data)
+'''
+@login_required
+def get_latest_applications(request):
+    # If you want to fetch applications for the logged-in user only:
+    # user_applications = UserApplication.objects.filter(user=request.user)
+    
+    # If you want to fetch all applications for admin review:
+    scholarship_applications = ScholarshipApplication.objects.all().order_by('-created_at')[:10]
+    vendor_applications = VendorApplication.objects.all().order_by('-created_at')[:10]
+    
+    # Serialize the applications data if necessary
+    scholarship_applications_data = [{
+        'id': app.id,
+        'user_id': app.user_id,
+        'status': app.status,
+        'first_name': app.first_name,
+        'last_name': app.last_name,
+        'phone_number': app.phone_number,
+        'email': app.email,
+        'date_of_birth': app.date_of_birth,
+        'education_level': app.education_level,
+        'gender': app.gender,
+        'business_name': app.business_name,
+        'business_description': app.business_description,
+        'video_link': app.video_link,
+        'pdf': app.pdf.url if app.pdf else None,
+        'squestion1': app.squestion1,
+        'squestion2': app.squestion2,
+        'squestion3': app.squestion3,
+        'created_at': app.created_at,
+        'updated_at': app.updated_at
+    } for app in scholarship_applications]
+
+    # Serialize the vendor applications data
+    vendor_applications_data = [{
+        'id': app.id,
+        'user_id': app.user_id,
+        'status': app.status,
+        'first_name': app.first_name,
+        'last_name': app.last_name,
+        'phone_number': app.phone_number,
+        'vquestion1': app.vquestion1,
+        'vquestion2': app.vquestion2,
+        'product_suite_overview': app.product_suite_overview,
+        'url_api_details': app.url_api_details,
+        'partnership_outcome': app.partnership_outcome,
+        'user': app.user.username if app.user else None,
+        'business_name': app.business_name,
+        'business_description': app.business_desciption,
+        'logo': app.logo.url if app.logo else None,
+        'website_link': app.website_link,
+        'business_proposal': app.business_proposal.url if app.business_proposal else None,
+        'fee_structure': app.fee_structure.url if app.fee_structure else None,
+        'about_me': app.about_me,
+        'created_at': app.created_at,
+        'updated_at': app.updated_at
+    } for app in vendor_applications]
 
     applications = list(scholarship_applications) + list(vendor_applications)
     return JsonResponse(applications, safe=False)
 
-    applications = list(scholarship_applications) + list(vendor_applications)
-    return JsonResponse(applications, safe=False)
-
-
+'''

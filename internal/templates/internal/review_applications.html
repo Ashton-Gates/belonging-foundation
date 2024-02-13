@@ -1,25 +1,8 @@
 {% block content %}
 <h2>Application Review</h2>
-{% for application in applications %}
-  <div>
-    <h3>{{ application.name }}</h3>
-    <p>{{ application.summary }}</p>
-    <!-- Add buttons for approve/disapprove actions -->
-    <a href="{% url 'approve_application' application.id %}">Approve</a>
-    <a href="{% url 'disapprove_application' application.id %}">Disapprove</a>
-  </div>
-{% empty %}
-  <p>No applications to review.</p>
-{% endfor %}
-<script>
-  const eventSource = new EventSource('/events/applications/');
-  eventSource.onmessage = function(event) {
-      const data = JSON.parse(event.data);
-      console.log('New event received:', data);
-      const applicationsList = document.getElementById('applications-list');
-      const appElement = document.createElement('div');
-      appElement.textContent = `New application received with ID: ${data.id}`;
-      applicationsList.appendChild(appElement);
-  };
-  </script>
+<div id="applications-list"></div> <!-- Container to hold the applications -->
+{% endblock %}
+
+{% block scripts %}
+
 {% endblock %}

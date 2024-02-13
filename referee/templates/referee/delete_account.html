@@ -1,0 +1,16 @@
+
+
+{% block content %}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <h1>Delete Account</h1>
+  <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+  
+  <form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Delete my account" />
+  </form>
+
+  <a href="{% url 'referee:sponsor_dashboard' %}">Cancel</a>
+  {% endblock %}
