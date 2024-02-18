@@ -88,11 +88,12 @@ div.form-navigation p {
 }
 </style>
 
+
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">Profile Login</div>
+                <div class="card-header">Applicant Login</div>
                 <div class="card-body">
                   <form method="post">
                     {% csrf_token %}
@@ -100,11 +101,9 @@ div.form-navigation p {
                     <button type="submit">Login</button>
                 </form>
                 <div>
-                  <p>Don't have an account?</p>
                   <a href="/registration/" class="mb-5 btn btn-primary">Need to Register</a>
                 </div>
                 <div>
-                  <p>Go back to Home?</p>
                   <a href="/index/" class="mb-5 btn btn-primary">Home</a>              
                 </div>
 

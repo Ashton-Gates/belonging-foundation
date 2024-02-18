@@ -13,6 +13,21 @@
 
 
 <style>
+
+.application-block {
+  background-color: #fff; /* White background */
+  /* Other styles for the block */
+}
+
+.application-block a {
+  color: #007bff; /* Bootstrap primary color for links */
+  /* Other styles for the links */
+}
+
+.application-block a:hover {
+  color: #0056b3; /* Darker blue for hover state */
+  text-decoration: none; /* Removes the underline on hover */
+}
   /* Reset some basic elements */
 body, h1, h2, h3, p, ul, li, a {
 margin: 0;
@@ -572,9 +587,9 @@ color: white;
             <a href="/media/Pitch_Prep.pptx" download="Pitch_Prep.pptx" class="btn btn-primary">Download Pitch Deck Template</a>
         </div>
         <ul class="list-group mb-3">
-            <li class="list-group-item"><a href="{% url 'scholar_landing' %}">Apply for Scholarship</a></li>
+            <li class="list-group-item"><a style='color:#333' href="{% url 'scholar_landing' %}">Apply for Scholarship</a></li>
 
-            <li class="list-group-item"><a href="{% url 'vendor_landing' %}">Apply as Vendor</a></li>
+            <li class="list-group-item"><a style='color:#333' href="{% url 'vendor_landing' %}">Apply as Vendor</a></li>
         </ul>
 
         <h3>Current Scholarships</h3>
@@ -589,7 +604,7 @@ color: white;
         {% if latest_scholarship_application %}
         <h3 class="mt-5">Latest Submitted Scholarship Application</h3>
         <ul class="list-group mb-5">
-            <li class="list-group-item">
+            <li class="list-group-item application-block">
                 {{ latest_scholarship_application.first_name }} {{ latest_scholarship_application.last_name }} - {{ latest_scholarship_application.business_description }} - <strong>Status:</strong> {{ latest_scholarship_application.status }}
                 <a href="{% url 'download_scholarship_pdf' latest_scholarship_application.id %}">Download Scholarship Application PDF</a>
                 {% if application.scholarship.deadline > now %}
@@ -604,7 +619,7 @@ color: white;
         {% if latest_vendor_application %}
             <h3 class="mt-5">Latest Submitted Vendor Application</h3>
             <ul class="list-group mb-5">
-                <li class="list-group-item">
+                <li class="list-group-item application-block">
                     {{ latest_vendor_application.first_name }} {{ latest_vendor_application.last_name }} - {{ latest_vendor_application.business_description }} - <strong>Status:</strong> {{ latest_vendor_application.status }}
                     <a href="{% url 'download_vendor_pdf' latest_vendor_application.id %}">Download Vendor Application PDF</a>
                     {% if application.scholarship.deadline > now %}
