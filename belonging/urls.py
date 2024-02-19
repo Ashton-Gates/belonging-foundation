@@ -38,6 +38,8 @@ urlpatterns = [
     path('validate_referee_id/', validate_referee_id, name='validate_referee_id'),
     path('referee/', include(('referee.urls', 'referee'))),
     path('delete_account/', delete_account, name='delete_account'),
+
+
 ]
 
 if settings.DEBUG:

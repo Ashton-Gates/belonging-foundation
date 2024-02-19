@@ -15,6 +15,6 @@ urlpatterns = [
     path('delete_account/', views.delete_account, name='delete_account'),
     path('sponsor_form_submitted/', views.sponsor_form_submitted, name='sponsor_form_submitted'),
     path('onboard_form/', views.onboard_form, name='onboard_form'),
-
+    path('sponsor_about/', views.sponsor_about, name='sponsor_about')
 
 ]

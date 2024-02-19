@@ -14,16 +14,14 @@
 </head>
 <body>
   <style>
-    /* Reset some basic elements */
+
 body, h1, h2, h3, p, ul, li, a {
-  margin: 0;
-  padding: 0;
+
   list-style: none;
   text-decoration: none;
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  margin: 0;
-  padding: 0;
+  padding: 10px 20px;
 }
 
 .hamburger-menu {
@@ -85,7 +83,7 @@ body, h1, h2, h3, p, ul, li, a {
   background-color: #333;
   color: white;
   text-align: center;
-  padding: 10px 20px;
+
 }
 
 /* Custom 'X' icon for closing */
@@ -360,7 +358,72 @@ body, h1, h2, h3, p, ul, li, a {
     color: black; /* Ensures text is black */
     font-size: 3.5rem;
 }
+.values-section {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
 
+        .column {
+            flex-basis: 30%;
+        }
+
+        .column h2 {
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .column p, .column ul {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .column ul li::before {
+            content: '• ';
+            color: #333; /* Bullet point color */
+            font-weight: bold; /* If you want bold bullet points */
+        }
+        .stats-section {
+            background-color: #e47424; /* Dark background color */
+            color: #333; /* White text color */
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .stats-header {
+            margin-bottom: 30px;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .stat {
+            width: 30%;
+        }
+
+        .icon {
+            /* Add styles for your icons here */
+            margin-bottom: 10px;
+        }
+
+        .stat-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: 10px 0;
+            color: #ecbc24;
+        }
+
+        .stat-description {
+            font-size: 0.9rem;
+        }
   </style>
   <header>
     <!-- Bootstrap Navigation -->
@@ -410,8 +473,8 @@ body, h1, h2, h3, p, ul, li, a {
         <div class="text-content">
             <h2 class="display-1" style="color: #333;">Our Mission</h2>
             <br>
-            <p style="text-align: left; color:#333;">
-              The Belonging Foundation is a non-profit organization that empowers innovators to create, transform, and disrupt industries by unleashing the power of software and data
+            <p style="text-align: left; color:#333; font-size: 1.3rem;">
+              The Belonging Foundation is a non-profit organization that empowers innovators to create, transform, and disrupt industries by unleashing the power of a more connected community
             </p>
         </div>
     
@@ -419,19 +482,89 @@ body, h1, h2, h3, p, ul, li, a {
             <img src="{% static 'images/main_logo.png' %}" alt="Belonging Foundation Logo" style="max-height: 500px;">
         </div>
     </div>
+    <div style="background-color: #333; padding: 10px 20px;">
+      <h1 style="color: white; text-align: left;">LOVE YOUR DREAMERS</h1>
+      <h3 style="color: #e47424; text-align: left;">Innovators have always shaper the history of technology. And no matter the future, innovators will build it.</h3>
+    </div>
+    <br>
+    <br>
+  <div>
+      <h1 style="color: #333; text-align: center; margin-top: 25px;"><strong>Guided by code values</strong></h1>
+      <h5 style="color: #333; text-align: center;padding-left: 100px; padding-right: 100px;">We use our core values every day to guide how we collaborate with each other and operate as a whole, and look for them in prospective candidates.</h5>
+    </div>
+    <br>
+    <br>
+    <div class="values-section">
+      <div class="column">
+          <h2 style="font-size: 1.7rem;"><strong>Think Big, Go Far</strong></h2>
+          <p>We are big dreamers with a passion for creativity. We eagerly pursue new opportunities and markets through innovation and disruption. We have a pioneering spirit - always ready to forge new paths and take smart risks.</p>
+      </div>
+      <div class="column">
+          <h3 style="color: #e47424; font-size: 1.25rem;">WHAT IT ISN'T</h3>
+          <ul>
+              <li>Letting the magnitude of any challenge squelch fresh thinking and ideas</li>
+              <li>Change merely for the sake of change</li>
+              <li>Grand ideas without a coherent plan</li>
+              <li>Believing valuable ideas can only come from senior people</li>
+          </ul>
+      </div>
+      <div class="column">
+          <h3 style="color: #e47424; font-size: 1.25rem;">WHAT IT IS</h3>
+          <ul>
+              <li>Fearless in our belief that we have a massive opportunity</li>
+              <li>Willingness to experiment with crazy ideas, and recognize not all experiments work</li>
+              <li>Eager to question the status quo</li>
+              <li>Disrupting ourselves before someone else does</li>
+          </ul>
+      </div>
+  </div>
+  <br>
+  <br>
+
+  <div class="stats-section">
+    <div class="stats-header">
+        <h1>What we do</h1>
+        <p>The Belonging Foundation is a digital safe space for Odd-Balls, Plant-Lovers, Black-Sheep, Lions, and the like to turn their dreams for tomorrow into actionable plans for the future and secure community support and engagement while doing so.
+        </p>
+    </div>
+    
+    <div class="stats-container">
+        <div class="stat">
+            <div class="icon">
+                <!-- You'll replace this div with the actual icon, perhaps an <img> or <svg> -->
+                &#x21E7; <!-- Example using a unicode arrow for demonstration -->
+            </div>
+            <div class="stat-title">Partners</div>
+            <div class="stat-description">Belonging has found hundreds partners to assist us in our mission.</div>
+        </div>
+
+        <div class="stat">
+            <div class="icon">
+                &#x1F310; <!-- Example using a unicode globe for demonstration -->
+            </div>
+            <div class="stat-title">Countries</div>
+            <div class="stat-description">We have employees in over 27 countries and growing.</div>
+        </div>
+
+        <div class="stat">
+            <div class="icon">
+                &#x1F465; <!-- Example using a unicode group icon for demonstration -->
+            </div>
+            <div class="stat-title">Employees</div>
+            <div class="stat-description">We have amazing people contributing to our success.</div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
 
       <div class="lead mt-4" style="text-align: left; color:#333;">
-        
-        <br>
-
-        <p><strong> Our vision is to build a more connected community on a national scale that actively seeks to support those who have a spark they need help transforming into a roaring flame.  </strong></p> 
-        
-        <br>
-
-        <p>The Belonging Foundation is a digital safe space for Odd-Balls, Plant-Lovers, Black-Sheep, Lions, and the like to turn their dreams for tomorrow into actionable plans for the future and secure community support and engagement while doing so. </p>
-        
-        <br>
-
         <p>The Belonging Foundation exists today because if it had existed 4 years sooner, it may have changed my family's story. <a href="https://www.bondmemorial.com/copy-of-2023-january-8">Kevin</a>,  <a href="https://www.bondmemorial.com/copy-of-2023-january-1">Keegan</a>, <a href="https://www.solontelford.com/obituary/Alvin-DeLong">Alvin</a>,  <a href="https://www.solontelford.com/obituary/Judith-DeLong">Judy</a>,  and <a href="https://www.solontelford.com/obituary/Eric-DeLong">Eric DeLong</a>  are a cluster of 5 immediate family members who passed naturally, tragically, and for some, avoidably all within a mere 15 months of one another. These were a lovingly (and grumpily) married set of parents, Alvin (Age 87) and Judith DeLong (Age 80), their "Philosopher" son, Eric DeLong (Age 57), their "Never Let the Bastards Wear You Down" son, Kevin DeLong (Age 54), and his "Lions, Not Sheep" son, Keegan DeLong (Forever Age 22). The DeLongs grew up in Central Illinois and raged about Illinois politics and the Chicago Bears for generations. Alvin was an avid marathon runner and at one point, a Golden Glove Boxer, in addition to spending his working years at the GE Plastics Factory in Streator, IL. Eric learned as much as he could about the world through books and collegiate pursuits at Illinois State University. Eric even served as President of the Streator Lions for a time. Judith's heart carried a flame that she protected increasingly over the years, and was the grandma who liked to catch up on the phone for hours and hours on a late afternoon. Kevin DeLong lived tall in every minute of his 54 years. He rode motorcycles with his sons and Iron Pig Brothers all around the country for the majority of his adult life, and put in over 20 years of tireless effort at the Pontiac Correctional Center in Pontiac, IL. From the day he was born, Keegan DeLong just wanted to love and be loved. At 22 years old, he was a young man charting a fiery path ahead to match his blazing hair and past, weighing the dreams of his forefathers against those still forming in his entrepreneurial, giving heart.
         <br>
         <br>
@@ -441,41 +574,32 @@ body, h1, h2, h3, p, ul, li, a {
       </div>
   </div>
 </section>
-
-<hr>
-
-<section class="bg-light py-5">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <h2 class="text-center display-4">Our Message is:</h2>
-        <br>
-        <h3 class="text-center display-4">"We all belong"</h3>
-        <p class="lead mt-4">Everyone, regardless of age has an idea that just doesn't get the credebilty it deserves. </p>
-        <div class="text-center mt-5">
-          <a href="/donate/" class="btn btn-primary btn-lg" style="background-color: #e47424; border-color: #333;">INVEST IN BETTER FUTURES</a>
-        </div>
-      </div>
-    </div>
+<div>
+  <h1 style="color: #333; text-align: center; margin-top: 25px;">How we support our communities</h1>
+  <h5 style="color: #333; text-align: center;padding-left: 100px; padding-right: 100px;">At the Belonging Foundation, we believe that it is our responsibility to positively impact the communities in which we operate and hope that Belonging will be an inflection point in the dreams of our candidates.</h5>
+</div>
+<div class="values-section">
+  <div class="column">
+      <h2 style="font-size: 1.7rem;">Scholarships</h2>
+      <p>We are big dreamers with a passion for creativity. We eagerly encourage all to pursue new opportunities and markets through innovation and disruption. We love a pioneering spirit - always ready to forge new paths and take smart risks.</p>
+      <a href="/scholarship/">Learn More</a>
   </div>
-</section>
-
-<hr>
-
-<section class="bg-light py-5">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <h2 class="text-center display-4">How Are We Impacting the World??</h2>
-        <br>
-        <p class="lead mt-4">We want to change the way we approach innovative ideas. Let's build a better future, together!</p>
-        <div class="text-center mt-5">
-          <a href="/donate/" class="btn btn-primary btn-lg" style="background-color: #e47424; border-color: #333;">INVEST IN BETTER FUTURES</a>
-        </div>
-      </div>
-    </div>
+  <div class="column">
+      <h3 style="color: #333; font-size: 1.7rem;">Vendors</h3>
+      <p>We are dedicated to creating an environment where all vendors feel like they belong and can thrive. We want all vendors to feel valued and supported.</p>
+      <a href="/vendors/">Learn More</a>
   </div>
-</section>
+  <div class="column">
+      <h3 style="color: #333; font-size: 1.7rem;">Donors</h3>
+      <p>The most impactful donations are those that are strategically allocated to address the multifaceted needs of innovators. This involves supporting not just the immediate operational costs but also investing in the long-term development of their projects. </p>
+      <a href="/donate/">Learn More</a>
+  </div>
+  <div class="column">
+    <h3 style="color: #333; font-size: 1.7rem;">Sponsors</h3>
+    <p>Our goal is to empower candidates to build a more sustainable future, one application at a time. Sponsors help else maximize that power, one referral at a time!</p>
+    <a href="/referee/sponsor_about/">Learn More</a>
+</div>
+</div>
 
 
 

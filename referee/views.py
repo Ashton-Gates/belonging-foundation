@@ -15,6 +15,8 @@ User = get_user_model()
 
 
 # Create your views here.
+def sponsor_about(request):
+    return render(request, 'referee/sponsor_about.html')
 
 
 def login_view(request):
