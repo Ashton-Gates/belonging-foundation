@@ -22,9 +22,6 @@ ALLOWED_HOSTS = ['*','belonging.foundation', 'www.belonging.foundation', 'belong
 
 # Application definition
 
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-
-
 INSTALLED_APPS = [
     'belonging',
     'referee',    
