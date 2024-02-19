@@ -2,11 +2,11 @@ version: '2.2'
 
 services:
   web:
-    image: ashtongkinnell/beloning-prod:latest
+    #image: ashtongkinnell/beloning-prod:latest
     #command: gunicorn belonging.wsgi:application --bind 0.0.0.0:8000
     command: uvicorn belonging.asgi:application --host 0.0.0.0 --port 8000
-    volumes:
-     - .:/belonging
+    #volumes:
+    # - .:/belonging
     ports:
       - "8001:8000"
     environment:
