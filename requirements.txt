@@ -2,7 +2,7 @@ Django==4.1.13
 djangorestframework==3.12.4
 gunicorn==21.2.0
 psycopg2-binary==2.9.1
-django-allauth==0.51.0 
+django-allauth==0.61.1 
 social-auth-app-django
 uvicorn[standard]
 reportlab==3.6.1
