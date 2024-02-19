@@ -6,3 +6,4 @@ django-allauth==0.61.1
 social-auth-app-django
 uvicorn[standard]
 reportlab==3.6.1
+python-dotenv==1.0.0
