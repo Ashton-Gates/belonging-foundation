@@ -22,6 +22,9 @@ ALLOWED_HOSTS = ['*','belonging.foundation', 'www.belonging.foundation', 'belong
 
 # Application definition
 
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+
 INSTALLED_APPS = [
     'belonging',
     'referee',    
@@ -49,8 +52,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 AUTHENTICATION_BACKENDS = [
@@ -203,3 +207,12 @@ SOCIAL_AUTH_LOGIN_URL = '/default_dashboard/'
 
 # settings.py of the belonging app
 INTERNAL_WEBHOOK_URL = 'https://abc123.ngrok.io/internal/webhook/'
+
+
+DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+
+AZURE_ACCOUNT_NAME = 'cs2100320034ce6f7de'
+AZURE_ACCOUNT_KEY = 'eoOYES2iFvOHO/kbf/Y5KgvZqDW3JAGpVbXAsih1gtP3UJQEd8i9QyF+/9Vd8G50ZCFG2m649Eay+AStbwL+Tg=='
+AZURE_CONTAINER = 'static'
+STATIC_URL = f'https://{AZURE_ACCOUNT_NAME}.blob.core.windows.net/{AZURE_CONTAINER}/'
