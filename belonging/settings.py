@@ -63,7 +63,7 @@ AUTHENTICATION_BACKENDS = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR / 'internal' / 'belonging' / 'templates')],
+        'DIRS': [BASE_DIR / 'internal' / 'belonging' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'belonging.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'prodbelonging-database',
@@ -90,7 +90,7 @@ DATABASES = {
         'HOST': 'prodbelonging-server',  # e.g., 'your-db-server.postgres.database.azure.com'
         'PORT': '5432',  # Default port for PostgreSQL
     }
-}
+}'''
 
 DATABASES = {
     'default': {
@@ -136,7 +136,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/staticfiles/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type

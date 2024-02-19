@@ -1,3 +1,5 @@
+
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,16 +20,11 @@ body, h1, h2, h3, p, ul, li, a {
   padding: 0;
   list-style: none;
   text-decoration: none;
-}
-
-/* Body and Font Styles */
-body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
   margin: 0;
   padding: 0;
 }
-
 
 .hamburger-menu {
   float: right;
@@ -45,7 +42,6 @@ body {
   width: 100%;
   background-color: #333;
 }
-
 
 /* Style the sign-up form */
 .signup-form {
@@ -91,7 +87,6 @@ body {
   text-align: center;
   padding: 10px 20px;
 }
-
 
 /* Custom 'X' icon for closing */
 .navbar-toggler.collapsed .close-icon {
@@ -205,10 +200,6 @@ body {
   transform: translateY(-2px); /* Raise the section */
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for the effects */
 }
-
-/*--------------------Header-Section End -----------------------*/
-
-/*---------------------Body Style Starts------------------------*/
 
 /* Hero Section Styles */
 .hero-section {
@@ -348,25 +339,54 @@ body {
     text-align: left;
   }
 }
+.content-container {
+    display: flex;
+    align-items: center; /* This will vertically center the items if they have different heights */
+}
 
+.text-content {
+    flex: 1; /* Takes up 1 fraction of the available space */
+    /*padding-right: 20px;  Adds some space between the text and the image */
+}
+
+.mission-photo {
+    flex: 1; /* Takes up 1 fraction of the available space */
+    max-height: 500px; /* Sets a maximum height for the image */
+    overflow: hidden; /* Prevents the content from spilling out */
+}
+
+.display-1 {
+    margin: 0; /* Removes default margins from h1 and h2 */
+    color: black; /* Ensures text is black */
+    font-size: 3.5rem;
+}
 
   </style>
   <header>
     <!-- Bootstrap Navigation -->
-    <!-- Bootstrap Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="/index/">
-        <img src="orange.png" alt="Belonging Foundation Logo" style="max-height: 50px;">
-      </a>
+        {% load static %}
+        <img src="{% static 'images/main_logo.png' %}" alt="Belonging Foundation Logo" style="max-height: 100px;">      </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
         aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     
       <div class="collapse navbar-collapse" id="navbarContent">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto">          
           <li class="nav-item active">
             <a class="nav-link" href="/index/">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Login
+            </a>
+            <div class="dropdown-menu" aria-labelledby="loginDropdown">
+              <a class="dropdown-item" href="/referee/referee_login/">Sponsor Login</a>
+              <a class="dropdown-item" href="/donation/donor_login/">Donor Login</a>
+              <a class="dropdown-item" href="/login/">Applicant Login</a>
+            </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/donate/">Donate to Belonging</a>
@@ -385,8 +405,21 @@ body {
 </header>
 <section class="bg-light py-5">
     <div class="container">
-      <h1 class="text-center display-4" style="color: black;">WHO WE ARE</h1>
-      <h2 class="text-center display-4" style="color: black;"> Our Mission</h2>
+      
+      <div class="content-container">
+        <div class="text-content">
+            <h2 class="display-1" style="color: #333;">Our Mission</h2>
+            <br>
+            <p style="text-align: left; color:#333;">
+              The Belonging Foundation is a non-profit organization that empowers innovators to create, transform, and disrupt industries by unleashing the power of software and data
+            </p>
+        </div>
+    
+        <div class="mission-photo">
+            <img src="{% static 'images/main_logo.png' %}" alt="Belonging Foundation Logo" style="max-height: 500px;">
+        </div>
+    </div>
+
       <div class="lead mt-4" style="text-align: left; color:#333;">
         
         <br>
@@ -399,7 +432,11 @@ body {
         
         <br>
 
-        <p>The Belonging Foundation exists today because if it had existed 4 years sooner, it may have changed my family's story. <a href="https://www.bondmemorial.com/copy-of-2023-january-8">Kevin</a>,  <a href="https://www.bondmemorial.com/copy-of-2023-january-1">Keegan</a>, <a href="https://www.solontelford.com/obituary/Alvin-DeLong">Alvin</a>,  <a href="https://www.solontelford.com/obituary/Judith-DeLong">Judy</a>,  and <a href="https://www.solontelford.com/obituary/Eric-DeLong">Eric DeLong</a>  are a cluster of 5 immediate family members who passed naturally, tragically, and for some, avoidably all within a mere 15 months of one another. These were a lovingly (and grumpily) married set of parents, Alvin (Age 87) and Judith DeLong (Age 80), their "Philosopher" son, Eric DeLong (Age 57), their "Never Let the Bastards Wear You Down" son, Kevin DeLong (Age 54), and his "Lions, Not Sheep" son, Keegan DeLong (Forever Age 22). The DeLongs grew up in Central Illinois and raged about Illinois politics and the Chicago Bears for generations. Alvin was an avid marathon runner and at one point, a Golden Glove Boxer, in addition to spending his working years at the GE Plastics Factory in Streator, IL. Eric learned as much as he could about the world through books and collegiate pursuits at Illinois State University. Eric even served as President of the Streator Lions for a time. Judith's heart carried a flame that she protected increasingly over the years, and was the grandma who liked to catch up on the phone for hours and hours on a late afternoon. Kevin DeLong lived tall in every minute of his 54 years. He rode motorcycles with his sons and Iron Pig Brothers all around the country for the majority of his adult life, and put in over 20 years of tireless effort at the Pontiac Correctional Center in Pontiac, IL. From the day he was born, Keegan DeLong just wanted to love and be loved. At 22 years old, he was a young man charting a fiery path ahead to match his blazing hair and past, weighing the dreams of his forefathers against those still forming in his entrepreneurial, giving heart. This Foundation was formed to help men and women at life stages such as these who are looking for help in realizing their most hope-filled dreams of a brighter, better tomorrow. Together we will create the future, so let's honor their memories by building a network community working together to build a future we're excited to live for. </p>
+        <p>The Belonging Foundation exists today because if it had existed 4 years sooner, it may have changed my family's story. <a href="https://www.bondmemorial.com/copy-of-2023-january-8">Kevin</a>,  <a href="https://www.bondmemorial.com/copy-of-2023-january-1">Keegan</a>, <a href="https://www.solontelford.com/obituary/Alvin-DeLong">Alvin</a>,  <a href="https://www.solontelford.com/obituary/Judith-DeLong">Judy</a>,  and <a href="https://www.solontelford.com/obituary/Eric-DeLong">Eric DeLong</a>  are a cluster of 5 immediate family members who passed naturally, tragically, and for some, avoidably all within a mere 15 months of one another. These were a lovingly (and grumpily) married set of parents, Alvin (Age 87) and Judith DeLong (Age 80), their "Philosopher" son, Eric DeLong (Age 57), their "Never Let the Bastards Wear You Down" son, Kevin DeLong (Age 54), and his "Lions, Not Sheep" son, Keegan DeLong (Forever Age 22). The DeLongs grew up in Central Illinois and raged about Illinois politics and the Chicago Bears for generations. Alvin was an avid marathon runner and at one point, a Golden Glove Boxer, in addition to spending his working years at the GE Plastics Factory in Streator, IL. Eric learned as much as he could about the world through books and collegiate pursuits at Illinois State University. Eric even served as President of the Streator Lions for a time. Judith's heart carried a flame that she protected increasingly over the years, and was the grandma who liked to catch up on the phone for hours and hours on a late afternoon. Kevin DeLong lived tall in every minute of his 54 years. He rode motorcycles with his sons and Iron Pig Brothers all around the country for the majority of his adult life, and put in over 20 years of tireless effort at the Pontiac Correctional Center in Pontiac, IL. From the day he was born, Keegan DeLong just wanted to love and be loved. At 22 years old, he was a young man charting a fiery path ahead to match his blazing hair and past, weighing the dreams of his forefathers against those still forming in his entrepreneurial, giving heart.
+        <br>
+        <br>
+  
+        This Foundation was formed to help men and women at life stages such as these who are looking for help in realizing their most hope-filled dreams of a brighter, better tomorrow. Together we will create the future, so let's honor their memories by building a network community working together to build a future we're excited to live for. </p>
 
       </div>
   </div>
@@ -416,7 +453,7 @@ body {
         <h3 class="text-center display-4">"We all belong"</h3>
         <p class="lead mt-4">Everyone, regardless of age has an idea that just doesn't get the credebilty it deserves. </p>
         <div class="text-center mt-5">
-          <a href="/donate/" class="btn btn-primary btn-lg">INVEST IN BETTER FUTURES</a>
+          <a href="/donate/" class="btn btn-primary btn-lg" style="background-color: #e47424; border-color: #333;">INVEST IN BETTER FUTURES</a>
         </div>
       </div>
     </div>
@@ -433,7 +470,7 @@ body {
         <br>
         <p class="lead mt-4">We want to change the way we approach innovative ideas. Let's build a better future, together!</p>
         <div class="text-center mt-5">
-          <a href="/donate/" class="btn btn-primary btn-lg">INVEST IN BETTER FUTURES</a>
+          <a href="/donate/" class="btn btn-primary btn-lg" style="background-color: #e47424; border-color: #333;">INVEST IN BETTER FUTURES</a>
         </div>
       </div>
     </div>
