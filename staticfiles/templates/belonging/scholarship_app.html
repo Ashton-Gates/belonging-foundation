@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scholarship Application</title>
+<style>
+      #step-1 {
+    /* Show the first step by default */
+    display: block;
+}
+
+#step-2 {
+    /* Hide the second step by default */
+    display: none;
+}
+
+#step-3 {
+    /* Hide the third step by default */
+    display: none;
+}
+
+        /* Reset some basic elements */
+    body, h1, h2, h3, p, ul, li, a {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      text-decoration: none;
+    }
+    p{
+    
+    text-align: left;
+    
+    }
+    
+    h2{
+      text-align: center;
+    }
+    /* Body and Font Styles */
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .hamburger-menu {
+      float: right;
+      cursor: pointer;
+    }
+    
+    /* Ensure the dropdown is hidden by default and only shown when the hamburger icon is clicked */
+    .hidden {
+      display: none;
+    }
+    /* This will show the nav-links when the hamburger menu is clicked */
+    .responsive {
+      display: block;
+      position: absolute;
+      width: 100%;
+      background-color: #333;
+    }
+    
+    
+    
+    /* Style the sign-up form */
+    .signup-form {
+      max-width: 100%;
+      color: white;
+      background-color: #333;
+      padding: 20px;
+      text-align: center;
+      margin-left: 25px;
+      margin-right: 25px;
+    }
+    
+    .signup-form h2 {
+      margin-bottom: 20px;
+    }
+    
+    .signup-form form {
+      max-width: 50%;
+      margin: auto;
+    }
+    
+    .signup-form input[type="email"],
+    .signup-form input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+    }
+    
+    .signup-form button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    /* Button hover effect */
+    .signup-form button:hover {
+      background-color: #0056b3;
+    }
+    /* Footer Styles */
+    .footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px 20px;
+    }
+    
+    /* Responsive Styles */
+    @media screen and (max-width: 600px) {
+      .navbar a, .navbar .dropdown .dropbtn {
+        display: none;
+      }
+    
+      .navbar .hamburger-menu {
+        display: block;
+        height: 100%;
+        width: 18.75em;
+      }
+    
+      .navbar.responsive {position: relative;}
+      .navbar.responsive a.icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      .navbar.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+      }
+    }
+    /* Custom 'X' icon for closing */
+    .navbar-toggler.collapsed .close-icon {
+      display: none;
+    }
+    
+    .navbar-toggler .navbar-toggler-icon {
+      display: inline-block; /* Show hamburger by default */
+    }
+    
+    .navbar-toggler .close-icon {
+      display: none; /* Hide 'X' by default */
+    }
+    
+    /* When the navbar is not collapsed, switch to 'X' and hide hamburger */
+    .navbar-toggler:not(.collapsed) .navbar-toggler-icon {
+      display: none;
+    }
+    
+    .navbar-toggler:not(.collapsed) .close-icon {
+      display: inline-block;
+    }
+    .header-height {
+      height: 70px; /* Example header height, adjust as needed */
+    }
+    .carousel-item a {
+      display: block;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .carousel-item a:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    /* Custom styles for carousel control arrows */
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      height: 40px; /* Adjust size */
+      width: 40px;
+      background-size: 100%, 100%;
+      background-image: none;
+    }
+    
+    .carousel-control-prev-icon {
+      border: solid black; /* Change color as needed */
+      border-width: 0 5px 5px 0;
+      transform: rotate(135deg);
+      -webkit-transform: rotate(135deg);
+    }
+    
+    .carousel-control-next-icon {
+      border: solid black; /* Change color as needed */
+      border-width: 0 5px 5px 0;
+      transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+    }
+    
+    /* Increase the size of the clickable area for easier navigation */
+    .carousel-control-prev, .carousel-control-next {
+      width: 5%;
+    }
+    .feature-section {
+      padding: 3rem 0; /* Adjust the padding as needed */
+      background-image: url('keegan_steph.jpg');
+      background-size: cover;
+      background-position: center;
+      text-align: center;
+      padding: 100px 0; /* Adjust padding as needed */
+    }
+    
+    .feature-section .container {
+      position: relative;
+      z-index: 2;
+      color: #fff; /* Or any color you want for the text */
+    }
+    
+    .cta-button {
+      background-color: #ff6f00; /* Or any color you want for the button */
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none; /* Remove underline from links */
+      display: inline-block; /* To apply padding and margin */
+      margin-top: 20px;
+      border: 1px solid white; /* Add a white border */
+      color: white; /* Text color */
+      text-decoration: none; /* Remove underlines */
+      border-radius: 5px; /* Optional: Add rounded corners */
+    }
+    
+    .feature-section h1 {
+      font-size: 2.5rem; /* Adjust size as needed */
+      margin-bottom: 1rem;
+    }
+    
+    .feature-section p {
+      margin-bottom: 2rem;
+    }
+    
+    .feature-section .btn-primary {
+      background-color: #ff6f00; /* Adjust button color as needed */
+      border-color: #ff6f00; /* Adjust border color as needed */
+      padding: 0.75rem 1.5rem; /* Adjust button padding as needed */
+    }
+    
+    .feature-section .btn-primary:hover {
+      background-color: #e65e00; /* Darken button on hover */
+      border-color: #e65e00;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.3); /* Add shadow effect on hover */
+      transform: translateY(-2px); /* Raise the button slightly on hover */
+    }
+    
+    /* Optional: If you want the shadow effect on hover for the entire section */
+    .feature-section:hover {
+      box-shadow: 0 8px 15px rgba(0,0,0,0.3); /* Shadow effect */
+      transform: translateY(-2px); /* Raise the section */
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for the effects */
+    }
+    
+    /*--------------------Header-Section End -----------------------*/
+    
+    /*---------------------Body Style Starts------------------------*/
+    
+    /* Hero Section Styles */
+    .hero-section {
+      background-image: url('keegan_steph.jpg'); /* Replace with the path to your hero image */
+      background-size: cover;
+      background-position: center;
+      text-align: center;
+      position: relative;
+      color: white;
+      padding: 100px 0; /* Adjust padding to suit your content */
+    }
+    
+    /* Overlay Content Styles */
+    .overlay-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      color: white;
+      text-align: center;
+    }
+    
+    /* This will be your button inside the overlay */
+    .cta-button {
+      background-color: #ff6f00; /* Adjust the button color as needed */
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2em; /* Adjust font size as needed */
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 20px;
+      border: 1px solid white; /* Add a white border */
+      color: white; /* Text color */
+      text-decoration: none; /* Remove underlines */
+      border-radius: 5px; /* Optional: Add rounded corners */
+    }
+    
+    /* Ensure the overlay content is above all other content */
+    .overlay-content .btn:hover {
+      background-color: #cc5800; /* Darken button on hover */
+      transition: background-color 0.3s ease;
+    }
+    /* Info Section Styles */
+    .info-section {
+      position: relative;
+      color: white;
+      text-align: center;
+      background-size: cover;
+      background-position: center;
+      /* Set individual background images for each section here */
+    }
+    
+    .info-section:first-of-type {
+      background-image: url('Article_2.PNG');
+    }
+    
+    .info-section:last-of-type {
+      background-image: url('Article_3.PNG');
+    }
+    
+    .info-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2; /* Ensures the content is above the overlay */
+      /* Additional styling as needed */
+    }
+    
+    .touts-container {
+        display: block;
+        margin-top: -10px; /* Adjusts the position upwards */
+        position: relative;
+        z-index: 1;
+        padding: 0 10px; /* Adds padding on the left and right */
+    }
+    
+    .row {
+        margin: 0 auto;
+        max-width: 75rem;
+        width: calc(100% - 20px); 
+    }
+    
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    .feature-panel {
+      align-items: center;
+      background-color: #ff8566;
+      background-position: 50% 25%;
+      background-size: cover;
+      display: flex;
+      flex-wrap: wrap;
+      overflow: hidden;
+      padding: 5rem 0 6.25rem;
+      position: relative;
+      text-align: center;
+    }
+    
+    .social-icons {
+      font-size: 24px;
+    }
+    
+    .social-icons a {
+      margin: 0 10px;
+      color: white;
+      text-decoration: none;
+    }
+    
+    .social-icons a:hover {
+      color: #ddd;
+    }
+    
+    @media screen and (max-width: 600px) {
+      .navbar a, .navbar .dropdown .dropbtn {
+        display: none; /* Hide all navbar links */
+    
+      }
+    
+      .navbar .hamburger-menu {
+        display: block; /* Show hamburger menu */
+        height: 100%;
+        width: 18.75em;
+      }
+    
+      .navbar.responsive .hamburger-menu,
+      .navbar.responsive a {
+        display: block; /* Show links when in responsive mode */
+      }
+    
+      .navbar.responsive .dropdown .dropbtn {
+        display: block; /* Ensure dropdown buttons are also shown */
+      }
+    }
+    /* Right side menu styles */
+    @media screen and (max-width: 992px) {
+      .navbar-collapse {
+    
+        position: static;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 18.75em;
+        max-height: 0;
+        overflow: hidden;
+        overflow-y: auto;
+        background-color: #333; /* Or any color you want */
+        border-left: 1px solid #ccc; /* Adds a slight border to the left of the menu */
+        transition: max-height 0.3s ease;
+    
+    
+    
+    
+      }
+    
+      .navbar-toggler {
+        margin-left: 1rem;
+      }
+      
+      .navbar {
+        justify-content: space-between;
+      }
+    
+      .navbar-nav {
+        display: flex;
+        flex-direction: column; /* Stack the links vertically */
+        padding: 1rem;
+      }
+    
+      .nav-item {
+        margin-bottom: 0.5rem; /* Add space between links */
+      }
+      .navbar-collapse.collapsing {
+        position: static;
+        max-height: 0; /* Transition from 0 */
+        overflow: hidden;
+      }
+    
+      .navbar-collapse.show {
+        max-height: 500px; /* Set to the maximum height your menu might need */
+      }
+    
+      .navbar-toggler.collapsed .close-icon {
+        display: none;
+      }
+    
+      .navbar-toggler .navbar-toggler-icon {
+        display: inline-block; /* Show hamburger by default */
+      }
+    
+      .navbar-toggler .close-icon {
+        display: none; /* Hide 'X' by default */
+      }
+    
+      .navbar-toggler:not(.collapsed) .navbar-toggler-icon {
+        display: none;
+      }
+    
+      .navbar-toggler:not(.collapsed) .close-icon {
+        display: inline-block;
+      }
+    }
+    
+    /* Responsive Styles */
+    @media screen and (max-width: 600px) {
+      .navbar a, .navbar .dropdown .dropbtn {
+        display: none;
+      }
+    
+      .navbar .hamburger-menu {
+        display: block;
+        height: 100%;
+        width: 18.75em;
+      }
+    
+      .navbar.responsive {position: relative;}
+      .navbar.responsive a.icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      .navbar.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+      }
+    }
+    .social-icons {
+      font-size: 24px;
+    }
+    
+    .social-icons a {
+      margin: 0 10px;
+      color: white;
+      text-decoration: none;
+    }
+    
+    .social-icons a:hover {
+      color: #ddd;
+    }
+    
+      </style>
+</head>
+<body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <div class="signup-form">
+    <h2>Apply for Scholarship</h2>
+    <form action="{% url 'scholarship_application' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    <div id="multi-step-form">
+        <!-- Step 1 -->
+        <div class="form-step" id="step-1">
+            <!-- Your Step 1 form fields go here -->
+            <div>
+              <label for="first_name">First Name</label>
+              <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
+              
+              <label for="last_name">Last Name</label>
+              <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
+              
+              <label for="phone_number">Phone Number</label>
+              <input type="text" id="phone_number" name="phone_number" placeholder="Phone Number" required>
+              
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="Email" required>
+            </div>
+            <div>
+              <label for="date_of_birth">Date of Birth</label>
+              <input type="date" id="date_of_birth" name="date_of_birth" required>
+            </div>
+
+            <div>
+              <label for="education_level">Education Level</label>
+              <select id="education_level" name="education_level">
+                  <option value="high_school">High School</option>
+                  <option value="college">College</option>                  
+                  <option value="graduate_school">Graduate School</option>
+                  <option value="blacksheep">Blacksheep</option>
+              </select>
+            </div>
+            <!-- Add a container for the refereeID input, initially hidden -->
+            <div id="refereeIDContainer" style="display: none;">
+              <label for="refereeID">Referee ID</label>
+              <input type="text" id="refereeID" name="refereeID" placeholder="Enter Referee ID">
+              <!-- Add a place to display the validation message -->
+              <p id="refereeIDValidationMessage"></p>
+            </div>
+            <div>
+              <input type="radio" name="gender" value="male" id="male">
+              <label for="male">Male</label>
+              <input type="radio" name="gender" value="female" id="female">
+              <label for="female">Female</label>
+              <input type="radio" name="gender" value="prefer_not_to_say" id="prefer_not_to_say">
+              <label for="prefer_not_to_say">Prefer not to say</label>
+            </div>
+            <button type="button" class="next-btn" data-next="step-2">Next</button>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="form-step" id="step-2" style="display:none;">
+            <!-- Your Step 2 form fields go here -->
+            <div class="text-area">
+              <label for="business_name">Business Name</label>
+              <input type="text" id="business_name" name="business_name" placeholder="Business Name">
+              <label for="business_description">Brief Description of Your Business</label>
+              <textarea id="business_description" name="business_description" placeholder="Brief description of your business"></textarea>
+            </div>
+            <div class="text-area">
+              <label for="video_link">Video Link (Upload a URL to your video)</label>
+              <input type="url" id="video_link" name="video_link" placeholder="https://">
+            </div>
+            <div>
+              <label for="pdf">Upload Your PDF</label>
+              <input type="file" id="pdf" name="pdf" accept=".pdf">
+            </div>
+            
+          <!-- The End of the fields for page 2 -->
+
+            <button type="button" class="prev-btn" data-prev="step-1">Previous</button>
+            <button type="button" class="next-btn" data-next="step-3">Next</button>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="form-step" id="step-3" style="display:none;">
+            <!-- Your Step 3 form fields go here -->
+            <div class="text-area">
+              <label for="squestion1">Have you ever heard yourself say, "I'm the black sheep", "I just don't feel like I belong here", "Nobody listens to me", or "Someday my life will be different"?</label>
+              <textarea id="squestion1" name="squestion1" placeholder="Answer here..." required></textarea>
+          </div>
+          <div class="text-area">
+              <label for="squestion2">When you dream of a better tomorrow or a brighter future, what does that look like?</label>
+              <textarea id="squestion2" name="squestion2" placeholder="Answer here..." required></textarea>
+          </div>
+          <div class="text-area">
+              <label for="squestion3">If you are selected as a Scholarship Recipient, what impact would it have on your life? How will you measure the good you do in the world as a result?</label>
+              <textarea id="squestion3" name="squestion3" placeholder="Answer here..." required></textarea>
+          </div>
+            <button type="button" class="prev-btn" data-prev="step-2">Previous</button>
+            <button type="submit">Submit Application</button>
+        </div>
+    </div>
+
+        <a href="/applicant_dashboard/" style="color: white; padding : 10px;"> Back to Dashboard</a>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+<script>
+
+$(document).on('submit', 'form', function(e) {
+    console.log('Form submitted!');
+});
+
+$(document).ready(function() {
+    $('.next-btn').click(function() {
+        var nextId = $(this).data('next');
+        $('.form-step').hide();
+        $('#' + nextId).show();
+    });
+
+    $('.prev-btn').click(function() {
+        var prevId = $(this).data('prev');
+        $('.form-step').hide();
+        $('#' + prevId).show();
+    });
+});
+</script>
+<script>
+  // Add an event listener for when the education_level field changes
+  document.getElementById('education_level').addEventListener('change', function() {
+      // Check if 'blacksheep' is selected
+      if (this.value === 'blacksheep') {
+          // Show the refereeID input
+          document.getElementById('refereeIDContainer').style.display = 'block';
+      } else {
+          // Hide the refereeID input
+          document.getElementById('refereeIDContainer').style.display = 'none';
+      }
+  });
+  
+  // Add an event listener for real-time validation of the refereeID
+  document.getElementById('refereeID').addEventListener('input', function() {
+      // Get the input value
+      var refereeID = this.value;
+      
+      // Use AJAX to send a request to your Django backend
+      $.ajax({
+          url: '/validate_referee_id/', // URL to your view that will handle the validation
+          type: 'GET',
+          data: {'refereeID': refereeID},
+          dataType: 'json',
+          success: function(response) {
+              // Display validation message
+              if (data.is_valid) {
+                  document.getElementById('refereeIDValidationMessage').textContent = 'Valid Referee ID';
+                  // You can also add logic to enable the submit button here if needed
+              } else {
+                  document.getElementById('refereeIDValidationMessage').textContent = 'Invalid Referee ID';
+                  // You can also add logic to disable the submit button here if needed
+              }
+          },
+          error: function(xhr, status, error) {
+              // Handle any errors here
+              console.error('An error occurred during validation');
+          }
+      });
+  });
+  </script>
+
+<!-- <h1>Scholarship Application Form</h1>
+
+    <div class="signup-form">
+        <h2>Apply for Scholarship</h2>
+        <form action="{% url 'scholarship_application' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+              <input type="text" name="first_name" placeholder="First Name" required>
+              <input type="text" name="last_name" placeholder="Last Name" required>
+          </div>
+          <div>
+              <input type="date" name="date_of_birth" required>
+          </div>
+          <div>
+              <input type="number" name="age" placeholder="Age" required>
+          </div>
+          <div>
+              <select name="education_level">
+                  <option value="high_school">High School</option>
+                  <option value="college">College</option>
+              </select>
+          </div>
+          <div>
+              <input type="radio" name="gender" value="male" id="male">
+              <label for="male">Male</label>
+              <input type="radio" name="gender" value="female" id="female">
+              <label for="female">Female</label>
+              <input type="radio" name="gender" value="prefer_not_to_say" id="prefer_not_to_say">
+              <label for="prefer_not_to_say">Prefer not to say</label>
+          </div>-->
+            <!--<div class="text-area">
+              <input type="text" name="business_name" placeholder="Business Name">
+              <textarea name="business_description" placeholder="Brief description of your business"></textarea>
+          </div>
+          <div class="text-area">
+              <label for="video_link">Upload a Video (Please provide a link to video of your pitch):</label>
+              <input type="url" name="video_link" placeholder="http://">
+          </div>
+          <div>
+              <label for="pdf">Upload Your PDF:</label>
+              <input type="file" name="pdf" accept=".pdf">
+          </div>-->
+          <!--<div class="text-area">
+              <label for="question1">Question 1: Have you ever heard yourself say, "I'm the black sheep", "I just don't feel like I belong here", "Nobody listens to me", or "Someday my life will be different"?</label>
+              <textarea name="question1" placeholder="Answer here..." required></textarea>
+          </div>
+          <div class="text-area">
+              <label for="question2">Question 2:</label>
+              <textarea name="question2" placeholder="Answer here..." required></textarea>
+          </div>
+          <div class="text-area">
+              <label for="question3">Question 3:</label>
+              <textarea name="question3" placeholder="Answer here..." required></textarea>
+          </div>
+            <div>
+                <button type="submit">Submit Application</button>
+            </div>
+        </form>-->
+</html>

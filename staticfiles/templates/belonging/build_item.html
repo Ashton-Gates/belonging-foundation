@@ -1,0 +1,18 @@
+<!-- build_item.html -->
+{% extends 'base.html' %}
+{% block content %}
+<h2>Add New Auction Item</h2>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="name">Item Name:</label><br>
+    <input type="text" id="name" name="name"><br>
+    <label for="description">Description:</label><br>
+    <textarea id="description" name="description"></textarea><br>
+    <label for="start_bid">Starting Bid:</label><br>
+    <input type="number" id="start_bid" name="start_bid" min="0" step="0.01"><br>
+    <label for="image">Item Image:</label><br>
+    <input type="file" id="image" name="image" accept="image/*"><br>
+    <input type="submit" value="Add Item">
+</form>
+{% endblock %}

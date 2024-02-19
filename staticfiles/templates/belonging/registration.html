@@ -1,0 +1,240 @@
+{% block content %}
+
+<style>
+/* Overall page styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1, h2 {
+    color: #333;
+    text-align: center;
+}
+
+/* Style for the form container */
+.signup-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    max-width: 90%;
+}
+
+/* Style for form inputs */
+.signup-form input[type="text"],
+.signup-form input[type="email"],
+.signup-form input[type="password"] {
+    width: calc(50% - 10px);
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Style for the submit button */
+.signup-form button {
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Style for the primary button */
+.btn-primary {
+    background-color: #0275d8;
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+/* Hover effects for buttons */
+.btn-primary:hover,
+.signup-form button:hover {
+    opacity: 0.9;
+}
+
+/* Style for existing account prompt */
+.signup-form div > p {
+    text-align: center;
+    color: #666;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .signup-form input[type="text"],
+    .signup-form input[type="email"],
+    .signup-form input[type="password"] {
+        width: 100%;
+    }
+}
+/* Password container to position the icon correctly */
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Style for the info icon */
+.info-icon {
+    display: inline-block;
+    margin-left: 5px;
+    color: #d8b33b; /* This is a teal color, you can use any hex color code */
+    cursor: pointer;
+    font-size: 20px; /* Adjust the size as needed */
+    transition: opacity 0.3s;
+}
+
+.info-icon.active {
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+/* Tooltip styling */
+.info-icon::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    width: 200px;
+    left: 100%; /* Adjust this value as needed */
+    top: 50%; /* Adjust this value as needed */
+    z-index: 10;
+    background-color: #666;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-left: 10px;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s;
+    pointer-events: none;
+    border: 1px solid #ddd;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Show the tooltip text on hover */
+.info-icon:hover::after {
+    opacity: 1;
+}
+
+
+</style>
+
+
+
+
+<div class="signup-form">
+    <h1>Account Registration</h1>
+        <form action="{% url 'registration' %}" method="post">
+        {% csrf_token %}
+        <div class="form-section" id="page1">
+            <!-- Username is typically needed for UserCreationForm -->
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="text" name="first_name" placeholder="First Name" required>
+            <input type="text" name="last_name" placeholder="Last Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="phone_number" placeholder="Phone Number" required>
+            <div class="password-container">
+                <input type="password" name="password1" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" >
+                <i class="info-icon" data-tooltip="Password must be at least 8 characters long, contain a number, and a capital letter.">&#9432;</i>
+                <!-- The &#9432; is the HTML entity for the 'information' symbol -->
+            </div>
+            <input type="password" name="password2" placeholder="Confirm Password" required>          
+            <div>
+                <button type="submit">Register</button>
+            </div> 
+        </div> 
+        <div>
+            <p>Already have an account?</p>
+            <a href="{% url 'login' %}" class="btn btn-primary">Login Here!</a>
+        </div>
+    </form>
+</div>
+<!--
+<div id="g_id_onload"
+    data-client_id="1002728390308-vak0cu5k7mba0jiuf3u70hrm35ivbjv4.apps.googleusercontent.com"
+    data-context="signin"
+    data-ux_mode="popup"
+    data-login_uri="http://localhost:8081/accounts/google/login/callback"
+    data-itp_support="true">
+</div>
+
+<div class="g_id_signin"
+    data-type="standard"
+    data-shape="pill"
+    data-theme="filled_blue"
+    data-text="signup_with"
+    data-size="large"
+    data-logo_alignment="left">
+</div>
+-->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const passwordInput = document.querySelector('input[name="password1"]');
+
+    passwordInput.addEventListener('input', function() {
+        const password = this.value;
+        const minLength = 8;
+        const hasNumber = /\d/.test(password);
+        const hasUpperCase = /[A-Z]/.test(password);
+        
+        if(password.length >= minLength && hasNumber && hasUpperCase) {
+            // Password meets requirements
+            this.setCustomValidity('');
+        } else {
+            // Password does not meet requirements
+            this.setCustomValidity('Must contain at least one number, one uppercase letter, and be at least 8 characters long');
+        }
+    });
+});
+
+</script>
+<script>
+  let currentSection = 0;
+  const sections = document.querySelectorAll('.form-section');
+  const totalSections = sections.length;
+
+
+  function navigate(direction) {
+      currentSection = Math.max(0, Math.min(currentSection + direction, totalSections - 1));
+      showSection(currentSection);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+      navigate(0);  // Show the first section
+  });
+</script>
+<script>
+    // Information icon tooltip script
+    document.addEventListener('DOMContentLoaded', () => {
+        const passwordInput = document.querySelector('input[name="password1"]');
+        const infoIcon = document.querySelector('.info-icon');
+  
+        passwordInput.addEventListener('focus', () => {
+            infoIcon.classList.add('active');
+        });
+  
+        passwordInput.addEventListener('blur', () => {
+            infoIcon.classList.remove('active');
+        });
+    });
+  </script>
+<script src="https://accounts.google.com/gsi/client" async></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  
+
+{% endblock %}

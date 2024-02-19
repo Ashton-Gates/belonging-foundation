@@ -13,9 +13,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-mq@((#x!tz0)v5bojl!ymb6s*5#s((h$ve9y88+j1(m%u427*o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*','belonging.foundation', 'www.belonging.foundation']
+ALLOWED_HOSTS = ['*','belonging.foundation', 'www.belonging.foundation', 'belongingprod.azurewebsites.net']
 #'belonging.foundation', 'www.belonging.foundation'
 
 # Application definition
@@ -61,7 +61,7 @@ AUTHENTICATION_BACKENDS = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR / 'intenal' / 'belonging' / 'templates')],
+        'DIRS': [os.path.join(BASE_DIR / 'internal' / 'belonging' / 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
