@@ -13,12 +13,12 @@
   </div>
 </div>
 <!-- Section with overlay and call to action -->
-<section class="feature-panel" style="text-align: center;">
+<section class="feature-panel" style="text-align: left; padding : 20px">
   <div class="touts-container">
     <div class="row">
       <h2 >About the Belonging Foundation</h2>
       <p>The Belonging Foundation is a 501(c)(3) non-profit organization dedicated to change lives across the United States.</p>
-      <a href="/about/" class="cta-button" style="text-align: center; ">LEARN ABOUT US</a>
+      <a href="/about/" class="cta-button" style="text-align: left; ">LEARN ABOUT US</a>
     </div>
   </div>
 </section>
@@ -115,29 +115,7 @@
   </div>
 </div>
 
-<!-- Footer: -->
-<div class="footer">
-  <div class="social-icons">
-    <a href="https://www.instagram.com/yourusername" target="_blank">
-      <i class="fab fa-instagram"></i>
-    </a>
-    <a href="mailto:your@email.com">
-      <i class="fas fa-envelope"></i>
-    </a>
-    <a href="https://www.facebook.com/yourusername" target="_blank">
-      <i class="fab fa-facebook"></i>
-    </a>
-  </div>
-                          <!-- Sign-up form -->
-   <div class="signup-form">
-      <h3>Join us in our fight for better futures.</h3>
-      <form action="YOUR_FORM_ACTION" method="POST">
-        <input type="email" name="email" placeholder="Email*" required>
-        <input type="text" name="zip" placeholder="Zip*" required>
-        <button type="submit">I'm Ready</button>
-      </form>
-   </div>
-</div>
+
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -153,24 +131,26 @@
       }, 2000); // Change content every 2000 milliseconds (2 seconds)
   });
   </script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Get the dropdown and the toggle element (assumed to be the profile image)
-  var profileToggle = document.getElementById('profileDropdown');
-  var dropdownMenu = document.querySelector('.dropdown-menu');
-
-  // Listen for click events on the toggle element
-  profileToggle.addEventListener('click', function(event) {
-    // Prevent the default navigation
-    event.preventDefault();
-
-    // Toggle the visibility of the dropdown menu
-    dropdownMenu.classList.toggle('show'); // Bootstrap 4 uses 'show' class for dropdowns
-  });
-});
-
-</script>
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Attempt to get the dropdown and the toggle element
+      var profileToggle = document.getElementById('profileDropdown');
+      var dropdownMenu = document.querySelector('.dropdown-menu');
+    
+      // Only add the event listener if profileToggle exists
+      if (profileToggle) {
+        profileToggle.addEventListener('click', function(event) {
+          // Prevent the default navigation
+          event.preventDefault();
+    
+          // Toggle the visibility of the dropdown menu
+          dropdownMenu.classList.toggle('show'); // Bootstrap 4 uses 'show' class for dropdowns
+        });
+      } else {
+        console.error('The element with id "profileDropdown" was not found.');
+      }
+    });
+    </script>
 <!-- Bootstrap JavaScript -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

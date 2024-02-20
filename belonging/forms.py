@@ -7,9 +7,8 @@ from django.utils.translation import gettext_lazy as _  # Correct import
 User = get_user_model()
 
 class CustomUserCreationForm(UserCreationForm):
-    email = forms.EmailField(required=True, help_text='Enter your email address.')
-    phone_number = forms.CharField(required=True)
-
+    email = forms.EmailField(required=True, help_text='Enter your email address.', widget=forms.EmailInput(attrs={'class': 'input-field'}))
+    phone_number = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'input-field'}))
 
     class Meta(UserCreationForm.Meta):
         model = User
@@ -25,6 +24,7 @@ class CustomUserCreationForm(UserCreationForm):
         return user
 
 class CustomAuthenticationForm(forms.ModelForm):
+    username = forms.CharField(label='Username', widget=forms.TextInput(attrs={'class': 'input-field'}))
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
 
     class Meta:

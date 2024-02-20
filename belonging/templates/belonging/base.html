@@ -270,7 +270,7 @@
       margin-top: -10px; /* Adjusts the position upwards */
       position: relative;
       z-index: 1;
-      padding: 0 10px; /* Adds padding on the left and right */
+      padding: 20px; /* Adds padding on the left and right */
   }
   
   .row {
@@ -529,6 +529,7 @@
   .carousel-caption{
     color:#333;
   }
+
     </style>
 </head>
 <body>
@@ -549,10 +550,10 @@
             <a class="nav-link" href="/index/">Home</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Login
             </a>
-            <div class="dropdown-menu" aria-labelledby="loginDropdown">
+            <div class="dropdown-menu" aria-labelledby="profileDropdown">
               <a class="dropdown-item" href="/referee/referee_login/">Sponsor Login</a>
               <a class="dropdown-item" href="/donation/donor_login/">Donor Login</a>
               <a class="dropdown-item" href="/login/">Applicant Login</a>
@@ -579,12 +580,56 @@
     {% endblock %}
     </main>
     <footer>
-        <!-- Footer content -->
+      <div class="footer">
+        <div class="social-icons">
+          <a href="https://www.instagram.com/yourusername" target="_blank">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="mailto:your@email.com">
+            <i class="fas fa-envelope"></i>
+          </a>
+          <a href="https://www.facebook.com/yourusername" target="_blank">
+            <i class="fab fa-facebook"></i>
+          </a>
+        </div>
+                                <!-- Sign-up form -->
+         <div class="signup-form">
+            <h3>Join us in our fight for better futures.</h3>
+            <form action="YOUR_FORM_ACTION" method="POST">
+              <input type="email" name="email" placeholder="Email*" required>
+              <input type="text" name="zip" placeholder="Zip*" required>
+              <button type="submit">I'm Ready</button>
+            </form>
+         </div>
+      </div>
     </footer>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Attempt to get the dropdown and the toggle element
+        var profileToggle = document.getElementById('profileDropdown');
+        var dropdownMenu = document.querySelector('.dropdown-menu');
+      
+        // Only add the event listener if profileToggle exists
+        if (profileToggle) {
+          profileToggle.addEventListener('click', function(event) {
+            // Prevent the default navigation
+            event.preventDefault();
+      
+            // Toggle the visibility of the dropdown menu
+            dropdownMenu.classList.toggle('show'); // Bootstrap 4 uses 'show' class for dropdowns
+          });
+        } else {
+          console.error('The element with id "profileDropdown" was not found.');
+        }
+      });
+      </script>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-    <!-- JavaScript files and <script> tags -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- Optional: jQuery for Bootstrap 4 -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

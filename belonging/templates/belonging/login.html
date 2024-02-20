@@ -1,8 +1,10 @@
 {% block content %}
-
+{% load static %}
 <body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+<head>
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+</head>
 <style>
 
 body {
@@ -98,7 +100,7 @@ div.form-navigation p {
                   <form method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <button type="submit">Login</button>
+                    <button type="submit" style="color:white; background-color: #e47424;" class="btn btn-primary">Login</button>
                 </form>
                 <div>
                   <a href="/registration/" class="mb-5 btn btn-primary">Need to Register</a>

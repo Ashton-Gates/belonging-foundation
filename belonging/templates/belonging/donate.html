@@ -1,3 +1,6 @@
+
+{% extends "belonging/base.html" %}
+{% load static %}
 {% block content %}
 <head>
     
@@ -205,7 +208,7 @@ body {
 }
 
 .cta-button {
-  background-color: #ff6f00; /* Or any color you want for the button */
+  background-color: #e47424; /* Or any color you want for the button */
   color: white;
   padding: 10px 20px;
   text-decoration: none; /* Remove underline from links */
@@ -272,21 +275,7 @@ body {
   text-align: center;
 }
 
-/* This will be your button inside the overlay */
-.cta-button {
-  background-color: #ff6f00; /* Adjust the button color as needed */
-  border: none;
-  padding: 15px 30px;
-  font-size: 1.2em; /* Adjust font size as needed */
-  text-transform: uppercase;
-  text-decoration: none;
-  display: inline-block;
-  margin-top: 20px;
-  border: 1px solid white; /* Add a white border */
-  color: white; /* Text color */
-  text-decoration: none; /* Remove underlines */
-  border-radius: 5px; /* Optional: Add rounded corners */
-}
+
 
 /* Ensure the overlay content is above all other content */
 .overlay-content .btn:hover {
@@ -497,17 +486,16 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around; /* This will distribute the space around the items */
-  height: 100vh; /* This will make the container take the full height of the viewport */
 
   margin: 0 auto;
-  padding: 20px;
+  padding: 100px;
   }
 
 .stats-item {
   display: flex;
   justify-content: space-between; /* This will push the number to the left and the text to the right */
   align-items: center; /* This will vertically align them in the center */
-
+  padding: 100px;
 }
 
   .stats-item h1 {
@@ -536,44 +524,28 @@ body {
   text-align: center;
 
 }
+.stats-heading{
+  text-align: center;
+  font-size:7em;
+}
+.stats-description p{
+  text-align: left;
+  font-size: 3em;
+  padding: 100px;
+
+}
   </style>
-  
-  <header>
-    <!-- Bootstrap Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="/index/">
-        <img src="stephanie_fathead_body.jpg" alt="Belonging Foundation Logo" style="max-height: 50px;">
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
-        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    
-      <div class="collapse navbar-collapse" id="navbarContent">
-        <ul class="navbar-nav ml-auto">          
-          <li class="nav-item active">
-            <a class="nav-link" href="/index/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/referee/referee_login/">Sponsor Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/donate/">Donate to Belonging</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">Who Are We?</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/involved/">Want to Get Involved?</a>
-          </li>
-          <!-- Other items -->
-        </ul>
-      </div>
-    </nav>
-  </div>
-</header>
+
 <body>
+
   <div class="stats-container">
+    <div class="stats-heading"><h1><strong>Our donation goals for 2024</strong></h1></div>
+    <div class="stats-description">
+      <p>
+        Every <i><span style="color: #ecbc24;"id="dynamicContent">cent</span></i> that gets put into our organization to help dreamers dream.
+      </p>
+
+    </div>
     <div class="stats-item">
       <div class="number"><h1>100K</h1></div>
       <div class="text"><p>:SCHOLARSHIP FUNDRAISING</p></div>
@@ -627,6 +599,21 @@ body {
 </div>
 
 </footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      var captions = ['dollar', 'quarter','2-dollar bill',  'penny']; // Add more captions as needed
+      var currentIndex = 0; // Start with the first item
+  
+      setInterval(function() {
+          document.getElementById('dynamicContent').textContent = captions[currentIndex];
+          currentIndex++;
+          if (currentIndex >= captions.length) { // Reset index if at the end of the array
+              currentIndex = 0;
+          }
+      }, 2000); // Change content every 2000 milliseconds (2 seconds)
+  });
+  </script>
 <!-- Bootstrap JavaScript -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
