@@ -7,7 +7,8 @@
 <div class="feature-section">
   <div class="container" style="color:#333; text-align: left;">
     <h1>You Belong!</h1>
-    <p>The Belonging Foundation and it's vendors change the way we convert dreams into reality! Please give generously to ensure that dreamers can get to embrace their entrepreneurial spirit because of your support!
+    <div style="font-size: 3.0em; font-weight: 700; color: #ecbc24;"id="dynamicContent">Innovators</div>
+    <p style="width:200px;">The Belonging Foundation and it's supporters are committed to change the way we convert dreams into reality!
     </p>
   </div>
 </div>
@@ -17,7 +18,7 @@
     <div class="row">
       <h2 >About the Belonging Foundation</h2>
       <p>HBCUs and their students change lives across the United States. Please give generously to ensure that students of color can get to and through college successfully because of your support!</p>
-      <a href="/about/" class="cta-button" style="text-align: center;">LEARN ABOUT US</a>
+      <a href="/about/" class="cta-button" style="text-align: center; ">LEARN ABOUT US</a>
     </div>
   </div>
 </section>
@@ -137,8 +138,23 @@
       </form>
    </div>
 </div>
-<script>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      var captions = ['Dreamers', 'Blacksheeps','Sponsors',  'Vendor']; // Add more captions as needed
+      var currentIndex = 0; // Start with the first item
+  
+      setInterval(function() {
+          document.getElementById('dynamicContent').textContent = captions[currentIndex];
+          currentIndex++;
+          if (currentIndex >= captions.length) { // Reset index if at the end of the array
+              currentIndex = 0;
+          }
+      }, 2000); // Change content every 2000 milliseconds (2 seconds)
+  });
+  </script>
+
+<script>
 document.addEventListener('DOMContentLoaded', function() {
   // Get the dropdown and the toggle element (assumed to be the profile image)
   var profileToggle = document.getElementById('profileDropdown');
