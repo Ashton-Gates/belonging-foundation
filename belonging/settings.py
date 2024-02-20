@@ -211,5 +211,5 @@ STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'
 
 AZURE_ACCOUNT_NAME = 'cs2100320034ce6f7de'
 AZURE_ACCOUNT_KEY = 'eoOYES2iFvOHO/kbf/Y5KgvZqDW3JAGpVbXAsih1gtP3UJQEd8i9QyF+/9Vd8G50ZCFG2m649Eay+AStbwL+Tg=='
-AZURE_CONTAINER = 'static'
+AZURE_CONTAINER = 'staticfiles'
 STATIC_URL = f'https://{AZURE_ACCOUNT_NAME}.blob.core.windows.net/{AZURE_CONTAINER}/'
