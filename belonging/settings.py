@@ -15,7 +15,7 @@ load_dotenv(BASE_DIR / '.env')
 SECRET_KEY = 'django-insecure-mq@((#x!tz0)v5bojl!ymb6s*5#s((h$ve9y88+j1(m%u427*o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*','belonging.foundation', 'www.belonging.foundation', 'belonging-foundation.azurewebsites.net']
 #'belonging.foundation', 'www.belonging.foundation'
@@ -136,9 +136,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
-STATIC_URL = 'https://cs2100320034ce6f7de.blob.core.windows.net/staticfiles/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -147,7 +149,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DJANGO_SETTINGS_MODULE = 'belonging.settings'
 
-
+STATICFILES_FINDERS = (
+  'django.contrib.staticfiles.finders.FileSystemFinder',
+  'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # For Gmail use 'smtp.gmail.com'
@@ -157,8 +162,7 @@ EMAIL_HOST_USER = 'ashtonkinnell8@gmail.com'
 EMAIL_HOST_PASSWORD = 'wnwl mdow uhlt xexe'
 DEFAULT_FROM_EMAIL = 'ashtonkinnell8@gmail.com'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+
 
 CSRF_COOKIE_SECURE = True
 
