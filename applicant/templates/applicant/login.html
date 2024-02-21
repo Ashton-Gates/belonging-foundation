@@ -1,0 +1,168 @@
+{% block content %}
+{% load static %}
+<body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<head>
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+</head>
+<style>
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    border: none;
+}
+
+.card-header {
+    background-color: #007bff;
+    color: white;
+    font-size: 24px;
+    padding: 10px 15px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+a.btn {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+a.btn:hover {
+    text-decoration: underline;
+}
+
+div.form-navigation p {
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+}
+</style>
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Applicant Login</div>
+                <div class="card-body">
+                  <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" style="color:white; background-color: #e47424;" class="btn btn-primary">Login</button>
+                </form>
+                <div>
+                    <a href="/applicant/registration/" class="mb-5 btn btn-primary">Need to Register</a>
+                </div>
+                <div>
+                  <a href="/index/" class="mb-5 btn btn-primary">Home</a>              
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+var csrftoken = getCookie('csrftoken');
+
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+</script>
+<script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get the dropdown and the toggle element (assumed to be the profile image)
+    var profileToggle = document.getElementById('profileDropdown');
+    var dropdownMenu = document.querySelector('.dropdown-menu');
+  
+    // Listen for click events on the toggle element
+    profileToggle.addEventListener('click', function(event) {
+      // Prevent the default navigation
+      event.preventDefault();
+  
+      // Toggle the visibility of the dropdown menu
+      dropdownMenu.classList.toggle('show'); // Bootstrap 4 uses 'show' class for dropdowns
+    });
+  });
+  
+  </script>
+<script src="https://accounts.google.com/gsi/client" async></script>
+<!-- Bootstrap JavaScript -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+{% endblock %}

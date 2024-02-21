@@ -4,6 +4,8 @@
 <body>
 {% block content %}
 
+
+
 <div class="feature-section">
   <div class="container" style="color:#333; text-align: left;">
     <h1 style="font-size: 75px;"><i><span style="color: #ecbc24;"id="dynamicContent">Belongers</span></i> Belong!</h1>
@@ -131,30 +133,11 @@
       }, 2000); // Change content every 2000 milliseconds (2 seconds)
   });
   </script>
-   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Attempt to get the dropdown and the toggle element
-      var profileToggle = document.getElementById('profileDropdown');
-      var dropdownMenu = document.querySelector('.dropdown-menu');
-    
-      // Only add the event listener if profileToggle exists
-      if (profileToggle) {
-        profileToggle.addEventListener('click', function(event) {
-          // Prevent the default navigation
-          event.preventDefault();
-    
-          // Toggle the visibility of the dropdown menu
-          dropdownMenu.classList.toggle('show'); // Bootstrap 4 uses 'show' class for dropdowns
-        });
-      } else {
-        console.error('The element with id "profileDropdown" was not found.');
-      }
-    });
-    </script>
 <!-- Bootstrap JavaScript -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 </body>
 </html>

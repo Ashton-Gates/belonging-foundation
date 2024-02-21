@@ -1,0 +1,103 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card {
+        border: none;
+    }
+    
+    .card-header {
+        background-color: #007bff;
+        color: white;
+        font-size: 24px;
+        padding: 10px 15px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+    
+    .card-body {
+        padding: 20px;
+    }
+    
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    
+    button[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+    
+    a.btn {
+        color: #007bff;
+        text-decoration: none;
+        font-size: 16px;
+    }
+    
+    a.btn:hover {
+        text-decoration: underline;
+    }
+    
+    div.form-navigation p {
+        margin-bottom: 0;
+    }
+    
+    @media (max-width: 768px) {
+        .container {
+            width: 90%;
+            padding: 15px;
+        }
+    }
+    </style>
+    
+
+{% block content %}
+<div class="container">
+    <h2>Register</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button">Register</button>
+        <a href="{% url 'venue:venue_login' %}">Login</a>
+    </form>
+
+</div>
+{% endblock %}

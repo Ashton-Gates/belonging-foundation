@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
-from .models import ScholarshipApplication, Event, VendorApplication
+from .models import Event
 from django.utils.translation import gettext_lazy as _  # Correct import
 
 User = get_user_model()
@@ -32,23 +32,10 @@ class CustomAuthenticationForm(forms.ModelForm):
         fields = ('username', 'password')
 
 
-class ScholarshipApplicationForm(forms.ModelForm):
-    class Meta:
-        model = ScholarshipApplication
-        exclude = ('user', 'status', 'date_submitted', 'date_approved', 'date_rejected')
-        fields = '__all__'
-
-
 class EventForm(forms.ModelForm):
     class Meta:
         UserModel = Event
         fields = '__all__'
-
-class VendorApplicationForm(forms.ModelForm):
-    class Meta:
-        model = VendorApplication
-        fields = '__all__'
-        exclude = ('user', 'status')
 
 
 

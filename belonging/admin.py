@@ -4,7 +4,9 @@ from django.contrib import admin
 from django.db.models.signals import post_save
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.hashers import make_password 
-from .models import ScholarshipApplication, Referee, VendorApplication, CustomUser, Scholarship
+from applicant.models import ScholarshipApplication, VendorApplication, Scholarship
+from referee.models import Referee
+from accounts.models import CustomUser
 from django.core.mail import send_mail
 from django.conf import settings
 from django.core.mail import EmailMessage

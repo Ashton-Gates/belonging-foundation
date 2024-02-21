@@ -4,7 +4,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from .models import ScholarshipApplication, VendorApplication
+from applicant.models import ScholarshipApplication, VendorApplication
 from reportlab.lib.pagesizes import letter
 
 

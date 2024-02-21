@@ -23,10 +23,11 @@ ALLOWED_HOSTS = ['*','belonging.foundation', 'www.belonging.foundation', 'belong
 # Application definition
 
 INSTALLED_APPS = [
+    'applicant',
     'belonging',
     'referee',    
-    'internal',
     'donation',
+    'accounts',    
     'django.contrib.auth',    
     'django.contrib.admin',
     'django.contrib.contenttypes',
@@ -36,9 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sites',  # Required by allauth
     'allauth',
     'allauth.account',
+    'venue',
+    'vendor',
 ]
 
-AUTH_USER_MODEL = 'belonging.CustomUser'
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
