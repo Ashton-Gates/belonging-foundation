@@ -1,7 +1,6 @@
 #applicant/views.py
 from datetime import timezone
 import os
-from tkinter import Canvas
 from reportlab.pdfgen import canvas
 from django.conf import settings
 from referee.models import Referee
@@ -219,7 +218,7 @@ def download_vendor_pdf(request, application_id):
     # Adjust the line height as needed
     line_height = 14
 
-    p = Canvas.Canvas(response, pagesize=letter)
+    p = canvas.Canvas(response, pagesize=letter)
     width, height = letter  # Get the dimensions of the page
     y = height - 50  # Start from the top of the page for text
     x_text = 300  # X position for text, assuming the image is on the left side
