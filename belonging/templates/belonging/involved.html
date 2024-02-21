@@ -105,7 +105,7 @@
  
             <p style="text-align: center;">Do you have an awesome idea that you'd like to see come true? Login to our Application portal to see what's available to you and apply!</p>
             <div>
-              <a href="/login/" class="cta-button">Login To apply for a grant!</a>
+              <a href="{% url 'applicant:login' %}" class="cta-button">Login To apply for a grant!</a>
           </div>
         </div>
         
@@ -118,7 +118,7 @@
 
                     <h2>Vendor Opportunities</h2>
                     <p>There's lots of ways for individuals to get involved with our cause! Check out how you can be involved and support in all ways!</p>
-                    <a href="/login/" class="cta-button">Login To Sell Your Shit!</a>
+                    <a href="{% url 'vendor:login' %}" class="cta-button">Login To Sell Your Shit!</a>
         </div>
           <br>
           <br>
@@ -127,9 +127,7 @@
             border-color: #333;">
                 <h2>Venue Opportunities</h2>
                 <p>There's lots of ways for individuals to get involved with our cause! Check out how you can be involved and support in all ways!</p>
-
-                  <a href="/login/" class="cta-button">Login To Get Promote Your Venue!</a>
-
+                <a href="{% url 'venue:venue_login' %}" class="cta-button">Login To Get Promote Your Venue!</a>
         </div>
             <br>
             <br>
