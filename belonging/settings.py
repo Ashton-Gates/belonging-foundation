@@ -27,7 +27,8 @@ INSTALLED_APPS = [
     'belonging',
     'referee',    
     'donation',
-    'accounts',    
+    'accounts',
+    'storages',    
     'django.contrib.auth',    
     'django.contrib.admin',
     'django.contrib.contenttypes',
@@ -45,6 +46,7 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -139,11 +141,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
 
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles/'
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -214,9 +214,24 @@ INTERNAL_WEBHOOK_URL = 'https://abc123.ngrok.io/internal/webhook/'
 
 
 DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
-STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 AZURE_ACCOUNT_NAME = 'cs2100320034ce6f7de'
 AZURE_ACCOUNT_KEY = 'eoOYES2iFvOHO/kbf/Y5KgvZqDW3JAGpVbXAsih1gtP3UJQEd8i9QyF+/9Vd8G50ZCFG2m649Eay+AStbwL+Tg=='
 AZURE_CONTAINER = 'staticfiles'
-STATIC_URL = f'https://{AZURE_ACCOUNT_NAME}.blob.core.windows.net/{AZURE_CONTAINER}/'
+
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+# Static files settings
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+   ('belonging', os.path.join(BASE_DIR, 'belonging', 'static')),
+)
+STATICFILES_FINDERS = (
+  'django.contrib.staticfiles.finders.FileSystemFinder',
+  'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)

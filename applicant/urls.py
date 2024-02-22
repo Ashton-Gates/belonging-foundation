@@ -25,7 +25,7 @@ urlpatterns = [
     path('applications/<int:application_id>/withdraw/', withdraw_application, name='withdraw_application'),
     path('validate_referee_id/', validate_referee_id, name='validate_referee_id'),
     path('delete_account/', delete_account, name='delete_account'),
-]  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

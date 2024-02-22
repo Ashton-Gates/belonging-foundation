@@ -1,5 +1,7 @@
 
 {% load static %}
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,8 +18,6 @@
   <style>
 
 body, h1, h2, h3, p, ul, li, a {
-
-  list-style: none;
   text-decoration: none;
   font-family: Arial, sans-serif;
   line-height: 1.6;
@@ -110,37 +110,7 @@ body, h1, h2, h3, p, ul, li, a {
 .header-height {
   height: 70px; /* Example header height, adjust as needed */
 }
-.carousel-item a {
-  display: block;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
 
-.carousel-item a:hover {
-  transform: scale(1.03);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-/* Custom styles for carousel control arrows */
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  height: 40px; /* Adjust size */
-  width: 40px;
-  background-size: 100%, 100%;
-  background-image: none;
-}
-
-.carousel-control-prev-icon {
-  border: solid black; /* Change color as needed */
-  border-width: 0 5px 5px 0;
-  transform: rotate(135deg);
-  -webkit-transform: rotate(135deg);
-}
-
-.carousel-control-next-icon {
-  border: solid black; /* Change color as needed */
-  border-width: 0 5px 5px 0;
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-}
 
 /* Increase the size of the clickable area for easier navigation */
 .carousel-control-prev, .carousel-control-next {
@@ -339,11 +309,19 @@ body, h1, h2, h3, p, ul, li, a {
 }
 .content-container {
     display: flex;
-    align-items: center; /* This will vertically center the items if they have different heights */
+    align-items: center;
+    justify-content: space-between; /* This aligns the child elements to opposite ends */
+    background-image: url('/static/images/about.jpg');
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 200px; /* Increase padding at the bottom */
+
 }
 
 .text-content {
-    flex: 1; /* Takes up 1 fraction of the available space */
+  padding-top: 50px;
+  max-width: 30%;
     /*padding-right: 20px;  Adds some space between the text and the image */
 }
 
@@ -359,13 +337,14 @@ body, h1, h2, h3, p, ul, li, a {
     font-size: 3.5rem;
 }
 .values-section {
-            display: flex;
+  display: flex;
             justify-content: space-around;
-            padding: 20px;
+            align-items: center;
         }
 
         .column {
-            flex-basis: 30%;
+            flex: 50%;
+            float: left;
         }
 
         .column h2 {
@@ -446,9 +425,10 @@ body, h1, h2, h3, p, ul, li, a {
               Login
             </a>
             <div class="dropdown-menu" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" href="/referee/referee_login/">Sponsor Login</a>
+              <a class="dropdown-item" href="{% url 'applicant:login' %}">Applicant Login</a>
               <a class="dropdown-item" href="/donation/donor_login/">Donor Login</a>
-              <a class="dropdown-item" href="/login/">Applicant Login</a>
+              <a class="dropdown-item" href="/referee/referee_login/">Sponsor Login</a>              
+              <a class="dropdown-item" href="{% url 'venue:venue_login' %}">Venue Login</a>
             </div>
           </li>
           <li class="nav-item">
@@ -469,8 +449,8 @@ body, h1, h2, h3, p, ul, li, a {
 <section class="bg-light py-5">
     <div class="container">
       
-      <div class="content-container">
-        <div class="text-content">
+      <div class="content-container" >
+        <div class="text-content" >
             <h2 class="display-1" style="color: #333;">Our Mission</h2>
             <br>
             <p style="text-align: left; color:#333; font-size: 1.3rem;">
@@ -479,7 +459,6 @@ body, h1, h2, h3, p, ul, li, a {
         </div>
     
         <div class="mission-photo">
-            <img src="{% static 'images/main_logo.png' %}" alt="Belonging Foundation Logo" style="max-height: 500px;">
         </div>
     </div>
     <div style="background-color: #333; padding: 10px 20px;">
@@ -496,28 +475,28 @@ body, h1, h2, h3, p, ul, li, a {
     <br>
     <div class="values-section">
       <div class="column">
-          <h2 style="font-size: 1.7rem;"><strong>Think Big, Go Far</strong></h2>
-          <p>We are big dreamers with a passion for creativity. We eagerly pursue new opportunities and markets through innovation and disruption. We have a pioneering spirit - always ready to forge new paths and take smart risks.</p>
+        <h2>Think Big, Go Far</h2>
+        <p>We are big dreamers with a passion for creativity. We eagerly pursue new opportunities and markets through innovation and disruption. We have a pioneering spirit - always ready to forge new paths and take smart risks.</p>
       </div>
       <div class="column">
-          <h3 style="color: #e47424; font-size: 1.25rem;">WHAT IT ISN'T</h3>
-          <ul>
-              <li>Letting the magnitude of any challenge squelch fresh thinking and ideas</li>
-              <li>Change merely for the sake of change</li>
-              <li>Grand ideas without a coherent plan</li>
-              <li>Believing valuable ideas can only come from senior people</li>
-          </ul>
+        <h3>WHAT IT ISN'T</h3>
+        <ul>
+          <li>Letting the magnitude of any challenge squelch fresh thinking and ideas</li>
+          <li>Change merely for the sake of change</li>
+          <li>Grand ideas without a coherent plan</li>
+          <li>Believing valuable ideas can only come from senior people</li>
+        </ul>
       </div>
       <div class="column">
-          <h3 style="color: #e47424; font-size: 1.25rem;">WHAT IT IS</h3>
-          <ul>
-              <li>Fearless in our belief that we have a massive opportunity</li>
-              <li>Willingness to experiment with crazy ideas, and recognize not all experiments work</li>
-              <li>Eager to question the status quo</li>
-              <li>Disrupting ourselves before someone else does</li>
-          </ul>
+        <h3>WHAT IT IS</h3>
+        <ul>
+          <li>Fearless in our belief that we have a massive opportunity</li>
+          <li>Willingness to experiment with crazy ideas, and recognize not all experiments work</li>
+          <li>Eager to question the status quo</li>
+          <li>Disrupting ourselves before someone else does</li>
+        </ul>
       </div>
-  </div>
+    </div>
   <br>
   <br>
 
@@ -535,15 +514,17 @@ body, h1, h2, h3, p, ul, li, a {
                 &#x21E7; <!-- Example using a unicode arrow for demonstration -->
             </div>
             <div class="stat-title">Partners</div>
-            <div class="stat-description">Belonging has found hundreds partners to assist us in our mission.</div>
+            <div class="stat-description">Belonging has found hundreds partners to assist us in our mission.
+              
+            </div>
         </div>
 
         <div class="stat">
             <div class="icon">
                 &#x1F310; <!-- Example using a unicode globe for demonstration -->
             </div>
-            <div class="stat-title">Countries</div>
-            <div class="stat-description">We have employees in over 27 countries and growing.</div>
+            <div class="stat-title">Placeholder</div>
+            <div class="stat-description">Placeholder.</div>
         </div>
 
         <div class="stat">
@@ -557,19 +538,26 @@ body, h1, h2, h3, p, ul, li, a {
 </div>
 
 
+  <div class="lead mt-4" style="text-align: left; color:#333;">
+      <p style="text-indent:50px;">The Belonging Foundation exists today because if it had existed 4 years sooner, it may have changed my family's story.
+      <a href="https://www.bondmemorial.com/copy-of-2023-january-8">Kevin</a>,  
+      <a href="https://www.bondmemorial.com/copy-of-2023-january-1">Keegan</a>, 
+      <a href="https://www.solontelford.com/obituary/Alvin-DeLong">Alvin</a>, 
+      <a href="https://www.solontelford.com/obituary/Judith-DeLong">Judy</a>, 
+      
+      and 
+      
+      <a href="https://www.solontelford.com/obituary/Eric-DeLong">Eric DeLong</a>  
+      
+      are a cluster of 5 immediate family members who passed naturally, tragically, and for some, avoidably all within a mere 15 months of one another. These were a lovingly (and grumpily) married set of parents, Alvin (Age 87) and Judith DeLong (Age 80), their "Philosopher" son, Eric DeLong (Age 57), their "Never Let the Bastards Wear You Down" son, Kevin DeLong (Age 54), and his "Lions, Not Sheep" son, Keegan DeLong (Forever Age 22). </p>
+      
+      <p style="text-indent:50px;">The DeLongs grew up in Central Illinois and raged about Illinois politics and the Chicago Bears for generations. Alvin was an avid marathon runner and at one point, a Golden Glove Boxer, in addition to spending his working years at the GE Plastics Factory in Streator, IL. Eric learned as much as he could about the world through books and collegiate pursuits at Illinois State University.</p> 
 
+      <p style="text-indent:50px;">Eric even served as President of the Streator Lions for a time. Judith's heart carried a flame that she protected increasingly over the years, and was the grandma who liked to catch up on the phone for hours and hours on a late afternoon. Kevin DeLong lived tall in every minute of his 54 years. </p>
+      
+      <p style="text-indent:50px;">Kevin rode motorcycles with his sons and Iron Pig Brothers all around the country for the majority of his adult life, and put in over 20 years of tireless effort at the Pontiac Correctional Center in Pontiac, IL. From the day he was born, Keegan DeLong just wanted to love and be loved. At 22 years old, he was a young man charting a fiery path ahead to match his blazing hair and past, weighing the dreams of his forefathers against those still forming in his entrepreneurial, giving heart.</p>
 
-
-
-
-
-
-      <div class="lead mt-4" style="text-align: left; color:#333;">
-        <p>The Belonging Foundation exists today because if it had existed 4 years sooner, it may have changed my family's story. <a href="https://www.bondmemorial.com/copy-of-2023-january-8">Kevin</a>,  <a href="https://www.bondmemorial.com/copy-of-2023-january-1">Keegan</a>, <a href="https://www.solontelford.com/obituary/Alvin-DeLong">Alvin</a>,  <a href="https://www.solontelford.com/obituary/Judith-DeLong">Judy</a>,  and <a href="https://www.solontelford.com/obituary/Eric-DeLong">Eric DeLong</a>  are a cluster of 5 immediate family members who passed naturally, tragically, and for some, avoidably all within a mere 15 months of one another. These were a lovingly (and grumpily) married set of parents, Alvin (Age 87) and Judith DeLong (Age 80), their "Philosopher" son, Eric DeLong (Age 57), their "Never Let the Bastards Wear You Down" son, Kevin DeLong (Age 54), and his "Lions, Not Sheep" son, Keegan DeLong (Forever Age 22). The DeLongs grew up in Central Illinois and raged about Illinois politics and the Chicago Bears for generations. Alvin was an avid marathon runner and at one point, a Golden Glove Boxer, in addition to spending his working years at the GE Plastics Factory in Streator, IL. Eric learned as much as he could about the world through books and collegiate pursuits at Illinois State University. Eric even served as President of the Streator Lions for a time. Judith's heart carried a flame that she protected increasingly over the years, and was the grandma who liked to catch up on the phone for hours and hours on a late afternoon. Kevin DeLong lived tall in every minute of his 54 years. He rode motorcycles with his sons and Iron Pig Brothers all around the country for the majority of his adult life, and put in over 20 years of tireless effort at the Pontiac Correctional Center in Pontiac, IL. From the day he was born, Keegan DeLong just wanted to love and be loved. At 22 years old, he was a young man charting a fiery path ahead to match his blazing hair and past, weighing the dreams of his forefathers against those still forming in his entrepreneurial, giving heart.
-        <br>
-        <br>
-  
-        This Foundation was formed to help men and women at life stages such as these who are looking for help in realizing their most hope-filled dreams of a brighter, better tomorrow. Together we will create the future, so let's honor their memories by building a network community working together to build a future we're excited to live for. </p>
+        <p style="text-indent:50px;">This Foundation was formed to help men and women at life stages such as these who are looking for help in realizing their most hope-filled dreams of a brighter, better tomorrow. Together we will create the future, so let's honor their memories by building a network community working together to build a future we're excited to live for. </p>
 
       </div>
   </div>
@@ -601,40 +589,60 @@ body, h1, h2, h3, p, ul, li, a {
 </div>
 </div>
 
-
-
-
-
-<!-- Footer: -->
-<div class="footer">
-  <div class="social-icons">
-    <a href="https://www.instagram.com/yourusername" target="_blank">
-      <i class="fab fa-instagram"></i>
-    </a>
-    <a href="mailto:your@email.com">
-      <i class="fas fa-envelope"></i>
-    </a>
-    <a href="https://www.facebook.com/yourusername" target="_blank">
-      <i class="fab fa-facebook"></i>
-    </a>
+</main>
+<footer>
+  <div class="footer">
+    <div class="social-icons">
+      <a href="https://www.instagram.com/yourusername" target="_blank">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="mailto:your@email.com">
+        <i class="fas fa-envelope"></i>
+      </a>
+      <a href="https://www.facebook.com/yourusername" target="_blank">
+        <i class="fab fa-facebook"></i>
+      </a>
+    </div>
+                            <!-- Sign-up form -->
+     <div class="signup-form">
+        <h3>Join us in our fight for better futures.</h3>
+        <form action="YOUR_FORM_ACTION" method="POST">
+          <input type="email" name="email" placeholder="Email*" required>
+          <input type="text" name="zip" placeholder="Zip*" required>
+          <button type="submit">I'm Ready</button>
+        </form>
+     </div>
   </div>
-                          <!-- Sign-up form -->
-   <div class="signup-form">
-      <h3>Join us in our fight for better futures.</h3>
-      <form action="YOUR_FORM_ACTION" method="POST">
-        <input type="email" name="email" placeholder="Email*" required>
-        <input type="text" name="zip" placeholder="Zip*" required>
-        <button type="submit">I'm Ready</button>
-      </form>
-   </div>
-</div>
+</footer>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Attempt to get the dropdown and the toggle element
+    var profileToggle = document.getElementById('profileDropdown');
+    var dropdownMenu = document.querySelector('.dropdown-menu');
+  
+    // Only add the event listener if profileToggle exists
+    if (profileToggle) {
+      profileToggle.addEventListener('click', function(event) {
+        // Prevent the default navigation
+        event.preventDefault();
+  
+        // Toggle the visibility of the dropdown menu
+        dropdownMenu.classList.toggle('show'); // Bootstrap 4 uses 'show' class for dropdowns
+      });
+    } else {
+      console.error('The element with id "profileDropdown" was not found.');
+    }
+  });
+  </script>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+<!-- Optional: jQuery for Bootstrap 4 -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
-
-<!-- Bootstrap JavaScript -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
+{% endblock %}
