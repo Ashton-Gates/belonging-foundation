@@ -13,3 +13,4 @@ whitenoise
 django-storages[azure] 
 azure-storage-blob
 mssql-django
+pyodbc
