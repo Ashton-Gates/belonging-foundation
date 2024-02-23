@@ -1,29 +1,31 @@
 # belonging/admin.py
 from django import forms
 from django.contrib import admin
-from django.db.models.signals import post_save
-from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.hashers import make_password 
-from applicant.models import ScholarshipApplication, VendorApplication, Scholarship
-from referee.models import Referee
-from accounts.models import CustomUser
-from django.core.mail import send_mail
 from django.conf import settings
-from django.core.mail import EmailMessage
-from .utils import send_status_email
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from donation.models import Donation, DonorAccount
+from .utils import send_status_email
+from django.core.mail import send_mail
+from django.http import HttpResponseRedirect
 from django.contrib.auth import get_user_model
-from referee.models import Referral, SponsorApplication
+from django.db.models.signals import post_save
+from django.contrib.auth.hashers import make_password 
+
+
+from accounts.models import CustomUser
+from django.contrib.auth.admin import UserAdmin
+from donation.models import Donation, DonorAccount
+from referee.models import Referee, Referral, SponsorApplication
+from applicant.models import ScholarshipApplication, VendorApplication, Scholarship
+
+
 CustomUser = get_user_model()
 
 
 @admin.register(SponsorApplication)
 class SponsorApplicationAdmin(admin.ModelAdmin):
     list_display = ['first_name', 'last_name', 'approved', 'email']
-    list_filter = ['approved']
     actions = ['approve_application', 'deny_application']
+    list_filter = ['approved']
 
     def approve_application(self, request, queryset):
         for application in queryset:

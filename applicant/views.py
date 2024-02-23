@@ -15,6 +15,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse, FileResponse, JsonResponse
 from .models import PitchDeck, ScholarshipApplication, VendorApplication, Scholarship, UserApplication
 from .forms import ApplicantRegistrationForm, ApplicantLoginForm, VendorApplicationForm, ScholarshipApplicationForm
+from .auto_deny import auto_deny_scholarship_applications, auto_deny_vendor_applications
 
 
 @login_required
@@ -114,6 +115,9 @@ def applicant_dashboard(request):
 
 @login_required
 def scholarship_application(request):
+        # When you want to auto-deny applications, just call the function
+    auto_deny_scholarship_applications()
+
     if request.method == "POST":
         form = ScholarshipApplicationForm(request.POST, request.FILES)
         existing_app = ScholarshipApplication.objects.filter(user=request.user).exists()
@@ -139,6 +143,8 @@ def scholarship_application(request):
 
 @login_required
 def vendor_application(request):
+        # When you want to auto-deny applications, just call the function
+    auto_deny_vendor_applications()
     if request.method == 'POST':
         form = VendorApplicationForm(request.POST, request.FILES)
         existing_vendor_app = VendorApplication.objects.filter(user=request.user).exists()
