@@ -30,13 +30,14 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       
+      - name: Add Microsoft package signing key (Updated Method)
+        run: |
+          curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft-archive-keyring.gpg
+          echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/ubuntu/20.04/prod focal main" | sudo tee /etc/apt/sources.list.d/microsoft-prod.list > /dev/null
+          sudo apt-get update
+      
       - name: Install ODBC Driver for SQL Server
         run: |
-
-          sudo curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-          sudo curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
-          exit
-          sudo apt-get update
           sudo ACCEPT_EULA=Y apt-get install -y msodbcsql17
 
       # Test Database Connection before deployment
