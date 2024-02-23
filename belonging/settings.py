@@ -88,23 +88,28 @@ WSGI_APPLICATION = 'belonging.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-'''DATABASES = {
+DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'prodbelonging-database',
-        'USER': 'xsdmcpfsta',
-        'PASSWORD': '7GXF048QE1B0LCMK$',
-        'HOST': 'prodbelonging-server',  # e.g., 'your-db-server.postgres.database.azure.com'
-        'PORT': '5432',  # Default port for PostgreSQL
+        'ENGINE': 'mssql',
+        'NAME': 'belonging-prod-database',
+        'USER': 'belo-admin',
+        'PASSWORD': 'H1ng3isgro$$',
+        'HOST': 'belonging-server.database.windows.net',
+        'PORT': '1433',
+        'OPTIONS': {
+            'driver': 'ODBC Driver 18 for SQL Server',
+            'encrypt': True,
+            'trust_server_certificate': False,
+        },
     }
-}'''
-
+}
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',  # Path to database file
     }
-}
+}'''
 
 
 # Password validation
