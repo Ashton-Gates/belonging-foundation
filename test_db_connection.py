@@ -3,7 +3,7 @@ import sys
 import pyodbc
 
 def test_database_connection():
-    connection_string = ('Driver={ODBC Driver 18 for SQL Server};'
+    connection_string = ('Driver={ODBC Driver 17 for SQL Server};'
                              'Server=tcp:belonging-server.database.windows.net,1433;'
                              'Database=belonging-prod-database;'
                              'UID=belo-admin;'
