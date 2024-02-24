@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'belonging.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': 'belonging-prod-database',
+        'NAME': 'belonging-prod-database_2024-02-24T22-47Z',
         'USER': 'belo-admin',
         'PASSWORD': 'H1ng3isgro$$',
         'HOST': 'belonging-server.database.windows.net',
