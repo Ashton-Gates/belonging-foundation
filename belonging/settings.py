@@ -57,6 +57,8 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
@@ -241,3 +243,5 @@ STATICFILES_FINDERS = (
   'django.contrib.staticfiles.finders.FileSystemFinder',
   'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+SECURE_SSL_REDIRECT = True

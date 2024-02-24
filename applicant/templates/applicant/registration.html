@@ -137,32 +137,15 @@ h1, h2 {
 
 
 <div class="signup-form">
-    <h1>Account Registration</h1>
-        <form action="" method="post">
+    <h1>Applicant Registration</h1>
+    <form method="post">
         {% csrf_token %}
-        <div class="form-section" id="page1">
-            <!-- Username is typically needed for UserCreationForm -->
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="text" name="first_name" placeholder="First Name" required>
-            <input type="text" name="last_name" placeholder="Last Name" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="text" name="phone_number" placeholder="Phone Number" required>
-            <div class="password-container">
-                <input type="password" name="password1" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" >
-                <i class="info-icon" data-tooltip="Password must be at least 8 characters long, contain a number, and a capital letter.">&#9432;</i>
-                <!-- The &#9432; is the HTML entity for the 'information' symbol -->
-            </div>
-            <input type="password" name="password2" placeholder="Confirm Password" required>          
-            <div>
-                <button type="submit">Register</button>
-            </div> 
-        </div> 
-        <div>
-            <p>Already have an account?</p>
-            <a href="{% url 'applicant:login' %}" class="btn btn-primary">Login Here!</a>
-        </div>
+        {{ form.as_p }}
+        <button type="submit" style="color:white; background-color: #e47424;" class="btn btn-primary">Login</button>
+        <p>Already have an account?</p>
+        <a href="{% url 'applicant:login' %}" class="btn btn-primary">Login Here!</a>
     </form>
-</div>
+</div>            
 <!--
 <div id="g_id_onload"
     data-client_id="1002728390308-vak0cu5k7mba0jiuf3u70hrm35ivbjv4.apps.googleusercontent.com"
