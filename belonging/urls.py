@@ -9,6 +9,7 @@ about_view, home_page, donate_stripe, vendor_about)
 
 urlpatterns = [
     path('', home_page, name='home_page'),
+    path("stripe/", include("djstripe.urls", namespace="djstripe")),
     path('index/', index_view, name='index_view'),
     path('admin/', admin.site.urls),
     path('donate/', donate_stripe, name='donate_stripe'),

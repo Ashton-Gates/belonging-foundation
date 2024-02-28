@@ -14,4 +14,4 @@ django-storages[azure]
 azure-storage-blob
 mssql-django
 pyodbc
-djstripe==2.4.3
+dj-stripe==2.8.3
