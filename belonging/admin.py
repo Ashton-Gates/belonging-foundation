@@ -16,10 +16,30 @@ from django.contrib.auth.admin import UserAdmin
 from donation.models import Payment, DonorAccount
 from referee.models import Referee, Referral, SponsorApplication
 from applicant.models import ScholarshipApplication, VendorApplication, Scholarship
-
+from vendor.models import Vendor, Category, SubCategory, Item
 
 CustomUser = get_user_model()
+@admin.register(Vendor)
+class VendorAdmin(admin.ModelAdmin):
+    list_display = ('user', 'business_name', 'website_link')
+    search_fields = ('business_name', 'user__username')
 
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    search_fields = ('name',)
+
+@admin.register(SubCategory)
+class SubCategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'category')
+    search_fields = ('name', 'category__name')
+    list_filter = ('category',)
+
+@admin.register(Item)
+class ItemAdmin(admin.ModelAdmin):
+    list_display = ('title', 'vendor', 'starting_bid', 'condition', 'category', 'purchased_amount', 'purchased_by')
+    search_fields = ('title', 'description', 'vendor__business_name', 'category__name')
+    list_filter = ('condition', 'category', 'vendor')
 
 @admin.register(SponsorApplication)
 class SponsorApplicationAdmin(admin.ModelAdmin):
@@ -278,3 +298,4 @@ class CustomUserAdmin(UserAdmin):
         }),
     )
 admin.site.register(CustomUser, CustomUserAdmin)
+
