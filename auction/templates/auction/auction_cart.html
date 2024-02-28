@@ -1,0 +1,15 @@
+
+
+<a href="{% url 'auction:auction_dashboard' %}" class="btn btn-primary">Back to Listings</a>
+<a href="{% url 'auction:payment' %}" class="btn btn-primary">Checkout Here!</a>
+<a class="nav-link" href="/index/">Home</a>
+
+<h1>Cart</h1>
+
+{% for item in cart.items.all %}
+    <div>
+        <h2>{{ item.item.title }}</h2>
+        <p>Price: {{ item.price }}</p>
+        <!-- Display other details as needed -->
+    </div>
+{% endfor %}

@@ -30,6 +30,9 @@ INSTALLED_APPS = [
     'donation',
     'accounts',
     'storages',    
+    'auction',
+    'customers',
+    'djstripe',
     'django.contrib.auth',    
     'django.contrib.admin',
     'django.contrib.contenttypes',
@@ -243,5 +246,14 @@ STATICFILES_FINDERS = (
   'django.contrib.staticfiles.finders.FileSystemFinder',
   'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
+STRIPE_TEST_SECRET_KEY = 'sk_test_51ObDcEKj0Am5FA1U8mu0YIyaYWgntAdOudVoidLPiCJlC9Ynm1WPHkIvrMFgy3Sph8JEOXARvuNDWoYEXNyFL1G30020D0t41u'
+STRIPE_PUBLIC_KEY = 'pk_test_51ObDcEKj0Am5FA1UXZR8BaefNnGDzw6pOrmSSHX499OWIxsrNZCwjxHAG1HbgitVA0c4GhTwOOwaPqLIQazy0o6W00GZroVGqf'
+STRIPE_PRIVATE_KEY = 'sk_test_51ObDcEKj0Am5FA1U8mu0YIyaYWgntAdOudVoidLPiCJlC9Ynm1WPHkIvrMFgy3Sph8JEOXARvuNDWoYEXNyFL1G30020D0t41u'
+DJSTRIPE_WEBHOOK_SECRET = 'whsec_84219e91f49eaacb54edaedc816f3712bb2afc053b6bbfafe657e5028681b036'
+DJSTRIPE_USE_NATIVE_JSONFIELD = True
+
+
 
 #SECURE_SSL_REDIRECT = True

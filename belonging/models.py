@@ -12,7 +12,7 @@ class Dashboard(models.Model):
         return self.title
     
 class Vendor(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='belonging_vendor')
     # Additional vendor-specific fields
 
 class Bidder(models.Model):

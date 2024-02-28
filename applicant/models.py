@@ -42,6 +42,8 @@ class Dashboard(models.Model):
         return self.title
     
 class ScholarshipApplication(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    scholarship = models.ForeignKey(Scholarship, on_delete=models.CASCADE, default=False)
     denial_feedback = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
@@ -74,6 +76,11 @@ class ScholarshipApplication(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}'s Scholarship Application"
 class VendorApplication(models.Model):
+    user=models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='vendor_applications'
+    )
     denial_feedback = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)

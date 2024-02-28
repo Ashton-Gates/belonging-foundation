@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="item-detail">
+    <h2>{{ item.title }}</h2>
+    <p>{{ item.description }}</p>
+    <!-- Display other item details here -->
+    <form method="post" action="{% url 'place_bid' item.id %}">
+        {% csrf_token %}
+        <input type="number" name="bid_amount" min="{{ item.starting_bid }}">
+        <input type="submit" value="Place Bid">
+    </form>
+    <form method="post" action="{% url 'add_to_cart' item.id %}">
+        {% csrf_token %}
+        <input type="submit" value="Buy Now">
+    </form>
+</div>
+{% endblock %}

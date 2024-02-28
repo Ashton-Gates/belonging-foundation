@@ -1,24 +1,128 @@
-from django.shortcuts import render, redirect
-from .forms import DonationForm
-from .models import DonorAccount
-import stripe
-from django.contrib.auth import authenticate, login
-from django.core.mail import send_mail
-from django.contrib.auth.tokens import default_token_generator
-from .models import OTPModel 
-from django.contrib import messages
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
 import random
 import string
-from django.core.mail import send_mail
+import stripe
+from .forms import PaymentForm
+from django.urls import reverse
 from django.conf import settings
-from django.contrib.auth import get_user_model
-from .models import Donation
-
+from django.db import transaction
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
+from .models import DonorAccount, Payment, OTPModel 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User, AnonymousUser
+from django.contrib.auth import get_user_model, authenticate, login
 
 User = get_user_model()
+
+def payment(request):
+    form = PaymentForm(request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
+        payment = form.save(commit=False)
+        
+        # Assign the user only if they are authenticated
+        if request.user.is_authenticated:
+            payment.user = request.user
+
+        payment.save()
+
+        # Create a Stripe PaymentIntent
+        stripe.api_key = settings.STRIPE_PRIVATE_KEY
+        intent = stripe.PaymentIntent.create(
+            amount=int(payment.amount * 100),
+            currency='usd',
+            metadata={'payment_id': payment.id}
+        )
+
+        # Redirect to the payment processing view
+        return redirect('donation:process_payment', client_secret=intent.client_secret)
+
+    context = {'form': form}
+    return render(request, 'payment.html', context)
+
+def process_payment(request, client_secret):
+
+    intent = None
+
+    # Handle the successful payment
+
+    if request.method == "POST":
+        stripe.api_key = settings.STRIPE_PRIVATE_KEY
+        
+        try:
+
+            intent = stripe.PaymentIntent.confirm(client_secret)
+
+            if intent.status == 'succeeded':
+                # Update the Payment model
+                payment_id = intent.metadata['payment_id']
+                payment = Payment.objects.get(id=payment_id)
+                payment.paid = True
+                payment.save()
+
+                messages.success(request, 'Payment successful!')
+                return redirect('success')
+        
+        except stripe.error.StripeError as e:
+            # Handle exceptions from Stripe API
+            messages.error(request, "Payment error: {}".format(e.user_message))
+            # Optionally, redirect to a payment error page or show a message
+
+    # This ensures 'intent' is checked for being None before attempting to access its attributes
+    if intent is not None:
+        return redirect(reverse('donation:payment', kwargs={'client_secret': intent.client_secret}))
+    else:
+        # Handle the case where intent couldn't be created or confirmed
+        # Redirect to an appropriate page or show an error message
+        messages.error(request, "There was an issue with your payment. Please try again.")
+        return redirect('donation:payment')  # Adjust the redirect as necessary
+
+
+def donation_view(request):
+    if request.method == 'POST':
+        form = PaymentForm(request.POST)
+        if form.is_valid():
+            with transaction.atomic():  # Use a transaction to ensure data integrity
+                donor_account = None
+                user = request.user
+
+                # If the user is authenticated, get or create a DonorAccount for them
+                if not isinstance(user, AnonymousUser):
+                    donor_account, created = DonorAccount.objects.update_or_create(
+                        user=user,
+                        defaults={
+                            'first_name': form.cleaned_data['first_name'],
+                            'last_name': form.cleaned_data['last_name'],
+                            'phone_number': form.cleaned_data['phone_number'],
+                            'email': form.cleaned_data['email'],
+                            'address': form.cleaned_data['address'],
+                        }
+                    )
+
+                # Save payment information
+                payment = form.save(commit=False)
+                payment.user = donor_account  # Assign the donor_account to the payment
+                payment.save()
+
+                # Create a Stripe PaymentIntent
+                stripe.api_key = settings.STRIPE_PRIVATE_KEY
+                intent = stripe.PaymentIntent.create(
+                    amount=int(payment.amount * 100),
+                    currency='usd',
+                    metadata={'payment_id': payment.id}
+                )
+
+                # Redirect to the payment processing view
+                return redirect('donation:process_payment', intent.client_secret)
+            # Handle form validation errors
+        else:
+            messages.error(request, "There was a problem with your submission.")
+    else:
+        form = PaymentForm()  # Make sure this is the form class you intend to use
+    
+    return render(request, 'donation/payment.html', {'form': form})
 
 def verify_otp(request):
     if request.method == 'POST':
@@ -48,53 +152,6 @@ def verify_otp(request):
     return render(request, 'donation/donor_login.html')
 
 
-def donation_view(request):
-    if request.method == 'POST':
-        form = DonationForm(request.POST)
-        if form.is_valid():
-            # Process donor account information
-            donor_account, created = DonorAccount.objects.update_or_create(
-                email=form.cleaned_data.get('email'),
-                defaults={
-                    'first_name': form.cleaned_data.get('first_name'),
-                    'last_name': form.cleaned_data.get('last_name'),
-                    'phone_number': form.cleaned_data.get('phone_number'),
-                    'address': form.cleaned_data.get('address'),
-                }
-            )
-            
-            # Process donation information
-            Donation.objects.create(
-                donor=donor_account,
-                amount=form.cleaned_data.get('amount'),
-                # Add other fields as necessary
-            )
-            
-            messages.success(request, "Thank you for your donation!")
-            return redirect('https://pay.belonging.foundation/b/test_bIYaHGdWK5gz1K8aEE')
-        else:
-            messages.error(request, "There was a problem with your submission.")
-    else:
-        form = DonationForm()
-    
-    return render(request, 'donation/donate_form.html', {'form': form})
-    
-def process_payment(request, amount_cents):
-    stripe.api_key = 'sk_test_51ObDcEKj0Am5FA1U8mu0YIyaYWgntAdOudVoidLPiCJlC9Ynm1WPHkIvrMFgy3Sph8JEOXARvuNDWoYEXNyFL1G30020D0t41u'
-    token = request.POST['stripeToken']  # Token created by Stripe's Checkout or Elements
-
-    try:
-        charge = stripe.Charge.create(
-            amount=amount_cents,
-            currency='usd',
-            description='Donation',
-            source=token,
-        )
-        return charge.id
-    except stripe.error.StripeError as e:
-        # Handle the error
-        return None
-    
 def donor_account_view(request):
     # Get the donor account for the current user
     donor_account = DonorAccount.objects.get(user=request.user)
@@ -113,6 +170,7 @@ def donor_login(request):
             messages.error(request, 'Invalid email or password.')
     return render(request, 'donation/donor_login.html')
 
+
 @login_required
 def change_password(request):
     if request.method == 'POST':
@@ -124,6 +182,7 @@ def change_password(request):
         login(request, user)
         return redirect('donor_dashboard')
     return render(request, 'change_password.html')
+
 
 @login_required
 def donor_dashboard(request):

@@ -1,0 +1,10 @@
+<!-- donation/payment.html -->
+{% extends "belonging/base.html" %}
+{% block content %}
+  <h2>Make a Payment</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Pay</button>
+  </form>
+{% endblock %}

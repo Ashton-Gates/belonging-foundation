@@ -1,0 +1,31 @@
+<style>
+    .auction-list {
+        list-style-type: none;
+        padding: 0;
+    }
+    .auction-item {
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+    </style>
+    
+<a href="{% url 'auction:auction_cart' %}" class="btn btn-primary">Auction Cart</a>
+<a class="nav-link" href="/index/">Home</a>
+<h1>Auctions</h1>
+
+    
+
+    <ul class="auction-list">
+    {% for auction in auctions %}
+        <li class="auction-item">
+            <h2>{{ auction.item.title }}</h2>
+            <p>Description: {{ auction.item.description }}</p>
+            <img src="{{ auction.item.image.url }}" alt="{{ auction.item.title }} image" style="width: 100px; height: auto;">
+            <p>Starting Bid: ${{ auction.item.starting_bid }}</p>
+            <p>Condition: {{ auction.item.get_condition_display }}</p>
+            <p>Category: {{ auction.item.category.name }}</p>
+            <!-- Add any other fields you want to display here -->
+        </li>
+    {% endfor %}
+    </ul>

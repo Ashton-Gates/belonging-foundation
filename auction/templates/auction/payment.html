@@ -1,0 +1,22 @@
+<!-- payment.html -->
+{% block content %}
+  <h2>Make a Payment</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Pay</button>
+  </form>
+{% endblock %}
+
+<!-- process_payment.html -->
+{% extends 'base.html' %}
+{% block content %}
+<h2>Processing Payment...</h2>
+<p>Please wait while we process your payment.</p>
+  {% load static %}
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="{% static 'js/payment.js' %}"></script>
+  <script>
+    processPayment('{{ client_secret }}');
+  </script>
+{% endblock %}

@@ -13,7 +13,7 @@ from django.contrib.auth.hashers import make_password
 
 from accounts.models import CustomUser
 from django.contrib.auth.admin import UserAdmin
-from donation.models import Donation, DonorAccount
+from donation.models import Payment, DonorAccount
 from referee.models import Referee, Referral, SponsorApplication
 from applicant.models import ScholarshipApplication, VendorApplication, Scholarship
 
@@ -252,15 +252,13 @@ class DonorAccountAdmin(admin.ModelAdmin):
 # Register the DonorAccount model with its admin class
 admin.site.register(DonorAccount, DonorAccountAdmin)
 
-# Admin class for Donation
-class DonationAdmin(admin.ModelAdmin):
-    list_display = ('donor', 'amount', 'is_monthly', 'created_at')
-    list_filter = ('is_monthly', 'created_at')
-    search_fields = ('donor__user__username', 'donor__user__email', 'donor__first_name', 'donor__last_name')
-    date_hierarchy = 'created_at'  # Adds a date drill down navigator
+class PaymentAdmin(admin.ModelAdmin):
+    list_display = ('user', 'amount', 'description', 'paid')
+    list_filter = ('paid',)
+    search_fields = ('user__username', 'description')
+    date_hierarchy = 'created'  # Replace 'created' with the actual DateTime field you use to track creation time
 
-# Register the Donation model with its admin class
-admin.site.register(Donation, DonationAdmin)
+admin.site.register(Payment, PaymentAdmin)
 
 class CustomUserAdmin(UserAdmin):
     list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff', 'date_joined')
