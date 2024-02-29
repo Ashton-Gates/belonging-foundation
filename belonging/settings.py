@@ -33,13 +33,14 @@ INSTALLED_APPS = [
     'auction',
     'customers',
     'djstripe',
+    'password_reset',
     'django.contrib.auth',    
     'django.contrib.admin',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',  # Required by allauth
+    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'venue',
@@ -75,7 +76,7 @@ AUTHENTICATION_BACKENDS = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'internal' / 'belonging' / 'templates'],
+        'DIRS': [BASE_DIR / 'accounts' / 'belonging' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -168,6 +169,11 @@ STATICFILES_FINDERS = (
   'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
+# For console backend (development)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+SITE_ID = 2
+# For SMTP
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # For Gmail use 'smtp.gmail.com'
 EMAIL_USE_TLS = True
@@ -175,7 +181,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'ashtonkinnell8@gmail.com'
 EMAIL_HOST_PASSWORD = 'wnwl mdow uhlt xexe'
 DEFAULT_FROM_EMAIL = 'ashtonkinnell8@gmail.com'
-
+EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 
 
 CSRF_COOKIE_SECURE = True
@@ -184,7 +190,7 @@ CSRF_COOKIE_DOMAIN = 'belonging.foundation'
 
 CSRF_TRUSTED_ORIGINS = ['https://belonging-foundation.azurewebsites.net','https://belonging.foundation', 'https://www.belonging.foundation']
 
-SITE_ID = 1
+
 
 ROOT_URLCONF = 'belonging.urls'
 

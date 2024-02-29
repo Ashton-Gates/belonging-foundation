@@ -1,24 +1,38 @@
 # belonging/admin.py
 from django import forms
+from django.urls import reverse
 from django.contrib import admin
 from django.conf import settings
 from django.shortcuts import render
 from .utils import send_status_email
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
+from django.utils.encoding import force_bytes
 from django.contrib.auth import get_user_model
-from django.db.models.signals import post_save
-from django.contrib.auth.hashers import make_password 
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.auth.tokens import default_token_generator
+
 
 
 from accounts.models import CustomUser
 from django.contrib.auth.admin import UserAdmin
 from donation.models import Payment, DonorAccount
-from referee.models import Referee, Referral, SponsorApplication
-from applicant.models import ScholarshipApplication, VendorApplication, Scholarship
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from vendor.models import Vendor, Category, SubCategory, Item
+from .forms import CustomUserCreationForm, CustomUserChangeForm
+from referee.models import Referee, Referral, SponsorApplication
+
+from applicant.models import ScholarshipApplication, VendorApplication, Scholarship
 
 CustomUser = get_user_model()
+
+# Check if the CustomUser model is already registered, if so, unregister it
+if admin.site.is_registered(CustomUser):
+    admin.site.unregister(CustomUser)
+
 @admin.register(Vendor)
 class VendorAdmin(admin.ModelAdmin):
     list_display = ('user', 'business_name', 'website_link')
@@ -103,18 +117,11 @@ class SponsorApplicationAdmin(admin.ModelAdmin):
     approve_application.short_description = "Approve selected applications and assign Referee ID"
     deny_application.short_description = "Deny selected applications with feedback"
 
-
-
 @admin.register(Referral)
 class ReferralAdmin(admin.ModelAdmin):
     list_display = ['nominee_name', 'nominee_email', 'scholarship', 'referee', 'justification']
     search_fields = ['nominee_name', 'referee__user__username']
     list_filter = ['scholarship']
-
-# Check if the CustomUser model is already registered, if so, unregister it
-if admin.site.is_registered(CustomUser):
-    admin.site.unregister(CustomUser)
-
 
 @admin.register(Referee)
 class RefereeAdmin(admin.ModelAdmin):
@@ -280,22 +287,63 @@ class PaymentAdmin(admin.ModelAdmin):
 
 admin.site.register(Payment, PaymentAdmin)
 
+class CustomUserChangeForm(UserChangeForm):
+    send_credentials = forms.BooleanField(required=False, label='Send credentials via email')
+    email_to_send = forms.EmailField(required=False, label="Email Address (optional)")
+
+    class Meta(UserChangeForm.Meta):
+        model = CustomUser
+        fields = '__all__'  # Adjust based on the fields you want to include
+
 class CustomUserAdmin(UserAdmin):
-    list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff', 'date_joined')
-    list_filter = ('is_customer', 'is_staff', 'is_superuser', 'is_active', 'groups')
-    search_fields = ('username', 'email', 'first_name', 'last_name')
-    ordering = ('-date_joined',)
-    fieldsets = (
-        (None, {'fields': ('username', 'password')}),
-        ('Personal Info', {'fields': ('first_name', 'last_name', 'email')}),
-        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
-        ('Important dates', {'fields': ('last_login', 'date_joined')}),
-    )
+    form = CustomUserChangeForm
+    add_form = CustomUserCreationForm
+    
+    model = CustomUser
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'password1', 'password2'),
+            'fields': ('username', 'email', 'first_name', 'last_name', 'password1', 'password2', 'send_credentials', 'email_to_send'),
         }),
     )
+    fieldsets = UserAdmin.fieldsets + (
+        ('Send Credentials', {'fields': ('send_credentials', 'email_to_send')}),
+    )
+
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        send_credentials = form.cleaned_data.get('send_credentials', False)
+        email_to_send = form.cleaned_data.get('email_to_send', obj.email)
+        
+        # Inside your save_model method
+        if send_credentials:
+            # Get the domain for the current site
+            current_site = get_current_site(request)
+            domain = current_site.domain
+            
+            # Create the password reset token
+            token = default_token_generator.make_token(obj)
+            
+            # Create the uid
+            uid = urlsafe_base64_encode(force_bytes(obj.pk))
+            
+            # Create the password reset URL
+            password_reset_url = reverse('accounts:password_reset_confirm', kwargs={'uidb64': uid, 'token': token})
+            reset_link = f'http://{domain}{password_reset_url}'
+
+            context = {
+                'username': obj.username,
+                'reset_link': reset_link,
+            }
+
+
+            send_mail(
+                'Password Reset',
+                f'Username: {obj.username}\n\n\nPlease reset your password using the following link: {reset_link}',
+                'ashtonkinnell8@gmail.com',
+                [email_to_send],
+                fail_silently=False,
+            )
+
 admin.site.register(CustomUser, CustomUserAdmin)
 

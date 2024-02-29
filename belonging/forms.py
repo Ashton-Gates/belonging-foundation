@@ -1,27 +1,31 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth import get_user_model
 from .models import Event
+from accounts.models import CustomUser
+
 from django.utils.translation import gettext_lazy as _  # Correct import
 
 User = get_user_model()
 
 class CustomUserCreationForm(UserCreationForm):
-    email = forms.EmailField(required=True, help_text='Enter your email address.', widget=forms.EmailInput(attrs={'class': 'input-field'}))
-    phone_number = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'input-field'}))
+    send_credentials = forms.BooleanField(required=False, label="Send Credentials")
+    email_to_send = forms.EmailField(required=False, label="Email Address (optional)")
 
     class Meta(UserCreationForm.Meta):
-        model = User
-        fields = UserCreationForm.Meta.fields + ('email', 'phone_number')
+        model = CustomUser
+        fields = ('username', 'email', 'first_name', 'last_name', 'send_credentials', 'email_to_send')
 
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        user.email = self.cleaned_data.get('email')  # Ensure email is saved.
-        user.phone_number = self.cleaned_data.get('phone_number')
-        user.is_customer = True
-        if commit:
-            user.save()
-        return user
+
+class CustomUserChangeForm(UserChangeForm):
+    send_credentials = forms.BooleanField(required=False, label='Send credentials via email')
+    email_to_send = forms.EmailField(required=False, label="Email Address (optional)")
+
+    class Meta(UserChangeForm.Meta):
+        model = CustomUser
+        fields = '__all__'  # Adjust based on the fields you want to include
+
+
 
 class CustomAuthenticationForm(forms.ModelForm):
     username = forms.CharField(label='Username', widget=forms.TextInput(attrs={'class': 'input-field'}))

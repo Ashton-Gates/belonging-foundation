@@ -1,5 +1,5 @@
 # views.py
-from .models import Venue
+
 from django.contrib.auth import get_user_model
 from django.shortcuts import render
 
@@ -30,6 +30,5 @@ def index_view(request):
     return render(request, 'belonging/index.html')
 
 def involved_view(request):
-    venues = Venue.objects.all()
-    return render(request, 'belonging/involved.html', {'venues': venues})
+    return render(request, 'belonging/involved.html')
 
