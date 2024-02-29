@@ -303,16 +303,19 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'first_name', 'last_name', 'company', 'user_type', 'password1', 'password2', 'send_credentials', 'email_to_send'),
+            'fields': ('username', 'email', 'first_name', 'last_name', 'company', 'ecommerce_website', 'profile_website', 'instagram_link', 'facebook_link', 'user_type', 'password1', 'password2', 'send_credentials', 'email_to_send'),
         }),
     )
-    # Ensure no duplicate fields across these fieldsets
+
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         ('Personal info', {'fields': ('first_name', 'last_name', 'email', 'company')}),
-        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+        ('Social Links', {'fields': ('ecommerce_website', 'profile_website', 'instagram_link', 'facebook_link')}),
+        ('Credentials', {'fields': ('user_type', 'send_credentials', 'email_to_send')}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
-        ('Additional info', {'fields': ('user_type', 'send_credentials', 'email_to_send')}),
+        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+
+        
     )
     list_display = ['username', 'email', 'first_name', 'last_name', 'is_staff', 'user_type', 'company']
     search_fields = ('username', 'first_name', 'last_name', 'email')
