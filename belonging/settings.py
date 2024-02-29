@@ -172,7 +172,7 @@ STATICFILES_FINDERS = (
 # For console backend (development)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-SITE_ID = 2
+SITE_ID = 1
 # For SMTP
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # For Gmail use 'smtp.gmail.com'
