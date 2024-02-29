@@ -12,11 +12,18 @@ class CustomUser(AbstractUser):
         ('host', 'Auction Host'),
         ('bidder', 'Bidder'),
         ('owner', 'Local Shop Owner'),
-        ('internal', 'Employee')
+        ('internal', 'Employee'),
+        ('vendor', 'Vendor'),
+        ('sponsor', 'Sponsor'),
+        ('distributor', 'Account Distributor'),
+        ('venue', 'Venue'),
+        ('other', 'Other')
     )
-    user_type = models.CharField(max_length=30, choices=USER_TYPES, default='student')
+    user_type = models.CharField(max_length=30, choices=USER_TYPES, default='other')
     is_customer = models.BooleanField(default=False, verbose_name='Customer account')
     is_admin = models.BooleanField(default=False, verbose_name='Admin account')
+    company = models.CharField(max_length=255, blank=True, null=True, verbose_name='Company Name')
+
 
     class Meta:
         db_table = 'custom_user'

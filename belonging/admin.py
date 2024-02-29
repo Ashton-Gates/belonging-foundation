@@ -303,12 +303,20 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'first_name', 'last_name', 'password1', 'password2', 'send_credentials', 'email_to_send'),
+            'fields': ('username', 'email', 'first_name', 'last_name', 'company', 'user_type', 'password1', 'password2', 'send_credentials', 'email_to_send'),
         }),
     )
-    fieldsets = UserAdmin.fieldsets + (
-        ('Send Credentials', {'fields': ('send_credentials', 'email_to_send')}),
+    # Ensure no duplicate fields across these fieldsets
+    fieldsets = (
+        (None, {'fields': ('username', 'password')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'email', 'company')}),
+        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+        ('Important dates', {'fields': ('last_login', 'date_joined')}),
+        ('Additional info', {'fields': ('user_type', 'send_credentials', 'email_to_send')}),
     )
+    list_display = ['username', 'email', 'first_name', 'last_name', 'is_staff', 'user_type', 'company']
+    search_fields = ('username', 'first_name', 'last_name', 'email')
+    ordering = ('username',)
 
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
