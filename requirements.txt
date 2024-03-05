@@ -16,3 +16,4 @@ mssql-django
 pyodbc
 dj-stripe==2.8.3
 django-password-reset
+widget-tweaks
