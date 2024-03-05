@@ -136,7 +136,7 @@ def scholarship_application(request):
         form = ScholarshipApplicationForm()  # Instantiate a new form for a GET request
 
     # Render the form with messages if they exist
-    return render(request, 'belonging/scholarship_app.html', {'form': form})
+    return render(request, 'applicant/scholarship_app.html', {'form': form})
 
 @login_required
 def vendor_application(request):
