@@ -14,18 +14,26 @@ User = get_user_model()
 
 class ApplicantRegistrationForm(UserCreationForm):
     email = forms.EmailField(validators=[EmailValidator()], widget=forms.EmailInput(attrs={'class': 'input-field'}))
-    username = forms.CharField(validators=[RegexValidator(regex='^[a-zA-Z0-9]*$', message='Username must be Alphanumeric')], widget=forms.TextInput(attrs={'class': 'input-field'}))
-
+    username = forms.CharField(
+        label="Full Name",
+        validators=[RegexValidator(regex='^[a-zA-Z0-9]*$')],
+        widget=forms.TextInput(attrs={'class': 'input-field'})  # Changed placeholder here
+    )
     class Meta:
         model = CustomUser
         fields = ('username', 'email', 'password1', 'password2')
         exclude = ('user_type',)
         widgets = {
 
-            'password1': forms.PasswordInput(attrs={'class': 'input-field'}),
-            'password2': forms.PasswordInput(attrs={'class': 'input-field'}),
+            'password1': forms.PasswordInput(attrs={'class': 'input-field', 'placeholder': 'Password', 'style': 'max-width: 300px;', 'pattern': '(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,};'}),
+            'password2': forms.PasswordInput(attrs={'class': 'input-field', 'placeholder': 'Password Confirmation', 'style': 'max-width: 300px;', 'pattern': '(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,};'}),
         }
-    
+    def __init__(self, *args, **kwargs):
+        super(ApplicantRegistrationForm, self).__init__(*args, **kwargs)
+        # Set the help text for the password confirmation field to an empty string
+        self.fields['password1'].help_text = ""
+        self.fields['password2'].help_text = ""
+           
     def save(self, commit=True):
         user = super().save(commit=False)
         user.user_type = 'applicant'  # Set the user type to 'applicant'
@@ -34,21 +42,17 @@ class ApplicantRegistrationForm(UserCreationForm):
         return user
     
 class ApplicantLoginForm(AuthenticationForm):
-    def clean(self):
-        username = self.cleaned_data.get('username')
-        password = self.cleaned_data.get('password')
+    email = forms.EmailField(widget=forms.TextInput(attrs={'autofocus': True}))
+    password1 = forms.CharField(widget=forms.PasswordInput)
 
-        if not username.isalnum():
-            raise forms.ValidationError("Username must be alphanumeric.")
+    class Meta:
+        model = CustomUser
+        fields = ['email', 'password1']
 
-        if username is not None and password:
-            self.user_cache = authenticate(self.request, username=username, password=password)
-            if self.user_cache is None or (self.user_cache.user_type != 'applicant'):
-                raise forms.ValidationError(
-                    "Please enter correct credentials for an applicant account."
-                )
-        return self.cleaned_data
-    
+    def __init__(self, *args, **kwargs):
+        super(ApplicantLoginForm, self).__init__(*args, **kwargs)
+        # Remove the username field, and replace it with email.
+        del self.fields['username']
 
 class VendorApplicationForm(forms.ModelForm):
     class Meta:

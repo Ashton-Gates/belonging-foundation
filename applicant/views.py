@@ -57,8 +57,8 @@ def registration(request):
 def login_view(request):
     if request.method == 'POST':
         form = ApplicantLoginForm(request=request, data=request.POST)
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        username = request.POST.get('email')
+        password = request.POST.get('password1')
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)

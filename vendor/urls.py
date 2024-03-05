@@ -15,5 +15,6 @@ urlpatterns = [
     path('vendor_dashboard/', views.vendor_dashboard, name='dashboard'),
     path('vendor_app/', views.vendor_app, name='vendor_app'),
     path('build_item/', views.build_item, name='build_item'),
+    path('onboard/', views.onboard, name='onboard'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

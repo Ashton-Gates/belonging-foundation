@@ -6,7 +6,8 @@
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Submit Referral</button>
+
+    <button type="submit" class="btn btn-primary">Submit Referral</button>
     <a href="{% url 'referee:sponsor_dashboard' %}" class="btn btn-link">Need to go back to the dashboard?</a>            
 
   </form>

@@ -4,6 +4,9 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from accounts.models import CustomUser
+from applicant.models import Scholarship
+
+
 
 class SponsorApplication(models.Model):
     user = models.OneToOneField(
@@ -29,9 +32,9 @@ class Referee(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name='belonging_referee_profile'
+
     )
-    referee_id = models.CharField(max_length=10, unique=True, null=True)
+    referee_id = models.CharField(max_length=10, unique=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
 
@@ -44,12 +47,21 @@ class Scholarship(models.Model):
 
 
 class Referral(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='referee_profile', null=True)
     nominee_name = models.CharField(max_length=255)
     nominee_email = models.EmailField()
     nominee_phone_number = models.CharField(max_length=20, blank=True, null=True)
-    scholarship = models.ForeignKey(Scholarship, on_delete=models.CASCADE)
+    scholarship = models.ForeignKey(Scholarship, on_delete=models.CASCADE, null=True)
     justification = models.TextField()
     referee = models.ForeignKey(Referee, on_delete=models.CASCADE)
+
+    @property
+    def scholarship_info(self):
+        return {
+            'title': self.scholarship.title,
+            'description': self.scholarship.description,
+            'deadline': self.scholarship.deadline,
+        }
 
     def __str__(self):
         return f"{self.user.username} ({self.referee_id})"

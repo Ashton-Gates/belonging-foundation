@@ -1,0 +1,1183 @@
+<style>
+form {
+    width: 50%;
+    margin: auto;
+}
+
+h2 {
+    margin: 0;
+}
+
+#multi-step-form-container {
+    margin-top: 3rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pl-0 {
+    padding-left: 0;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 0.8rem;
+    border: 1px solid #525252;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+}
+
+.container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+.combo {
+    display: block;
+    margin-bottom: 1.5em;
+    max-width: 400px;
+    position: relative;
+}
+
+.combo::after {
+    border-bottom: 2px solid rgba(0,0,0,.5);
+    border-right: 2px solid rgba(0,0,0,.5);
+    content: '';
+    display: block;
+    height: 12px;
+    pointer-events: none;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translate(0, -65%) rotate(45deg);
+    width: 12px;
+}
+
+.input-wrapper {
+    border-radius: 4px;
+}
+
+.combo-input {
+    background-color: #f5f5f5;
+    border: 2px solid rgba(0,0,0,.5);
+    border-radius: 4px;
+    display: block;
+    font-size: 1em;
+    min-height: calc(1.4em + 26px);
+    padding: 12px 16px 14px;
+    text-align: left;
+    width: 100%;
+}
+
+select.combo-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.open .combo-input {
+    border-radius: 4px 4px 0 0;
+}
+
+.combo-label {
+    display: block;
+    font-size: 20px;
+    font-weight: 100;
+    margin-bottom: 0.25em;
+}
+
+.combo-menu {
+    background-color: #f5f5f5;
+    border: 1px solid rgba(0,0,0,.42);
+    border-radius: 0 0 4px 4px;
+    display: none;
+    max-height: 300px;
+    overflow-y:scroll;
+    left: 0;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    z-index: 100;
+}
+
+.open .combo-menu {
+    display: block;
+}
+
+.combo-option {
+    padding: 10px 12px 12px;
+}
+
+.combo-option.option-current,
+.combo-option:hover {
+    background-color: rgba(0,0,0,0.1);
+}
+
+.combo-option.option-selected {
+    padding-right: 30px;
+    position: relative;
+}
+
+.combo-option.option-selected::after {
+    border-bottom: 2px solid #000;
+    border-right: 2px solid #000;
+    content: '';
+    height: 16px;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translate(0, -50%) rotate(45deg);
+    width: 8px;
+}
+
+.remove-option {
+    background-color: #6200ee;
+    border: 1px solid #6200ee;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 0.75em;
+    font-weight: bold;
+    margin-bottom: 6px;
+    margin-right: 6px;
+    padding: 0.25em 1.75em 0.25em 0.25em;
+    position: relative;
+}
+
+.remove-option::before,
+.remove-option::after {
+    border-right: 2px solid #fff;
+    content: "";
+    height: 1em;
+    right: 0.75em;
+    position: absolute;
+    top: 50%;
+    width: 0;
+}
+
+.remove-option::before {
+    transform: translate(0, -50%) rotate(45deg);
+}
+
+.remove-option::after {
+    transform: translate(0, -50%) rotate(-45deg);
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+input[type=radio] {
+    display: inline;
+    width: auto;
+}
+
+input[type=checkbox] {
+    display: inline;
+    width: auto;
+}
+
+.button {
+    padding: 0.7rem 1.5rem;
+    border: 1px solid #4361ee;
+    background-color: #4361ee;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 5px;
+}
+
+.submit-btn {
+    border: 1px solid #027473;
+    background-color: #027473;
+}
+
+.mt-3 {
+    margin-top: 2rem;
+}
+
+.d-none {
+    display: none;
+}
+
+.form-step {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 3rem;
+}
+
+.font-normal {
+    font-weight: normal;
+}
+
+ol.form-stepper {
+    counter-reset: section;
+    margin-bottom: 3rem;
+}
+
+ol.form-stepper .form-stepper-circle {
+    position: relative;
+}
+
+ol.form-stepper .form-stepper-circle span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.form-stepper-horizontal {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+ol.form-stepper > li:not(:last-of-type) {
+    margin-bottom: 0.625rem;
+    -webkit-transition: margin-bottom 0.4s;
+    -o-transition: margin-bottom 0.4s;
+    transition: margin-bottom 0.4s;
+}
+
+.form-stepper-horizontal > li:not(:last-of-type) {
+    margin-bottom: 0 !important;
+}
+
+.form-stepper-horizontal li {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: start;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+.form-stepper-horizontal li:not(:last-child):after {
+    position: relative;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    height: 5px;
+    content: "";
+    top: 32%;
+}
+
+.form-stepper-horizontal li:after {
+    background-color: #dee2e6;
+}
+
+.form-stepper-horizontal li.form-stepper-completed:after {
+    background-color: #4da3ff;
+}
+
+.form-stepper-horizontal li:last-child {
+    flex: unset;
+}
+
+ol.form-stepper li div .form-stepper-circle {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin-right: 0;
+    line-height: 2.2rem;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.38);
+    border-radius: 50%;
+}
+
+.form-stepper .form-stepper-active .form-stepper-circle {
+    background-color: #4361ee !important;
+    color: #fff;
+}
+
+.form-stepper .form-stepper-active .label {
+    color: #4361ee !important;
+    font-size: 1.3rem;
+}
+
+.form-stepper .form-stepper-active .form-stepper-circle:hover {
+    background-color: #4361ee !important;
+    color: #fff !important;
+}
+
+.form-stepper .form-stepper-unfinished .form-stepper-circle {
+    background-color: #f8f7ff;
+}
+
+.form-stepper .form-stepper-completed .form-stepper-circle {
+    background-color: #027473 !important;
+    color: #fff;
+}
+
+.form-stepper .form-stepper-completed .label {
+    color: #027473 !important;
+}
+
+.form-stepper .form-stepper-completed .form-stepper-circle:hover {
+    background-color: #027473 !important;
+    color: #fff !important;
+}
+
+.form-stepper .form-stepper-active span.text-muted {
+    color: #fff !important;
+}
+
+.form-stepper .form-stepper-completed span.text-muted {
+    color: #fff !important;
+}
+
+.form-stepper .label {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+.form-stepper div {
+    cursor: default;
+}
+
+.span {
+    color: red;
+}
+
+.radio,
+fieldset {
+    margin: 1rem 0;
+}
+
+.radiolabel {
+    display: inline-block;
+    width: 120px;
+    vertical-align: top;
+    padding: 0;
+}
+
+.radioinput,
+.radiolabel {
+    width: auto;
+}
+
+.alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    display: none;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+
+.checkmark {
+    font-family: arial;
+    -ms-transform: scaleX(-1) rotate(-35deg); /* IE 9 */
+    -webkit-transform: scaleX(-1) rotate(-35deg); /* Chrome, Safari, Opera */
+    transform: scaleX(-1) rotate(-35deg);
+}
+
+.check {
+    position: absolute;
+    left: 7.5%;
+    top: 30%;
+    font-size: 15px;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+.check.active {
+    color: #fff;
+}
+
+.errText {
+    color: red;
+    margin-bottom: 0.5rem;
+}
+
+.visuallyhidden {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    overflow: hidden;
+    position: absolute;
+}
+
+#thirdcheck {
+    margin-left: 3.3rem;
+}
+
+@media screen and (max-width: 600px) {
+    form {
+        width: 90%;
+    }
+
+    .form-stepper .label {
+        font-size: 1.2rem;
+        margin-top: 0.8rem;
+        width: min-content;
+        display: table-caption;
+    }
+
+    .form-stepper-horizontal li:not(:last-child):after {
+        top: 14%;
+    }
+
+    .check {
+        position: absolute;
+        left: 21%;
+        top: 18%;
+        font-size: 20px;
+        transform: translate(-50%, -50%);
+        display: none;
+    }
+
+    #thirdcheck {
+        margin-left: 0.6rem;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+    form {
+        width: 60%;
+    }
+
+    .check {
+        position: absolute;
+        left: 16%;
+        top: 29%;
+        font-size: 20px;
+        transform: translate(-50%, -50%);
+        display: none;
+    }
+
+    #thirdcheck {
+        margin-left: 2.6rem;
+    }
+}
+.photo-grid {
+    display: flex;
+    align-items: start;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    border: 2px solid #ccc; /* Adjust color and width as needed */
+    padding: 2px; /* Optional: for some space between the border and the contents */
+    border-radius: 4px; /* Optional: if you want rounded corners */
+}
+.photo-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+}
+
+.photo-preview img {
+    width: 100%;
+    border-radius: 4px;
+    object-fit: cover;
+}
+.photo-upload, .photo-tips {
+    flex: 1; /* This will allow both children to grow and take up equal space */
+}
+.photo-upload {
+    border: 2px dashed #ccc;
+    border-radius: 4px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.photo-upload-label {
+    text-align: center;
+    cursor: pointer;
+}
+
+.photo-upload-input {
+    display: none; /* Hide the actual input control */
+}
+
+.photo-tips {
+    grid-column: span 2; /* Adjust span for desired column width */
+}
+
+.video-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+    padding: 20px;
+    border: 2px solid #ccc; /* Adds a border around the video grid */
+    border-radius: 4px; /* Rounds the corners of the border */
+}
+
+.video-upload {
+    width: 85%; /* Full width of the parent container */
+    border: 2px dashed #ccc;
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center; /* Center the label text */
+}
+
+.video-upload input[type="file"] {
+    display: none; /* Hide the actual input control */
+}
+
+.video-upload-label {
+    cursor: pointer; /* Change cursor on hover */
+    display: inline-block; /* Allow width and margin to be set */
+    margin-bottom: 10px; /* Space between label and max file size text */
+}
+
+.video-tips {
+    padding-left: 15px; /* Padding to offset tips from the left edge */
+}
+
+.video-tips h2 {
+    margin-bottom: 0.5em; /* Space below the heading */
+}
+
+.video-tips p {
+    font-size: 1.3rem;
+}
+
+.video-tips ul {
+    list-style-type: disc; /* Add disc bullets to list */
+    padding-left: 20px; /* Align bullets inside the tips container */
+}
+
+.video-tips li {
+    margin-bottom: 0.5em; /* Space between list items */
+}
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* This creates two columns */
+    gap: 20px; /* Adjust the gap between grid items */
+    padding: 20px; /* Padding around the entire grid */
+}
+
+.about-listing, .renewal-options, .product-type, .product-description, .product-materials {
+    padding: 10px; /* Padding inside each section */
+    border: 1px solid #ccc; /* Border around each section */
+    border-radius: 4px; /* Rounded corners for each section */
+}
+
+/* Styles for the select elements */
+.details-grid select {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px; /* Adds space above the select element */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Styles for the input elements */
+.details-grid input[type="text"],
+.details-grid input[type="radio"],
+.details-grid textarea {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px; /* Adds space above the input/textarea element */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Styles for the labels */
+.details-grid label {
+    display: block; /* Ensures that the label takes up the full width */
+    margin-bottom: 5px; /* Adds space below the label */
+}
+
+/* Specific styles for the radio buttons and their labels */
+.renewal-options input[type="radio"],
+.product-type input[type="radio"] {
+    margin-right: 10px; /* Adds space to the right of the radio button */
+}
+
+.renewal-options label,
+.product-type label {
+    display: inline-block; /* Allows radio button and label to be on the same line */
+    margin-bottom: 10px; /* Adds space below each set of radio button and label */
+}
+
+/* Styles for the textarea */
+.details-grid textarea {
+    height: 100px; /* Adjust the height of the textarea */
+    resize: vertical; /* Allows the textarea to only be resized vertically */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .details-grid {
+        grid-template-columns: 1fr; /* One column on smaller screens */
+    }
+}
+</style>
+<div>
+    <div id="multi-step-form-container">
+
+        <ol class="form-stepper form-stepper-horizontal text-center mx-auto pl-0" id="navol" tabindex="-1">
+
+            <li class="form-stepper-active text-center form-stepper-list" id="stepOne" data-step="1">
+                <div class="mx-2"><span class="visuallyhidden">step one</span>
+                    <span class="form-stepper-circle" aria-hidden="true">1</span>
+                    <div class="label">Name your shop</div>
+                </div>
+                <div class="check fas fa-check" aria-hidden="true" style="display:none"></div>
+            </li>
+
+            <li class="form-stepper-unfinished text-center form-stepper-list" id="stepTwo" data-step="2">
+                <div class="mx-2"><span class="visuallyhidden">step two</span>
+                    <span class="form-stepper-circle text-muted" style="margin-left: 0.5rem;" aria-hidden="true">2</span>
+                    <div class="label text-muted">Stock your shop</div>
+                </div>
+                <div class="check fas fa-check" aria-hidden="true" style="display:none"></div>
+            </li>
+
+            <li class="form-stepper-unfinished text-center form-stepper-list" id="stepThree" data-step="3">
+                <div class="mx-2"><span class="visuallyhidden">step three</span>
+                    <span class="form-stepper-circle text-muted" style="margin-right: 1rem;" aria-hidden="true">3</span>
+                    <div class="label text-muted">How you'll get paid</div>
+                </div>
+                <div class="check fas fa-check" aria-hidden="true" id="thirdCheck" style="display:none;"></div>
+            </li>
+            <li class="form-stepper-unfinished text-center form-stepper-list" id="stepFour" data-step="4">
+                <div class="mx-2"><span class="visuallyhidden">step four</span>
+                    <span class="form-stepper-circle text-muted" style="margin-right: 1rem;" aria-hidden="true">3</span>
+                    <div class="label text-muted">Share your billing info</div>
+                </div>
+                <div class="check fas fa-check" aria-hidden="true" id="thirdCheck" style="display:none;"></div>
+            </li>
+            <li class="form-stepper-unfinished text-center form-stepper-list" id="stepFive" data-step="5">
+                <div class="mx-2"><span class="visuallyhidden">step five</span>
+                    <span class="form-stepper-circle text-muted" style="margin-right: 1rem;" aria-hidden="true">3</span>
+                    <div class="label text-muted">Your shop security</div>
+                </div>
+                <div class="check fas fa-check" aria-hidden="true" id="thirdCheck" style="display:none;"></div>
+            </li>
+        </ol>
+
+        <form id="register" onsubmit="return checkError(this)" method="post">
+
+            <section id="step-1" class="form-step">
+                <h2 class="font-normal" tabindex="-1">Name your shop</h2>
+                <p><strong>Don't sweat it! You can just draft a name now and change it later. We find sellers often draw inspiration from what they sell, their style, pretty much anything goes..</strong></p>
+                <div class="mt-3">
+                    <div>
+
+                        <input type="text" id="text" autocomplete="text" name="company_name" placeholder="Enter your shop name">
+                        <ul>
+                            <li> Between 4-20 characters</li>
+                            <li> No special characters please</li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="mt-3">
+                    <button class="button btn-navigate-form-step" id="firstNext" type="button" data-step-number="2">Next</button>
+                </div>
+            </section>
+
+            <section id="step-2" class="form-step d-none">
+                <h2 class="font-normal">Create a listing</h2>
+                <p><strong>Add some photos and details about your item. Fill out what you can for now—you'll be able to edit this later.</strong></p>
+                <div class="mt-3">
+                    <div class="photo-grid">
+                        <div class="photo-upload">
+                            <label for="photo-upload-input" class="photo-upload-label">
+                                Add a photo
+                                <input type="file" id="photo-upload-input" class="photo-upload-input" multiple accept="image/*">
+                                <div id="photo-preview" class="photo-preview"></div>
+                            </label>
+                        </div>
+                        <div class="photo-tips">
+                            <h2 style="padding-left: 15px">Photos of your listing!</h2>
+                            <p style="font-size: 1.3rem; padding-left: 15px;">Tips:</p>
+                            <ul>
+                                <li>Use natural light and no flash.</li>
+                                <br>
+                                <li>Include a common object for scale.</li>
+                                <br>
+                                <li>Show the item being held, worn, or used.</li>
+                                <!-- Add more tips as needed -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="video-grid">
+                        <h2>Video</h2>
+                        <p>Bring your product to life with a 5 to 15 second video—it could help you drive more sales. The video won't feature sound, so let your product do the talking!</p>
+                        <div class="video-upload">
+                            <label type="file" for="video-upload-input" class="video-upload-label">Add a video</label>
+                            <p>Max File size: 100MB</p>
+                            <input type="file" id="video-upload-input" multiple accept="image/*" max-size="100MB">
+                            <div id="video-preview" class="video-preview"></div>
+                        </div>
+                        <div class="video-tips">
+                            <h2 style="padding-left: 15px">Photos of your listing!</h2>
+                            <p style="font-size: 1.3rem; padding-left: 15px;">Helpful Tips:</p>
+                            <ul>
+                                <li>Film wearable items on a model or show a functional item being used.</li>
+                                <br>
+                                <li>Adjust your settings to record high resolution video—aim for 1080p or higher.</li>
+                                <br>
+                                <li>Crop your video after you upload it to get the right dimensions.</li>
+                                <!-- Add more tips as needed -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="details-grid">
+                        <div>
+                            <h2>Listing Details</h2>
+                            <p>Tell the world all about your item and why they'll love it.</p>
+                        </div>
+                        <div>
+                            <h3>Title</h3>
+                            <p>Include keywords that buyers would use to search for your item.</p>
+                            <input type="text" name="title"  id="title" >
+                        </div>
+                        <div class="about-listing">
+                            <select class="whomadeit">
+                                <option value="1"><strong>Who made it?</strong></option>
+                                <option value="2">I did</option>
+                                <option value="3">A member of my crew</option>
+                                <option value="4">Another company or person</option>
+                            </select>
+                            <select class="whatisit">
+                                <option value="1"><strong>What is it?</strong></option>
+                                <option value="2">A finished product</option>
+                                <option value="3">A supply or tool to make things</option>
+                            </select>
+                            <select class="whenwasitmade">
+                                <option value="1"><strong>When was it made?</strong></option>
+                                <option value="2">Made to order</option>
+                                <option value="3">2020-2024</option>
+                                <option value="4">2010-2020</option>
+                                <option value="5">2005-2009</option>
+                                <option value="6">Before 2005</option>
+                            </select>
+                        </div>
+                        <div class="renewal-options">
+                            <h2>Renewal Options</h2>
+                            <p>Each renewal lasts for four months or until the listing sells out.</p>
+                            <input type="radio" name="renewal" id="renewal" value="1">
+                            <label for="renewal">Renew automatically <br> This listing will renew as it expires for $0.20 USD each time (recommended).</label>
+                            <input type="radio" name="renewal" id="renewal" value="2">
+                            <label for="renewal">Renew manually <br> I'll renew expired listings myself.</label>
+                        </div>
+                        <div class="product-type">
+                            <h2>Product Type</h2>
+                            <p>What type of item are you listing?</p>
+                            <input type="radio" name="product" id="product" value="1">
+                            <label for="product">Physical</label>
+                            <input type="radio" name="product" id="product" value="2">
+                            <label for="product">Digital</label>
+                       </div>
+                       <div class="product-description">
+                            <label for="description">Description<span class="span">*</span></label>
+                            <p>Start with a brief overview that describes your item's finest features. Shoppers will only see the first few lines of your description at first, so make it count!
+                                <br>
+                            Not sure what else to say? Shoppers also like hearing about your process, and the story behind this item.</p>
+                            <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                       </div>
+                       <div class="product-materials">
+                            <label for="materials">Materials<span class="span">*</span></label>
+                            <p>What materials are used to make this item?</p>
+                            <input type="text" name="materials" id="materials" placeholder="Ingredients, materials, etc.">
+                        </div>
+                    </div>
+
+
+
+
+                    Inventory and pricing
+
+
+
+
+                    Variations
+
+
+
+                    Shipping
+
+
+                    **Customs information**
+
+                    Returns and exchanges
+
+
+
+
+
+                    <div>
+                        <label for="city">City<span class="span">*</span></label>
+                        <select id="city" name="city" autocomplete="country-name">
+                            <option value="">-- Select city -- </option>
+                            <option value="Amsterdam">Amsterdam</option>
+                            <option value="Buenos Aires">Buenos Aires</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Hong Kong">Hong Kong</option>
+                            <option value="London">London</option>
+                            <option value="Los Angeles">Los Angeles</option>
+                            <option value="Moscow">Moscow</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="New York">New York</option>
+                            <option value="Sydney">Sydney</option>
+                            <option value="Tokyo">Tokyo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <button class="button btn-navigate-form-step" id="previousBtn" type="button" data-step-number="1">Previous</button>
+                    <button class="button btn-navigate-form-step" id="secondNext" type="button" data-step-number="3">Next</button>
+                </div>
+            </section>
+
+            <section id="step-3" class="form-step d-none">
+
+
+
+                How you'll be paid
+
+
+
+
+
+                We need to set up an API so every time an item is made, it makes a new product on stripe
+
+
+
+
+
+
+                <h2 class="font-normal">Account Basic Details</h2>
+                <p><strong>Fields marked with asterisk (<span class="span">*</span>) are mandatory.</strong></p>
+                <div class="mt-3">
+                    <div>
+                        <fieldset id="radioField">
+                            <legend>Gender<span class="span">*</span></legend>
+                            <div class="radio">
+                                <input id="gender_male" class="radioInput" name="gender" type="radio" />
+                                <label for="gender_male" class="radioLabel">Male</label>
+                            </div>
+                            <div class="radio">
+                                <input id="gender_female" class="radioInput" name="gender" type="radio" />
+                                <label for="gender_female" class="radioLabel">Female</label>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <fieldset id="checkField">
+                            <legend>Subscription Plan</legend>
+                            <div>
+                                <input type="checkbox" name="newsletter" id="check_1" value="The weekly newsletter">
+                                <label for="check_1">Monthly Subscription</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="newsletter" id="check_2" value="The Monthly newsletter">
+                                <label for="check_2">Six Month Subscription</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="newsletter" id="check_3" value="The Yearly newsletter">
+                                <label for="check_3">Yearly Subscription</label>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="mt-3">
+                        <button class="button btn-navigate-form-step" type="button" data-step-number="2">Previous</button>
+                        <button class="button submit-btn" id="submit">Submit</button>
+                    </div>
+                </div>
+            </section>
+        </form>
+    </div>
+</div>
+<script>
+
+const progressCheck = document.querySelectorAll(".form-stepper-list .check");
+let form = document.querySelector('form');
+form.onsubmit =()=>{ return false; };
+const navol = document.querySelector('ol');
+
+const navigateToFormStep = (stepNumber) => {
+    document.querySelectorAll('.form-step').forEach((formStepElement) => {
+        formStepElement.classList.add('d-none');
+    });
+
+    document.querySelectorAll('.form-stepper-list').forEach((formStepHeader) => {
+        let addStepNum = 0;
+        formStepHeader.classList.add('form-stepper-unfinished');
+        formStepHeader.classList.remove('form-stepper-active', 'form-stepper-completed');
+        if (formStepHeader.classList.contains('form-stepper-active')) {
+            addStepNum = stepNumber + 1;
+            formStepHeader.querySelector('div .visuallyhidden').innerHTML='step ' + addStepNum;
+        }
+    });
+
+    document.querySelector('#step-' + stepNumber).classList.remove('d-none');
+
+    const formStepCircle = document.querySelector('li[data-step="' + stepNumber + '"]');
+    navol.focus();
+    formStepCircle.classList.remove('form-stepper-unfinished', 'form-stepper-completed');
+    formStepCircle.classList.add('form-stepper-active');
+    formStepCircle.querySelector('div .form-stepper-circle').innerHTML = stepNumber;
+    formStepCircle.querySelector('div .visuallyhidden').innerHTML = 'current step ' + stepNumber;
+    progressCheck[stepNumber - 1].classList.remove('active');
+    progressCheck[stepNumber - 1].style.display = 'none';
+
+    for (let index = 0; index < stepNumber; index++) {
+        const formStepCircle = document.querySelector('li[data-step="' + index + '"]');
+        if (formStepCircle) {
+            formStepCircle.classList.remove('form-stepper-unfinished', 'form-stepper-active');
+            formStepCircle.classList.add('form-stepper-completed');
+            const completeLabel = formStepCircle.querySelector('div span');
+            completeLabel.innerHTML='Step ' + index + ' completed';
+            formStepCircle.querySelector('div .form-stepper-circle').innerHTML = "";
+            progressCheck[index-1].classList.add('active');
+            progressCheck[index-1].style.display = 'block';
+        }
+    }
+};
+
+document.querySelectorAll(".btn-navigate-form-step").forEach((formNavigationBtn) => {
+    formNavigationBtn.addEventListener('click', function() {
+        const stepNumber = parseInt(formNavigationBtn.getAttribute('data-step-number'));
+        const currentFormStep = document.querySelector('#step-1');
+        const shopNameInput = currentFormStep.querySelector('input[name="company_name"]');
+        
+
+        // Clear previous errors
+        document.querySelectorAll('span.errText').forEach(function(a) {
+            a.remove();
+        });
+                // Initialize error tracking
+        let i = 0;
+        let focuss = '';
+        let span_field = '';
+        let elem_event_name = '';
+
+        // Validate shop name input
+        if (shopNameInput && shopNameInput.value === '') {
+            const errorText = document.createElement('div');
+            errorText.setAttribute('class', 'errText');
+            errorText.innerHTML = 'Error: Please enter your shop name.';
+            shopNameInput.parentNode.insertBefore(errorText, shopNameInput.nextSibling);
+            shopNameInput.focus();
+        } else {
+            navigateToFormStep(stepNumber);
+        }
+
+
+
+        if (3 === stepNumber) {
+            const currentFormStepTwo = document.querySelector('#step-2');
+            const secondForm = currentFormStepTwo.getElementsByTagName('input');
+            const secondFormSelect = currentFormStepTwo.getElementsByTagName('select');
+            i = 0;
+            focuss = '';
+            let phone = secondForm['phone'].value;
+            document.querySelectorAll('span.errText').forEach(function(a) {
+                a.previousSibling.removeAttribute('aria-describedby');
+                a.remove();
+            });
+
+             document.getElementById('photo-upload-input').addEventListener('change', function(e) {
+                const photoPreviewContainer = document.getElementById('photo-preview');
+                photoPreviewContainer.innerHTML = ''; // Clear existing images
+
+                Array.from(e.target.files).forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        photoPreviewContainer.appendChild(img);
+                    };
+                    reader.readAsDataURL(file);
+                });
+
+            });
+            if ('' === secondForm['lastname'].value) {
+                span_field = document.createElement('div');
+                span_field.setAttribute('class', 'errText');
+                span_field.setAttribute('id', 'err_' + i);
+                span_field.innerHTML = 'Error: Enter your last name.';
+                elem_event_name = document.getElementById('lastname');
+                elem_event_name.setAttribute('aria-describedby', 'err_' + i);
+                elem_event_name.parentNode.insertBefore( span_field, elem_event_name );
+                if ('' === focuss) {
+                    focuss = 'lastname';
+                }
+                i++;
+            } else if ((isNaN(secondForm['lastname'].value)) === false) {
+                span_field = document.createElement('div');
+                span_field.setAttribute('class', 'errText');
+                span_field.setAttribute('id', 'err_' + i);
+                span_field.innerHTML = 'Error: Last Name cannot include numbers.';
+                elem_event_name = document.getElementById('lastname');
+                elem_event_name.setAttribute('aria-describedby', 'err_' + i);
+                elem_event_name.parentNode.insertBefore( span_field, elem_event_name );
+                if ('' === focuss) {
+                    focuss = 'lastname';
+                }
+                i++;
+            }
+            if ('' === secondForm['phone'].value) {
+                span_field = document.createElement('div');
+                span_field.setAttribute('class', 'errText');
+                span_field.setAttribute('id', 'err_' + i);
+                span_field.innerHTML = 'Error: Enter your phone number.';
+                elem_event_name = document.getElementById('phone');
+                elem_event_name.setAttribute('aria-describedby', 'err_' + i);
+                elem_event_name.parentNode.insertBefore( span_field, elem_event_name );
+                if ('' === focuss) {
+                    focuss = 'phone';
+                }
+                i++;
+            }
+            else if (!validateNumber(phone)) {
+                span_field = document.createElement('div');
+                span_field.setAttribute('class', 'errText');
+                span_field.setAttribute('id', 'err_' + i);
+                span_field.innerHTML = 'Error: Please enter a valid contact number.';
+                elem_event_name = document.getElementById('phone');
+                elem_event_name.setAttribute('aria-describedby', 'err_' + i);
+                elem_event_name.parentNode.insertBefore( span_field, elem_event_name );
+                if ('' === focuss) {
+                    focuss = 'phone';
+                }
+                i++;
+            }
+            else if ((isNaN(secondForm['phone'].value)) === true) {
+                span_field = document.createElement('div');
+                span_field.setAttribute('class', 'errText');
+                span_field.setAttribute('id', 'err_' + i);
+                span_field.innerHTML = 'Error: Please enter a valid contact number.';
+                elem_event_name = document.getElementById('phone');
+                elem_event_name.setAttribute('aria-describedby', 'err_' + i);
+                elem_event_name.parentNode.insertBefore( span_field, elem_event_name );
+                if ('' === focuss) {
+                    focuss = 'phone';
+                }
+                i++;
+            }
+            if ('' === secondFormSelect['city'].value) {
+                span_field = document.createElement('div');
+                span_field.setAttribute('class', 'errText');
+                span_field.setAttribute('id', 'err_' + i);
+                span_field.innerHTML = 'Error: Please select a city.';
+                elem_event_name = document.getElementById('city');
+                elem_event_name.setAttribute('aria-describedby', 'err_' + i);
+                elem_event_name.parentNode.insertBefore( span_field, elem_event_name );
+                if ('' === focuss) {
+                    focuss = 'city';
+                }
+                i++;
+            }
+            if (0 !== i) {
+                document.getElementById(focuss).focus();
+            } else {
+                navigateToFormStep(stepNumber);
+            }
+        }
+        if (1 === stepNumber) {
+            navigateToFormStep(stepNumber);
+        }
+
+    });
+});
+
+const submitBtn = document.querySelector('#submit');
+const formThreeRadio = document.getElementsByName('gender');
+submitBtn.addEventListener('click', function() {
+    const listThree = document.querySelector('#stepThree');
+    let focuss = '';
+    let i = 0;
+    let span_field = '';
+    let elem_event_name = '';
+    let elem_err_name = '';
+    let elem_legend = '';
+    document.querySelectorAll("span.errText").forEach(function(a) {
+        a.previousSibling.removeAttribute('aria-describedby');
+        a.remove();
+    });
+    if (!formThreeRadio[0].checked && !formThreeRadio[1].checked) {
+        span_field = document.createElement('div');
+        span_field.setAttribute('class', 'errText');
+        span_field.setAttribute('id', 'radioErr');
+        span_field.innerHTML = 'Error: Please select a gender.';
+        elem_event_name = document.getElementById('radioField');
+        elem_err_name = document.getElementById('gender_male');
+        elem_err_name.setAttribute('aria-describedby', 'radioErr');
+        elem_legend = elem_event_name.querySelector('legend');
+        elem_legend.insertAdjacentElement('afterend', span_field);
+        if ('' === focuss) {
+            focuss = 'gender_male';
+        }
+        i++;
+    } else {
+        listThree.classList.remove('form-stepper-active');
+        listThree.classList.add('form-stepper-completed');
+        listThree.querySelector('div .form-stepper-circle').innerHTML = '';
+        progressCheck[2].classList.add('active');
+        progressCheck[2].style.display = 'block';
+        setTimeout(function() {
+            alert('Your form was successfully submitted.');
+            location.reload();
+        }, 800);
+    }
+    if (0 !== i) {
+        document.getElementById(focuss).focus();
+    }
+});
+
+function validateNumber(input_str) {
+    let re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+    return re.test(input_str);
+}
+
+
+</script>

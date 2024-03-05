@@ -20,6 +20,7 @@ class CustomUser(AbstractUser):
         ('other', 'Other')
     )
     user_type = models.CharField(max_length=30, choices=USER_TYPES, default='other')
+    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True, verbose_name='Profile Picture')
     is_customer = models.BooleanField(default=False, verbose_name='Customer account')
     is_admin = models.BooleanField(default=False, verbose_name='Admin account')
     company = models.CharField(max_length=255, blank=True, null=True, verbose_name='Company Name')

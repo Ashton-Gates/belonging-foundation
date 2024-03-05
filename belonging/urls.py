@@ -1,14 +1,20 @@
 from django.conf import settings
 from django.contrib import admin
+
 from django.urls import include, path
+from .models import Post
 from django.conf.urls.static import static
+from django.contrib.sitemaps.views import sitemap
 from .views import (involved_view, index_view, 
 about_view, home_page, donate_stripe, vendor_about)
 
-
+sitemaps = {
+    'yourmodel': Post,
+}
 
 urlpatterns = [
     path('', home_page, name='home_page'),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemap}),
     path("stripe/", include("djstripe.urls", namespace="djstripe")),
     path('index/', index_view, name='index_view'),
     path('admin/', admin.site.urls),

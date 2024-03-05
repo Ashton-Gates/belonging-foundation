@@ -11,6 +11,27 @@
             <li>No scholarships available at the moment.</li>
         {% endfor %}
     </ul>
+    {% for referral in referrals %}
+        <li><p>
+            <a href="#referral-detail-modal" data-toggle="modal" data-target="#referralDetailModal" data-referral-id="{{ referral.id }}">
+            {{ referral.nominee_name }}
+            </a>
+        </p></li>
+    {% empty %}
+        <li>No referrals available at the moment.</li>
+    {% endfor %}
+
+<!-- Modal -->
+<div class="modal fade" id="referralDetailModal" tabindex="-1" role="dialog" aria-labelledby="referralDetailModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!-- Modal content will be loaded here based on clicked referral -->
+    </div>
+  </div>
+</div>
+
+
+
     <a href="{% url 'referee:submit_referral' %}" class="btn btn-primary">Submit a Referral</a>
     <a href="{% url 'referee:logout' %}" class="btn btn-secondary">Logout</a>
     <a href="{% url 'referee:delete_account' %}" class="btn btn-warning">Delete Account</a>

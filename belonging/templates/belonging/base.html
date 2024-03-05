@@ -92,31 +92,7 @@
     text-align: center;
     padding: 10px 20px;
   }
-  
-  /* Responsive Styles */
-  @media screen and (max-width: 600px) {
-    .navbar a, .navbar .dropdown .dropbtn {
-      display: none;
-    }
-  
-    .navbar .hamburger-menu {
-      display: block;
-      height: 100%;
-      width: 18.75em;
-    }
-  
-    .navbar.responsive {position: relative;}
-    .navbar.responsive a.icon {
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-    .navbar.responsive a {
-      float: none;
-      display: block;
-      text-align: left;
-    }
-  }
+
   
   .header-height {
     height: 70px; /* Example header height, adjust as needed */
@@ -395,67 +371,41 @@
   .carousel-caption{
     color:#333;
   }
-/* Ensure the toggler is only shown on small screens */
-@media (max-width: 992px) {
-  .navbar-toggler {
-    display: block;
+  @media screen and (max-width: 500px) {
+  .navbar .hamburger-menu {
+    display: block; /* Show hamburger menu */
+    position: fixed; /* Fixed position to keep it visible */
+    top: 0; /* Align to the top */
+    right: 0; /* Align to the right */
+    height: 4em; /* Adjust as needed */
+    width: 4em; /* Adjust as needed */
+    cursor: pointer; /* Change mouse pointer to indicate it's clickable */
+    z-index: 1000; /* Make sure it's above other content */
   }
 
-  .navbar-collapse {
-    max-height: 0;
-    overflow-y: auto;
-    transition: max-height 0.35s ease;
+  .navbar a.icon {
+    display: none; /* Hide the icon if not needed, or adjust as necessary */
   }
 
-  .navbar-collapse.collapsing {
-    max-height: 0;
-    overflow: hidden;
+  .navbar.responsive {
+    position: fixed; /* Fixed position to stay on screen */
+    width: 100%; /* Full width */
+    height: auto; /* Auto height based on content */
+    top: 4em; /* Adjust based on the height of the hamburger menu */
+    left: 0; /* Align to the left */
+    flex-direction: column; /* Stack items vertically */
+    z-index: 999; /* Under the hamburger menu but above other content */
   }
 
-  .navbar-collapse.show {
-    max-height: 500px; /* Set to the maximum height your menu will need */
+  .navbar.responsive a {
+    float: none; /* Disable float */
+    display: block; /* Stack links */
+    text-align: center; /* Center text */
+    padding: 10px; /* Add some padding */
+    border-top: 1px solid #ddd; /* Add a border to separate items */
   }
-
-  .navbar-toggler.collapsed .navbar-toggler-icon {
-  background-image: url('static/images/main_logo.png');
 }
 
-  .navbar-toggler:not(.collapsed) .navbar-toggler-icon {
-    display: none;
-  }
-
-  .navbar-toggler:not(.collapsed) .close-icon {
-    background-image: url('static/images/main_logo.png');
-  }
-}
-
-/* Ensure the toggler is hidden on large screens */
-@media (min-width: 993px) {
-  .navbar-toggler {
-    display: none;
-  }
-}
-@media (max-width: 576px) {
-  .navbar .dropdown-menu {
-    position: static; /* Remove the absolute positioning */
-    float: none; /* Prevent floating */
-    display: none; /* Hide by default */
-    width: auto; /* Set width to auto to occupy the required space */
-    background-color: #333; /* Set your desired background color */
-  }
-
-  .navbar .dropdown-menu.show {
-    display: block; /* Display the dropdown */
-  }
-
-  .navbar .dropdown-menu .dropdown-item {
-    display: block; /* Make each dropdown item block-level so it spans the full width */
-  }
-
-  .navbar .dropdown-toggle::after {
-    display: none; /* Optionally hide the caret if you don't want it */
-  }
-}
     </style>
 </head>
 <body>

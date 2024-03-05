@@ -8,6 +8,8 @@ from django.contrib.messages import constants
 from django.contrib import auth
 from .forms import ItemForm
 
+def onboard(request):
+    return render(request, 'vendor/onboard.html')
 
 def vendor_landing(request):
     return render(request, 'vendor/vendor_landing.html')

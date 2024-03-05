@@ -1,23 +1,67 @@
-# belonging-foundation/referee/views.py
+#referee/views.py
 
 
 import uuid
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from .forms import RefereeRegistrationForm, ReferralForm, SponsorApplicationForm, LoginForm
-from .models import Referee, Scholarship
+from .models import Referee, Referral, SponsorApplication
+from applicant.models import Scholarship
 User = get_user_model()
 
+@login_required
+def submit_referral(request):
+    try:
+        referee_instance = request.user.referee  # Assuming 'referee' is the related name for the OneToOneField linking CustomUser to Referee.
+    except Referee.DoesNotExist:
+        referee_instance = None  # Handle cases where the referee profile does not exist for the user.
+    
+    
+    if request.method == 'POST':
+        form = ReferralForm(request.POST)
+        if form.is_valid():
+            referral = form.save(commit=False)
+            referral.referee = referee_instance
+            referral.save()
+            send_mail(
+                'You have been nominated for a scholarship',
+                f"Message content. Referee ID: {referee_instance.referee_id if referee_instance else 'N/A'}",
 
-# Create your views here.
+                'from@example.com',
+                [form.cleaned_data['nominee_email']],
+                fail_silently=False,
+            )
+            messages.success(request, 'Referral submitted successfully.')
+            return redirect('referee:sponsor_dashboard')
+    else:
+        form = ReferralForm()
+    return render(request, 'referee/submit_referral.html', {'form': form, 'referee_id': referee_instance.referee_id if referee_instance else None})
+
+@login_required
+def referee_dashboard(request):
+    scholarships = Scholarship.objects.all()  # Fetch all scholarship instances
+    referrals = Referral.objects.filter(referee=request.user.referee_profile).order_by('-id')
+    
+    return render(request, 'referee/dashboard.html', {'scholarships': scholarships})
+
+
+
 def sponsor_about(request):
     return render(request, 'referee/sponsor_about.html')
 
+
+
+@login_required
+def sponsor_dashboard(request):
+    # Fetch all referrals made by the current referee user
+    referrals = Referral.objects.filter(referee=request.user.referee_profile).order_by('-id')
+    return render(request, 'referee/sponsor_dashboard.html')
 
 def login_view(request):
     if request.method == 'POST':
@@ -69,26 +113,7 @@ def referee_register(request):
     # Removed the erroneous print statement; form is now always defined
     return render(request, 'referee/referee_register.html', {'form': form})
 
-@login_required
-def submit_referral(request):
-    if request.method == 'POST':
-        form = ReferralForm(request.POST)
-        if form.is_valid():
-            referral = form.save(commit=False)
-            referral.referee = request.user.referee_profile
-            referral.save()
-            form.send_email()  # Send the email
-            messages.success(request, 'Referral submitted successfully.')
-            return redirect('referee:sponsor_dashboard')
-    else:
-        form = ReferralForm()
-    return render(request, 'referee/submit_referral.html', {'form': form})
 
-
-@login_required
-def referee_dashboard(request):
-    scholarships = Scholarship.objects.all()
-    return render(request, 'referee/dashboard.html', {'scholarships': scholarships})
 
 
 def sponsor_application(request):
@@ -127,6 +152,12 @@ def delete_account(request):
 
 @login_required
 def onboard_form(request):
+
+    existing_application = SponsorApplication.objects.filter(user=request.user).exists()
+    if existing_application:
+        messages.info(request, "You have already submitted an application. Please sign in with the account you used.")
+        return redirect('referee:sponsor_dashboard')  # or wherever you want to redirect
+
     if request.method == 'POST':
         form = SponsorApplicationForm(request.POST)
         if form.is_valid():
@@ -134,7 +165,7 @@ def onboard_form(request):
             sponsor_application.user = request.user  # Assuming a ForeignKey to User
             sponsor_application.save()
             messages.success(request, 'Your application has been submitted for review.')
-            return redirect('referee:dashboard')  # Adjust as necessary
+            return redirect('referee:sponsor_dashboard') 
         else:
             messages.error(request, 'Please correct the error below.')
     else:
@@ -146,6 +177,3 @@ def sponsor_form_submitted(request):
     return render(request, 'referee/sponsor_form_submitted.html')
 
 
-@login_required
-def sponsor_dashboard(request):
-    return render(request, 'referee/sponsor_dashboard.html')

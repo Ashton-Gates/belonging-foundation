@@ -2,7 +2,8 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from referee.models import Referral
-from .models import Scholarship, SponsorApplication
+from applicant.models import Scholarship
+from .models import SponsorApplication
 from django.contrib.auth import authenticate
 
 
@@ -57,23 +58,15 @@ class RefereeRegistrationForm(forms.ModelForm):
 
 
 class ReferralForm(forms.ModelForm):
+    nominee_name = forms.CharField(label='Nominee Name')
+    nominee_email = forms.EmailField(label='Nominee Email')
+    nominee_phone_number = forms.CharField(label='Nominee Phone Number')
+
     class Meta:
         model = Referral
-        fields = ['nominee_name', 'nominee_email', 'nominee_phone_number', 'scholarship', 'justification']
+        fields = ['nominee_name', 'nominee_email', 'nominee_phone_number', 'justification']
         widgets = {
             'justification': forms.Textarea(attrs={'rows': 4}),
         }
 
-    def __init__(self, *args, **kwargs):
-        super(ReferralForm, self).__init__(*args, **kwargs)
-        self.fields['scholarship'].queryset = Scholarship.objects.all()
 
-    def send_email(self):
-        # Send an email to the nominee
-        send_mail(
-            'You have been nominated for a scholarship',
-            'Message content.',
-            'from@example.com',
-            [self.cleaned_data['nominee_email']],
-            fail_silently=False,
-        )

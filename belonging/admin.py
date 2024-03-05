@@ -303,13 +303,14 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'first_name', 'last_name', 'company', 'ecommerce_website', 'profile_website', 'instagram_link', 'facebook_link', 'user_type', 'password1', 'password2', 'send_credentials', 'email_to_send'),
+            'fields': ('profile_picture', 'username', 'email', 'first_name', 'last_name', 'company', 'ecommerce_website', 'profile_website', 'instagram_link', 'facebook_link', 'user_type', 'password1', 'password2', 'send_credentials', 'email_to_send'),
         }),
     )
+    readonly_fields = ('profile_picture_preview',)
 
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name', 'email', 'company')}),
+        ('Personal info', {'fields': ('profile_picture', 'first_name', 'last_name', 'email', 'company')}),
         ('Social Links', {'fields': ('ecommerce_website', 'profile_website', 'instagram_link', 'facebook_link')}),
         ('Credentials', {'fields': ('user_type', 'send_credentials', 'email_to_send')}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
@@ -317,9 +318,18 @@ class CustomUserAdmin(UserAdmin):
 
         
     )
+
+    def profile_picture_preview(self, obj):
+        return obj.profile_picture.url if obj.profile_picture else "No image uploaded."
+    profile_picture_preview.short_description = 'Profile Picture Preview'
+
     list_display = ['username', 'email', 'first_name', 'last_name', 'is_staff', 'user_type', 'company']
     search_fields = ('username', 'first_name', 'last_name', 'email')
     ordering = ('username',)
+    
+    def profile_picture_preview(self, obj):
+        return obj.profile_picture.url if obj.profile_picture else "No image uploaded."
+    profile_picture_preview.short_description = 'Profile Picture Preview'
 
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)

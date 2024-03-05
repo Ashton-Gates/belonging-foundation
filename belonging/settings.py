@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'customers',
     'djstripe',
     'password_reset',
+    'widget_tweaks',
     'django.contrib.auth',    
     'django.contrib.admin',
     'django.contrib.contenttypes',
