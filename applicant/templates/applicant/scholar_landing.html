@@ -464,21 +464,75 @@
         border-top: 1px solid #ddd; /* Add a border to separate items */
       }
     }
-    </style>
+    .application-instructions {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .application-instructions h2 {
+            color: #333;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .application-instructions ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-bottom: 2rem;
+        }
+        .application-instructions ul li {
+            background-color: #f1f1f1;
+            margin-bottom: 0.5rem;
+            padding: 0.75rem 1rem;
+            border-radius: 5px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .application-instructions ul li i {
+            margin-right: 0.5rem;
+            color: #007bff;
+        }
+        .application-instructions a.proceed-btn {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .application-instructions a.proceed-btn:hover {
+            background-color: #0056b3;
+        }
+        @media screen and (max-width: 576px) {
+            .application-instructions {
+                margin: 1rem;
+                padding: 1rem;
+            }
+        }
+</style>
 
 
 
-This is how you be successfull in your scholarship application:
+<div class="application-instructions">
+    <h2>How to Succeed in Your Scholarship Application</h2>
+    <ul>
+        <li><i class="fa fa-check-circle"></i>Fill in all the fields.</li>
+        <li><i class="fa fa-check-circle"></i>Submit the full PowerPoint presentation. <span class="text-muted">*Please refer to the template.*</span></li>
+        <li><i class="fa fa-check-circle"></i>Avoid multiple submissions.</li>
+    </ul>
+    <p>Ensure you understand the criteria and check your application before submitting.</p>
+    <a href="{% url 'applicant:scholarship_application' %}" class="proceed-btn">Proceed to Application</a>
+</div>
 
-<ul>
-    <li>Fill in all the fields.</li>
-    <li>Make sure to submit the full power point presentation. *Please refer to the template.*</li>
-    <li>Do not make multiple submissions</li>
-    <li></li>
-
-</ul>
 
 
 We need to add a page to take them to an application info page to warn them of multiple submissions, criteria for passing, last check warnings, etc. 
 
 <a href="{% url 'applicant:scholarship_application' %}">Proceed to application!</a>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
