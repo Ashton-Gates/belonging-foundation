@@ -74,7 +74,7 @@ def login_view(request):
                 return redirect('vendor_dashboard')
             
             # Default to applicant dashboard if no approved applications
-            return redirect('applicant_dashboard')
+            return redirect('applicant:applicant_dashboard')
         else:
             return render(request, 'applicant/login.html', {'form': form, 'error': 'Invalid username or password'})
     else:
