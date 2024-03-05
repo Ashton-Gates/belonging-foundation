@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>{% block title %}About|Belonging Foundation{% endblock %}</title>
+  <title>{% block title %}About | Belonging Foundation{% endblock %}</title>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -252,61 +252,6 @@ body, h1, h2, h3, p, ul, li, a {
 }
 
 
-/* Ensure .row clears its children */
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-.feature-panel {
-  align-items: center;
-  background-color: #ff8566;
-  background-position: 50% 25%;
-  background-size: cover;
-  display: flex;
-  flex-wrap: wrap;
-  overflow: hidden;
-  padding: 5rem 0 6.25rem;
-  position: relative;
-  text-align: center;
-}
-.social-icons {
-  font-size: 24px;
-}
-
-.social-icons a {
-  margin: 0 10px;
-  color: white;
-  text-decoration: none;
-}
-
-.social-icons a:hover {
-  color: #ddd;
-}
-/* Responsive Styles */
-@media screen and (max-width: 600px) {
-  .navbar a, .navbar .dropdown .dropbtn {
-    display: none;
-  }
-
-  .navbar .hamburger-menu {
-    display: block;
-    height: 100%;
-    width: 18.75em;
-  }
-
-  .navbar.responsive {position: relative;}
-  .navbar.responsive a.icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .navbar.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-}
 .content-container {
     display: flex;
     align-items: center;
@@ -321,9 +266,19 @@ body, h1, h2, h3, p, ul, li, a {
 
 .text-content {
   padding-top: 50px;
-  max-width: 30%;
+  max-width: 100%;
     /*padding-right: 20px;  Adds some space between the text and the image */
 }
+.text-content p {
+    line-height: 1.6; /* Adjust line-height for better readability */
+    margin-bottom: 1rem; /* Add some space below each paragraph */
+    padding: 0 15px; /* Add some padding on the sides */
+  }
+
+  /* If you want to adjust the font size for mobile as well */
+  .text-content p {
+    font-size: 1.1rem; /* Slightly larger font size for mobile */
+  }
 
 .mission-photo {
     flex: 1; /* Takes up 1 fraction of the available space */
@@ -403,66 +358,60 @@ body, h1, h2, h3, p, ul, li, a {
         .stat-description {
             font-size: 0.9rem;
         }
-/* Ensure the toggler is only shown on small screens */
-@media (max-width: 992px) {
-  .navbar-toggler {
-    display: block;
+        @media screen and (max-width: 500px) {
+  .navbar .hamburger-menu {
+    display: block; /* Show hamburger menu */
+    position: fixed; /* Fixed position to keep it visible */
+    top: 0; /* Align to the top */
+    right: 0; /* Align to the right */
+    height: 4em; /* Adjust as needed */
+    width: 4em; /* Adjust as needed */
+    cursor: pointer; /* Change mouse pointer to indicate it's clickable */
+    z-index: 1000; /* Make sure it's above other content */
   }
 
-  .navbar-collapse {
-    max-height: 0;
-    overflow-y: auto;
-    transition: max-height 0.35s ease;
+  .navbar a.icon {
+    display: none; /* Hide the icon if not needed, or adjust as necessary */
   }
 
-  .navbar-collapse.collapsing {
-    max-height: 0;
-    overflow: hidden;
+  .navbar.responsive {
+    position: fixed; /* Fixed position to stay on screen */
+    width: 100%; /* Full width */
+    height: auto; /* Auto height based on content */
+    top: 4em; /* Adjust based on the height of the hamburger menu */
+    left: 0; /* Align to the left */
+    flex-direction: column; /* Stack items vertically */
+    z-index: 999; /* Under the hamburger menu but above other content */
   }
 
-  .navbar-collapse.show {
-    max-height: 500px; /* Set to the maximum height your menu will need */
+  .navbar.responsive a {
+    float: none; /* Disable float */
+    display: block; /* Stack links */
+    text-align: center; /* Center text */
+    padding: 10px; /* Add some padding */
+    border-top: 1px solid #ddd; /* Add a border to separate items */
   }
+  .content-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* This aligns the child elements to opposite ends */
+    background-image: url('/static/images/about.jpg');
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 200px; /* Increase padding at the bottom */
 
-  .navbar-toggler.collapsed .navbar-toggler-icon {
-  background-image: url('static/images/main_logo.png');
 }
-
-  .navbar-toggler:not(.collapsed) .navbar-toggler-icon {
-    display: none;
-  }
-
-  .navbar-toggler:not(.collapsed) .close-icon {
-    background-image: url('static/images/main_logo.png');
-  }
+.text-content {
+  padding-top: 50px;
+  max-width: 100%;
+    /*padding-right: 20px;  Adds some space between the text and the image */
 }
-
-/* Ensure the toggler is hidden on large screens */
-@media (min-width: 993px) {
-  .navbar-toggler {
-    display: none;
-  }
+.mission-photo {
+    flex: 1; /* Takes up 1 fraction of the available space */
+    max-height: 500px; /* Sets a maximum height for the image */
+    overflow: hidden; /* Prevents the content from spilling out */
 }
-@media (max-width: 576px) {
-  .navbar .dropdown-menu {
-    position: static; /* Remove the absolute positioning */
-    float: none; /* Prevent floating */
-    display: none; /* Hide by default */
-    width: auto; /* Set width to auto to occupy the required space */
-    background-color: #333; /* Set your desired background color */
-  }
-
-  .navbar .dropdown-menu.show {
-    display: block; /* Display the dropdown */
-  }
-
-  .navbar .dropdown-menu .dropdown-item {
-    display: block; /* Make each dropdown item block-level so it spans the full width */
-  }
-
-  .navbar .dropdown-toggle::after {
-    display: none; /* Optionally hide the caret if you don't want it */
-  }
 }
   </style>
   <header>
@@ -515,7 +464,6 @@ body, h1, h2, h3, p, ul, li, a {
 </header>
 <section class="bg-light py-5">
     <div class="container">
-      
       <div class="content-container" >
         <div class="text-content" >
             <h2 class="display-1" style="color: #333;">Our Mission</h2>

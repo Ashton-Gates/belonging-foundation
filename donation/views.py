@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.conf import settings
 from django.db import transaction
 from django.contrib import messages
+from django.http import JsonResponse
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -225,3 +226,34 @@ def make_otp(request):
             return redirect('donation:make_otp')  # Same here for URL name
     else:
         return render(request, 'donation/make_otp.html')
+
+stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
+
+def retrieve_stripe_info(request):
+    email_or_transaction_id = request.GET.get('identifier', '')
+
+    try:
+        if "@" in email_or_transaction_id:  # rudimentary check to assume it's an email
+            # List customers with the given email address
+            customers = stripe.Customer.list(email=email_or_transaction_id).data
+            if customers:
+                customer_id = customers[0].id
+                # Now retrieve charges or other information using this customer ID
+                charges = stripe.Charge.list(customer=customer_id)
+                # Process and return relevant information
+                return JsonResponse({'charges': charges})
+            else:
+                return JsonResponse({'error': 'No customer found with that email.'})
+        else:
+            # Assume the identifier is a transaction ID and retrieve the charge
+            charge = stripe.Charge.retrieve(email_or_transaction_id)
+            # Process and return relevant information
+            return JsonResponse({'charge': charge})
+    except stripe.error.StripeError as e:
+        # Handle the error
+        body = e.json_body
+        err  = body.get('error', {})
+        return JsonResponse({'error': err.get('message')})
+
+    # Generic error if identifier doesn't match any pattern
+    return JsonResponse({'error': 'Invalid identifier provided.'})

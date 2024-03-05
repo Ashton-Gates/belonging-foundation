@@ -1,13 +1,35 @@
 <!-- donations/templates/donations/donor_login.html -->
 <!-- Include Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donate Login | Belonging Foundation</title>
 
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    .full-height {
+      min-height: 100vh; /* 100% of the viewport height */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem; /* Adds padding around the form */
+    }
+    .card {
+      width: 100%; /* Makes the card full width */
+      max-width: 500px; /* Maximum width of the form card */
+    }
+    /* Add additional styling as needed */
+  </style>
+</head>
+<body>
 <div class="container my-5">
   <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="container-fluid my-5">
       <div class="card">
         <div class="card-body">
-          <h3 class="card-title text-center">Login</h3>
+          <h3 class="card-title text-center">Donor Login</h3>
+          <p>1. You must've donated in order to qualify for a donor account.</p>
+          <p>2. Please use the email you used when you made the donation.</p>
           
           <!-- Display messages from Django's messages framework -->
           {% if messages %}
@@ -45,3 +67,4 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
