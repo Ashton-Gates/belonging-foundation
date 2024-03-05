@@ -20,11 +20,11 @@ from .auto_deny import auto_deny_scholarship_applications, auto_deny_vendor_appl
 
 @login_required
 def scholar_landing(request):
-    return render(request, 'scholar_landing.html')
+    return render(request, 'applicant/vendor_landing.html')
 
 @login_required
 def vendor_landing(request):
-    return render(request, 'vendor_landing.html')
+    return render(request, 'applicant/vendor_landing.html')
 
 
 
