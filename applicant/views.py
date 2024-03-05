@@ -29,16 +29,6 @@ def vendor_landing(request):
 
 
 
-@login_required
-def delete_account(request):
-    if request.method == 'POST':
-        # Delete the user's account
-        request.user.delete()
-        logout(request)
-        messages.success(request, 'Your account has been successfully deleted.')
-        return redirect('home')  # Redirect to the homepage or a goodbye page
-
-    return render(request, 'belonging/delete_account.html')  # Confirm account deletion page
 
 @login_required
 def get_latest_applications(request):
@@ -312,5 +302,16 @@ def logout_view(request):
     # Log out the user.
     logout(request)
     # Redirect to login page.
-    return redirect('login')
+    return redirect('applicant:login')
+
+@login_required
+def delete_account(request):
+    if request.method == 'POST':
+        # Delete the user's account
+        request.user.delete()
+        logout(request)
+        messages.success(request, 'Your account has been successfully deleted.')
+        return redirect('home')  # Redirect to the homepage or a goodbye page
+
+    return render(request, 'belonging/delete_account.html')  # Confirm account deletion page
 
