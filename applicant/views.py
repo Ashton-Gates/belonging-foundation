@@ -130,7 +130,7 @@ def scholarship_application(request):
             application.status = 'pending'  # Explicitly set status if not defaulting in the model
             application.save()
             messages.success(request, "Your scholarship application has been successfully submitted.")
-            return redirect('applicant_dashboard')
+            return redirect('applicant:applicant_dashboard')
         else:
             # If the form is not valid, render the form again with errors
             messages.error(request, "There was an error with your submission.")
