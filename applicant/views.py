@@ -74,7 +74,7 @@ def login_view(request):
                 return redirect('vendor_dashboard')
             
             # Default to applicant dashboard if no approved applications
-            return redirect('applicant:applicant_dashboard')
+            return redirect('applicant_dashboard')
         else:
             return render(request, 'applicant/login.html', {'form': form, 'error': 'Invalid username or password'})
     else:
@@ -111,7 +111,7 @@ def applicant_dashboard(request):
         'user_pitch_decks': user_pitch_decks,
     }
 
-    return render(request, 'belonging/applicant_dashboard.html', context)
+    return render(request, 'applicant/applicant_dashboard.html', context)
 
 @login_required
 def scholarship_application(request):
@@ -130,7 +130,7 @@ def scholarship_application(request):
             application.status = 'pending'  # Explicitly set status if not defaulting in the model
             application.save()
             messages.success(request, "Your scholarship application has been successfully submitted.")
-            return redirect('applicant:applicant_dashboard')
+            return redirect('applicant_dashboard')
         else:
             # If the form is not valid, render the form again with errors
             messages.error(request, "There was an error with your submission.")
