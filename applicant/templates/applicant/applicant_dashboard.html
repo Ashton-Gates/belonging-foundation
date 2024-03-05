@@ -533,17 +533,18 @@ color: white;
           <div class="carousel-inner">
             <ul>
               {% for scholarship in scholarships %}
-            <li>
               <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                  <h4>{{ scholarship.title }}</h4>
-                  <p>{{ scholarship.description }}</p>
-                  <!-- You can also display other fields here -->
+                <h4>{{ scholarship.title }}</h4>
+                <p>{{ scholarship.description }}</p>
+                <p>Grand Prize: {{ scholarship.grand_prize }}</p>
+                <p>Second Prize: {{ scholarship.second_prize }}</p>
+                <p>Third Place: {{ scholarship.third_place }}</p>
+                <p>Deadline: {{ scholarship.deadline|date:"DATE_FORMAT" }}</p>
+                <!-- DATE_FORMAT should be replaced with the actual date format you want to use, e.g. "N j, Y" for 'March 4, 2024' -->
               </div>
-            </li>
               {% endfor %}
             </ul>
           </div>
-
       </div>
       <h3 class="mt-5">Latest Submitted Scholarship Application</h3>
         {% if latest_scholarship_application %}

@@ -158,10 +158,11 @@ class DenialFeedbackForm(forms.Form):
 
 # Class to edit the individual scholarships that applicants will be appling for
 class ScholarshipAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', 'deadline')
-    # Add 'deadline' to the fields you want to be able to edit in the admin
+    list_display = ('title', 'grand_prize', 'second_prize', 'third_place', 'description', 'deadline')
     fieldsets = (
-        (None, {'fields': ('title', 'description', 'deadline')}),
+        (None, {
+            'fields': ('title', 'grand_prize', 'second_prize', 'third_place', 'description', 'deadline')
+        }),
     )
 
 admin.site.register(Scholarship, ScholarshipAdmin, )

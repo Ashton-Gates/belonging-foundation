@@ -26,6 +26,9 @@ class ApplicantRegistration(models.Model):
 # Model to track scholarship events for applicants
 class Scholarship(models.Model):
     title = models.CharField(max_length=200)
+    grand_prize = models.CharField(max_length=200, null=True, blank=True)
+    second_prize = models.CharField(max_length=200, null=True, blank=True)
+    third_place = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField()
     deadline = models.DateTimeField(null=True, blank=True)
     # You can add other fields like image, deadline, etc.
