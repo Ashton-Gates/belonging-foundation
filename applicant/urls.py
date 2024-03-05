@@ -7,12 +7,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 from .views import (vendor_application, scholarship_application, login_view, applicant_dashboard,                    
 download_vendor_pdf, download_scholarship_pdf, logout_view,
-withdraw_application, validate_referee_id, delete_account, registration)
+withdraw_application, validate_referee_id, delete_account, registration,
+scholar_landing, vendor_landing)
 
 app_name = 'applicant'
 
 
 urlpatterns = [
+    path('scholar_landing/', scholar_landing, name='scholar_landing'),
+    path('vendor_landing/', vendor_landing, name = 'vendor_landing'),
     path('admin/', admin.site.urls),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
