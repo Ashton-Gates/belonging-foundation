@@ -3,6 +3,8 @@
 from django import forms
 from accounts.models import CustomUser
 from django.contrib.auth import get_user_model, authenticate
+from django.core.exceptions import ValidationError
+from django.core.validators import URLValidator
 from .models import ScholarshipApplication, VendorApplication
 from django.core.validators import EmailValidator, RegexValidator
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -72,3 +74,25 @@ class ScholarshipApplicationForm(forms.ModelForm):
         model = ScholarshipApplication
         exclude = ('user', 'status', 'date_submitted', 'date_approved', 'date_rejected')
         fields = '__all__'
+    
+    def clean(self):
+        cleaned_data = super().clean()  # Call the parent class's clean method first
+        
+        # Check if all required fields are filled
+        for field in self.fields:
+            if self.fields[field].required and not cleaned_data.get(field):
+                self.add_error(field, 'This field is required.')
+
+        # Validate URL fields specifically
+        url_validator = URLValidator()
+        video_link = cleaned_data.get('video_link')
+        if video_link:
+            try:
+                url_validator(video_link)
+            except ValidationError:
+                self.add_error('video_link', 'Enter a valid URL.')
+        
+        # You can add more custom validations as needed
+
+        # Always return the full collection of cleaned data
+        return cleaned_data
