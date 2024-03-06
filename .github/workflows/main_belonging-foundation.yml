@@ -13,9 +13,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Python version
         uses: actions/setup-python@v1
         with:
@@ -43,7 +43,7 @@ jobs:
         run: odbcinst -j    
     
         # Test Database Connection before deployment
-     - name: Test Database Connection
+      - name: Test Database Connection
         run: python test_db_connection.py
         env:
           DATABASE_CONNECTION_STRING: ${{ secrets.DATABASE_CONNECTION_STRING }}
