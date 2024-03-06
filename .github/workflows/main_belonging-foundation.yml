@@ -54,10 +54,10 @@ jobs:
       
     - name: Install ODBC Driver for SQL Server
       run: |
-        sudo ACCEPT_EULA=Y apt-get install -y msodbcsql17
+        sudo ACCEPT_EULA=Y apt-get install -y msodbcsql18
     - name: Verify ODBC Driver installation
       run: odbcinst -j    
-         
+
       # Test Database Connection before deployment
     - name: Test Database Connection
       run: python test_db_connection.py
