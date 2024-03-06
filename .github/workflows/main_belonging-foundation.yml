@@ -30,15 +30,7 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       
-      - name: Add Microsoft package signing key (Updated Method)
-        run: |
-          curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft-archive-keyring.gpg
-          echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/ubuntu/20.04/prod focal main" | sudo tee /etc/apt/sources.list.d/microsoft-prod.list > /dev/null
-          sudo apt-get update
-      
-      - name: Install ODBC Driver for SQL Server
-        run: |
-          sudo ACCEPT_EULA=Y apt-get install -y msodbcsql17
+
 
   test:
     needs: build
@@ -56,6 +48,15 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: Add Microsoft package signing key (Updated Method)
+      run: |
+        curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft-archive-keyring.gpg
+        echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/ubuntu/20.04/prod focal main" | sudo tee /etc/apt/sources.list.d/microsoft-prod.list > /dev/null
+        sudo apt-get update
+      
+    - name: Install ODBC Driver for SQL Server
+      run: |
+        sudo ACCEPT_EULA=Y apt-get install -y msodbcsql17
         
       # Test Database Connection before deployment
     - name: Test Database Connection
