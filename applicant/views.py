@@ -124,6 +124,7 @@ def scholarship_application(request):
         if form.is_valid():
             application = form.save(commit=False)
             application.user = request.user  # Set the user to the current logged-in user
+            referee_id = form.cleaned_data.get('refereeID')
             application.status = 'pending'  # Explicitly set status if not defaulting in the model
             application.save()
             messages.success(request, "Your scholarship application has been successfully submitted.")

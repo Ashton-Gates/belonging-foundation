@@ -50,6 +50,7 @@ class Referral(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='referee_profile', null=True)
     nominee_name = models.CharField(max_length=255)
     nominee_email = models.EmailField()
+    referee_id = models.CharField(max_length=100, blank=True, null=True)  # Assuming it's an optional field
     nominee_phone_number = models.CharField(max_length=20, blank=True, null=True)
     scholarship = models.ForeignKey(Scholarship, on_delete=models.CASCADE, null=True)
     justification = models.TextField()

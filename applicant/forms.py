@@ -6,6 +6,7 @@ from django.contrib.auth import get_user_model, authenticate
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
 from .models import ScholarshipApplication, VendorApplication
+from referee.models import Referee
 from django.core.validators import EmailValidator, RegexValidator
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
@@ -16,6 +17,7 @@ User = get_user_model()
 
 class ApplicantRegistrationForm(UserCreationForm):
     email = forms.EmailField(validators=[EmailValidator()], widget=forms.EmailInput(attrs={'class': 'input-field'}))
+    
     username = forms.CharField(
         label="Full Name",
         validators=[RegexValidator(regex='^[a-zA-Z0-9]*$')],
@@ -30,6 +32,14 @@ class ApplicantRegistrationForm(UserCreationForm):
             'password1': forms.PasswordInput(attrs={'class': 'input-field', 'placeholder': 'Password', 'style': 'max-width: 300px;', 'pattern': '(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,};'}),
             'password2': forms.PasswordInput(attrs={'class': 'input-field', 'placeholder': 'Password Confirmation', 'style': 'max-width: 300px;', 'pattern': '(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,};'}),
         }
+    def clean_referee_id(self):
+        referee_id = self.cleaned_data.get('referee_id')
+        if referee_id:
+            try:
+                Referee.objects.get(referee_id=referee_id)
+            except Referee.DoesNotExist:
+                raise ValidationError("Invalid Referee ID")
+        return referee_id
     def __init__(self, *args, **kwargs):
         super(ApplicantRegistrationForm, self).__init__(*args, **kwargs)
         # Set the help text for the password confirmation field to an empty string
@@ -70,6 +80,18 @@ class VendorApplicationForm(forms.ModelForm):
         return vendor_application
 
 class ScholarshipApplicationForm(forms.ModelForm):
+    referee_id = forms.ForeignKey(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+
+    date_of_birth = forms.DateField(
+        widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'})
+    )
+    education_level = forms.ChoiceField(
+        choices=[('high_school', 'High School'), ('college', 'College'), ('graduate_school', 'Graduate School'), ('blacksheep', 'Blacksheep')],
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+
+
     class Meta:
         model = ScholarshipApplication
         exclude = ('user', 'status', 'date_submitted', 'date_approved', 'date_rejected')
