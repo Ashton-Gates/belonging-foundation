@@ -62,18 +62,14 @@ jobs:
       run: python test_db_connection.py
       env:
         DATABASE_CONNECTION_STRING: ${{ secrets.DATABASE_CONNECTION_STRING }}
+    - name: Check for configuration and import errors
+      run: |
+        python manage.py check
+  
+    - name: Run tests
+      run: |
+        python manage.py test
 
-      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
-    - name: Zip artifact for deployment
-      run: zip release.zip ./* -r
-
-    - name: Upload artifact for deployment jobs
-      uses: actions/upload-artifact@v3
-      with:
-        name: python-app
-        path: |
-          release.zip
-          !venv/
 
   deploy:
     needs: test
