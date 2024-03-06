@@ -11,12 +11,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
-
       - name: Set up Python version
         uses: actions/setup-python@v1
         with:
@@ -28,82 +27,68 @@ jobs:
           source venv/bin/activate
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Add Microsoft package signing key (Updated Method)
+        run: |
+          curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft-archive-keyring.gpg
+          echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/ubuntu/20.04/prod focal main" | sudo tee /etc/apt/sources.list.d/microsoft-prod.list > /dev/null
+          sudo apt-get update
+          
+      - name: Install ODBC Driver for SQL Server
+        run: |
+          sudo ACCEPT_EULA=Y apt-get install -y msodbcsql18
+      - name: Verify ODBC Driver installation
+         run: odbcinst -j    
+    
+        # Test Database Connection before deployment
+     - name: Test Database Connection
+        run: python test_db_connection.py
+        env:
+          DATABASE_CONNECTION_STRING: ${{ secrets.DATABASE_CONNECTION_STRING }}
+    
+      - name: Check for configuration and import errors
+        run: |
+          python manage.py check
       
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v1
-      with:
-        python-version: '3.10'
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Add Microsoft package signing key (Updated Method)
-      run: |
-        curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft-archive-keyring.gpg
-        echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/ubuntu/20.04/prod focal main" | sudo tee /etc/apt/sources.list.d/microsoft-prod.list > /dev/null
-        sudo apt-get update
+      - name: Run tests
+        run: |
+          python manage.py test
       
-    - name: Install ODBC Driver for SQL Server
-      run: |
-        sudo ACCEPT_EULA=Y apt-get install -y msodbcsql18
-    - name: Verify ODBC Driver installation
-      run: odbcinst -j    
-
-      # Test Database Connection before deployment
-    - name: Test Database Connection
-      run: python test_db_connection.py
-      env:
-        DATABASE_CONNECTION_STRING: ${{ secrets.DATABASE_CONNECTION_STRING }}
-
-    - name: Check for configuration and import errors
-      run: |
-        python manage.py check
-  
-    - name: Run tests
-      run: |
-        python manage.py test
-
-
-  deploy:
+  build:
     needs: test
     runs-on: ubuntu-latest
-
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
     steps:
-            # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
+      - uses: actions/checkout@v4
+      - name: Set up Python version
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
-
-      - name: Upload artifact for deployment jobs
+        run: zip -r release.zip . -x "venv/*" ".git/*" "*.zip"
+      - name: Upload build artifact
         uses: actions/upload-artifact@v3
         with:
           name: python-app
-          path: |
-            release.zip
-            !venv/
-      - name: Download artifact from build job
+          path: release.zip
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: 'Production'
+    steps:
+      - name: Download build artifact
         uses: actions/download-artifact@v3
         with:
           name: python-app
-
       - name: Unzip artifact for deployment
         run: unzip release.zip
-
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
-        id: deploy-to-webapp
         with:
           app-name: 'Belonging-Foundation'
           slot-name: 'Production'
