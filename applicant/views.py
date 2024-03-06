@@ -71,7 +71,7 @@ def login_view(request):
                 return redirect('vendor_dashboard')
             
             # Default to applicant dashboard if no approved applications
-            return redirect('applicant_dashboard')
+            return redirect('applicant:applicant_dashboard')
         else:
             return render(request, 'applicant/login.html', {'form': form, 'error': 'Invalid username or password'})
     else:
@@ -113,7 +113,7 @@ def applicant_dashboard(request):
 @login_required
 def scholarship_application(request):
         # When you want to auto-deny applications, just call the function
-    auto_deny_scholarship_applications()
+    #auto_deny_scholarship_applications()
 
     if request.method == "POST":
         form = ScholarshipApplicationForm(request.POST, request.FILES)
@@ -142,26 +142,26 @@ def scholarship_application(request):
 @login_required
 def vendor_application(request):
         # When you want to auto-deny applications, just call the function
-    auto_deny_vendor_applications()
+    #auto_deny_vendor_applications()
     if request.method == 'POST':
         form = VendorApplicationForm(request.POST, request.FILES)
         existing_vendor_app = VendorApplication.objects.filter(user=request.user).exists()
         if existing_vendor_app:
             messages.error(request, 'You have already submitted a vendor application.')
-            return redirect('applicant_dashboard')
+            return redirect('applicant:applicant_dashboard')
         if form.is_valid():
             vendor_application = form.save(commit=False)
             vendor_application.user = request.user
             vendor_application.status = 'pending'
             vendor_application.save()
             messages.success(request, 'Your vendor application has been successfully submitted.')
-            return redirect('applicant_dashboard')
+            return redirect('applicant:applicant_dashboard')
         else:
             messages.error(request, 'There was an error with your submission: ' + ', '.join(form.errors))
     else:
         form = VendorApplicationForm()
 
-    return render(request, 'belonging/vendor_app.html', {'form': form})
+    return render(request, 'applicant/vendor_app.html', {'form': form})
 
 
 

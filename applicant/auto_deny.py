@@ -3,6 +3,8 @@
 from .models import ScholarshipApplication, VendorApplication
 from django.utils import timezone
 
+ALLOWED_REGIONS = ['USA']
+
 def auto_deny_scholarship_applications():
     # Get all pending scholarship applications
     scholarship_applications = ScholarshipApplication.objects.filter(status='pending')
@@ -26,4 +28,4 @@ def auto_deny_vendor_applications():
 def should_deny(application):
     # Implement your criteria check here
     # For example, if the application is from a blocked region
-    return application.user.region in BLOCKED_REGIONS
+    return application.user.region not in ALLOWED_REGIONS

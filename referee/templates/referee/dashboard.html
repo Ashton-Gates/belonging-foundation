@@ -6,7 +6,13 @@
     <h2>Available Scholarships</h2>
     <ul>
         {% for scholarship in scholarships %}
-            <li>{{ scholarship.title }} - {{ scholarship.description }}</li>
+        <li><h4>{{ scholarship.title }}</h4></li>
+            <p>Grand Prize: {{ scholarship.grand_prize }}</p>
+            <p>Second Prize: {{ scholarship.second_prize }}</p>
+            <p>Third Place: {{ scholarship.third_place }}</p>
+            <p>Deadline: {{ scholarship.deadline|date:"DATE_FORMAT" }}</p>
+            <p>{{ scholarship.description }}</p>
+
         {% empty %}
             <li>No scholarships available at the moment.</li>
         {% endfor %}

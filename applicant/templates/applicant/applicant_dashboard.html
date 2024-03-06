@@ -554,9 +554,9 @@ color: white;
         <ul class="list-group mb-5">
             <li class="list-group-item application-block">
                 {{ latest_scholarship_application.first_name }} {{ latest_scholarship_application.last_name }} - {{ latest_scholarship_application.business_description }} - <strong>Status:</strong> {{ latest_scholarship_application.status }}
-                <a href="{% url 'download_scholarship_pdf' latest_scholarship_application.id %}">Download Scholarship Application PDF</a>
+                <a href="{% url 'applicant:download_scholarship_pdf' latest_scholarship_application.id %}">Download Scholarship Application PDF</a>
                 {% if application.scholarship.deadline > now %}
-                    <a href="{% url 'withdraw_application' application.id %}">Withdraw Application</a>
+                    <a href="{% url 'applicant:withdraw_application' application.id %}">Withdraw Application</a>
                 {% endif %}
             </li>
         </ul>
@@ -568,9 +568,9 @@ color: white;
             <ul class="list-group mb-5">
                 <li class="list-group-item application-block">
                     {{ latest_vendor_application.first_name }} {{ latest_vendor_application.last_name }} - {{ latest_vendor_application.business_description }} - <strong>Status:</strong> {{ latest_vendor_application.status }}
-                    <a href="{% url 'download_vendor_pdf' latest_vendor_application.id %}">Download Vendor Application PDF</a>
+                    <a href="{% url 'applicant:download_vendor_pdf' latest_vendor_application.id %}">Download Vendor Application PDF</a>
                     {% if application.scholarship.deadline > now %}
-                        <a href="{% url 'withdraw_application' application.id %}">Withdraw Application</a>
+                        <a href="{% url 'applicant:withdraw_application' application.id %}">Withdraw Application</a>
                     {% endif %}
                 
                 </li>

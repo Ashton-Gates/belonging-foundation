@@ -28,6 +28,7 @@ class CustomUser(AbstractUser):
     profile_website = models.URLField(max_length=255, blank=True, verbose_name='Profile Website')
     instagram_link = models.URLField(max_length=255, blank=True, verbose_name='Instagram')
     facebook_link = models.URLField(max_length=255, blank=True, verbose_name='Facebook')
+    region = models.CharField(max_length=100, null=True, blank=True)
 
 
 

@@ -72,9 +72,14 @@ class VendorApplicationForm(forms.ModelForm):
         fields = '__all__'
         exclude = ('user', 'status')
 
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(VendorApplicationForm, self).__init__(*args, **kwargs)
+
     def save(self, commit=True):
-        vendor_application = super().save(commit=False)
-        vendor_application.user = self.request.user
+        vendor_application = super(VendorApplicationForm, self).save(commit=False)
+        if self.request:
+            vendor_application.user = self.request.user
         if commit:
             vendor_application.save()
         return vendor_application

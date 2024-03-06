@@ -12,7 +12,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from .forms import RefereeRegistrationForm, ReferralForm, SponsorApplicationForm, LoginForm
 from .models import Referee, Referral, SponsorApplication
+from accounts.models import CustomUser
 from applicant.models import Scholarship
+
 User = get_user_model()
 
 @login_required
@@ -46,7 +48,10 @@ def submit_referral(request):
 @login_required
 def referee_dashboard(request):
     scholarships = Scholarship.objects.all()  # Fetch all scholarship instances
-    referrals = Referral.objects.filter(referee=request.user.referee_profile).order_by('-id')
+    try:
+        referrals = Referral.objects.filter(referee=request.user.referee_profile).order_by('-id')
+    except CustomUser.referee_profile.RelatedObjectDoesNotExist:
+        referrals = None  # or Referral.objects.none() to pass an empty queryset    
     
     return render(request, 'referee/dashboard.html', {'scholarships': scholarships})
 
