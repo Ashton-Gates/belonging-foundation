@@ -30,8 +30,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       
-
-
   test:
     needs: build
     runs-on: ubuntu-latest
@@ -57,12 +55,15 @@ jobs:
     - name: Install ODBC Driver for SQL Server
       run: |
         sudo ACCEPT_EULA=Y apt-get install -y msodbcsql17
-        
+    - name: Verify ODBC Driver installation
+      run: odbcinst -j    
+         
       # Test Database Connection before deployment
     - name: Test Database Connection
       run: python test_db_connection.py
       env:
         DATABASE_CONNECTION_STRING: ${{ secrets.DATABASE_CONNECTION_STRING }}
+
     - name: Check for configuration and import errors
       run: |
         python manage.py check
