@@ -32,7 +32,15 @@ CustomUser = get_user_model()
 # Check if the CustomUser model is already registered, if so, unregister it
 if admin.site.is_registered(CustomUser):
     admin.site.unregister(CustomUser)
+@admin.register(Referee)
+class RefereeAdmin(admin.ModelAdmin):
+    list_display = ['user', 'referee_id']
+    # If you have additional fields, you can add them here
 
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        # If you need to filter the queryset for specific conditions, you can modify it here
+        return qs
 @admin.register(Vendor)
 class VendorAdmin(admin.ModelAdmin):
     list_display = ('user', 'business_name', 'website_link')
@@ -119,19 +127,11 @@ class SponsorApplicationAdmin(admin.ModelAdmin):
 
 @admin.register(Referral)
 class ReferralAdmin(admin.ModelAdmin):
-    list_display = ['nominee_name', 'nominee_email', 'scholarship', 'referee', 'justification']
+    list_display = ['nominee_name', 'nominee_email', 'referee', 'justification']
     search_fields = ['nominee_name', 'referee__user__username']
     list_filter = ['scholarship']
 
-@admin.register(Referee)
-class RefereeAdmin(admin.ModelAdmin):
-    list_display = ['user', 'referee_id']
-    # If you have additional fields, you can add them here
 
-    def get_queryset(self, request):
-        qs = super().get_queryset(request)
-        # If you need to filter the queryset for specific conditions, you can modify it here
-        return qs
 
 class DenialFeedbackForm(forms.Form):
     feedback = forms.CharField(widget=forms.Textarea, required=False)

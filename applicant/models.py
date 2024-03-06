@@ -2,6 +2,7 @@
 
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from referee.models import Referee
 from django.db import models
 
 
@@ -54,7 +55,7 @@ class ScholarshipApplication(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)    
     first_name = models.CharField(max_length=100, null=True)
     last_name = models.CharField(max_length=100, null=True)
-    referee_id = models.CharField(max_length=100, blank=True, null=True)
+    referee_id = models.CharField(Referee, max_length=100, blank=True, null=True)
     phone_number = models.CharField(max_length=15, null=True)
     email = models.EmailField(null=True)
     date_of_birth = models.DateField(null=True)

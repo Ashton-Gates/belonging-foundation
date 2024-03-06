@@ -80,7 +80,7 @@ class VendorApplicationForm(forms.ModelForm):
         return vendor_application
 
 class ScholarshipApplicationForm(forms.ModelForm):
-    referee_id = forms.ForeignKey(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    referee_id = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
 
 
     date_of_birth = forms.DateField(

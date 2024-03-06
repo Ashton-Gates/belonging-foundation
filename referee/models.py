@@ -4,7 +4,6 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from accounts.models import CustomUser
-from applicant.models import Scholarship
 
 
 
@@ -45,14 +44,18 @@ class Scholarship(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
 
-
 class Referral(models.Model):
+    '''@staticmethod
+    def default_scholarship_id():
+        scholarship = Scholarship.objects.first()
+        return scholarship.id if scholarship else None'''
+
+    
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='referee_profile', null=True)
+    scholarship = models.ForeignKey(Scholarship, on_delete=models.CASCADE, null=True)
     nominee_name = models.CharField(max_length=255)
     nominee_email = models.EmailField()
-    referee_id = models.CharField(max_length=100, blank=True, null=True)  # Assuming it's an optional field
     nominee_phone_number = models.CharField(max_length=20, blank=True, null=True)
-    scholarship = models.ForeignKey(Scholarship, on_delete=models.CASCADE, null=True)
     justification = models.TextField()
     referee = models.ForeignKey(Referee, on_delete=models.CASCADE)
 
@@ -61,8 +64,10 @@ class Referral(models.Model):
         return {
             'title': self.scholarship.title,
             'description': self.scholarship.description,
-            'deadline': self.scholarship.deadline,
+            'grand_prize': self.scholarship.grand_prize,
+
         }
+
 
     def __str__(self):
         return f"{self.user.username} ({self.referee_id})"
