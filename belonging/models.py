@@ -13,7 +13,6 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-
 class Dashboard(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
@@ -23,11 +22,11 @@ class Dashboard(models.Model):
     
 class Vendor(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='belonging_vendor')
-    # Additional vendor-specific fields
+    # vendor-specific fields
 
 class Bidder(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    # Additional bidder-specific fields
+    # bidder-specific fields
 
 class Item(models.Model):
     name = models.CharField(max_length=200)
@@ -45,9 +44,10 @@ class Bid(models.Model):
     bidder = models.ForeignKey(Bidder, on_delete=models.CASCADE)
     bid_amount = models.DecimalField(max_digits=10, decimal_places=2)
     bid_time = models.DateTimeField(auto_now_add=True)
-
-
-
+    
+    def __str__(self):
+        return f"{self.bidder.user.username} bid {self.bid_amount} on {self.item.name} at {self.bid_time}"
+    
 class Event(models.Model):
     name = models.CharField(max_length=200)
     date = models.DateField()
@@ -64,8 +64,6 @@ class Event(models.Model):
 
     def __str__(self):
         return f"{self.business_name} by {self.user.username} - {self.status}"
-
-
 
 class Venue(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

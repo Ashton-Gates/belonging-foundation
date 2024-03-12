@@ -433,14 +433,16 @@
             <div class="dropdown-menu" aria-labelledby="profileDropdown">
               <a class="dropdown-item" href="{% url 'applicant:login' %}">Applicant Login</a>
               <a class="dropdown-item" href="/donation/donor_login/">Donor Login</a>
-              <a class="dropdown-item" href="/referee/referee_login/">Sponsor Login</a>              
+              <a class="dropdown-item" href="/referee/referee_login/">Sponsor Login</a> 
+              <a class="dropdown-item" href="{% url 'vendor:vendor_login' %}">Vendor Login</a>
+             
 
 
             </div>
           </li>
-          <li class="nav-item" >
+          <!--<li class="nav-item" >
             <a class="nav-link" href="{% url 'auction:auction_dashboard' %}">Marketplace</a>
-          </li>
+          </li>-->
           <li class="nav-item">
             <a class="nav-link" href="/donate/">Donate to Belonging</a>
           </li>

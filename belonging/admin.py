@@ -32,6 +32,8 @@ CustomUser = get_user_model()
 # Check if the CustomUser model is already registered, if so, unregister it
 if admin.site.is_registered(CustomUser):
     admin.site.unregister(CustomUser)
+
+
 @admin.register(Referee)
 class RefereeAdmin(admin.ModelAdmin):
     list_display = ['user', 'referee_id']
@@ -41,6 +43,7 @@ class RefereeAdmin(admin.ModelAdmin):
         qs = super().get_queryset(request)
         # If you need to filter the queryset for specific conditions, you can modify it here
         return qs
+    
 @admin.register(Vendor)
 class VendorAdmin(admin.ModelAdmin):
     list_display = ('user', 'business_name', 'website_link')
@@ -132,7 +135,6 @@ class ReferralAdmin(admin.ModelAdmin):
     list_filter = ['scholarship']
 
 
-
 class DenialFeedbackForm(forms.Form):
     feedback = forms.CharField(widget=forms.Textarea, required=False)
 
@@ -156,6 +158,8 @@ class DenialFeedbackForm(forms.Form):
 
     deny_selected_applications.short_description = "Deny selected applications with feedback"
 
+
+
 # Class to edit the individual scholarships that applicants will be appling for
 class ScholarshipAdmin(admin.ModelAdmin):
     list_display = ('title', 'grand_prize', 'second_prize', 'third_place', 'description', 'deadline')
@@ -165,7 +169,6 @@ class ScholarshipAdmin(admin.ModelAdmin):
         }),
     )
 
-admin.site.register(Scholarship, ScholarshipAdmin, )
 
 #Class to for Scholarship Application viewing and listing for approve/deny
 class ScholarshipApplicationForm(forms.ModelForm):

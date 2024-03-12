@@ -9,9 +9,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv(BASE_DIR / '.env')
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-mq@((#x!tz0)v5bojl!ymb6s*5#s((h$ve9y88+j1(m%u427*o'
 
@@ -21,14 +18,14 @@ DEBUG = True
 ALLOWED_HOSTS = ['*','belonging.foundation', 'www.belonging.foundation', 'belonging-foundation.azurewebsites.net']
 #'belonging.foundation', 'www.belonging.foundation'
 
-# Application definition
+CMS_CONFIRM_VERSION4 = True
 
 INSTALLED_APPS = [
+    'accounts',
     'applicant',
     'belonging',
     'referee',    
     'donation',
-    'accounts',
     'storages',    
     'auction',
     'customers',
@@ -48,8 +45,6 @@ INSTALLED_APPS = [
     'vendor',
 ]
 
-
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -61,6 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+
 ]
 
 
@@ -89,6 +85,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 'belonging.wsgi.application'
 
@@ -151,16 +149,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
-
-
-
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DJANGO_SETTINGS_MODULE = 'belonging.settings'
@@ -184,14 +172,11 @@ EMAIL_HOST_PASSWORD = 'wnwl mdow uhlt xexe'
 DEFAULT_FROM_EMAIL = 'ashtonkinnell8@gmail.com'
 EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 
-
 CSRF_COOKIE_SECURE = True
 
 CSRF_COOKIE_DOMAIN = 'belonging.foundation'
 
 CSRF_TRUSTED_ORIGINS = ['https://belonging-foundation.azurewebsites.net','https://belonging.foundation', 'https://www.belonging.foundation']
-
-
 
 ROOT_URLCONF = 'belonging.urls'
 
@@ -255,10 +240,14 @@ STATICFILES_FINDERS = (
 )
 
 DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
-STRIPE_TEST_SECRET_KEY = os.environ.get("STRIPE_TEST_SECRET_KEY", "sk_test_51ObDcEKj0Am5FA1U8mu0YIyaYWgntAdOudVoidLPiCJlC9Ynm1WPHkIvrMFgy3Sph8JEOXARvuNDWoYEXNyFL1G30020D0t41u")
-STRIPE_PUBLIC_KEY = 'pk_test_51ObDcEKj0Am5FA1UXZR8BaefNnGDzw6pOrmSSHX499OWIxsrNZCwjxHAG1HbgitVA0c4GhTwOOwaPqLIQazy0o6W00GZroVGqf'
-STRIPE_PRIVATE_KEY = 'sk_test_51ObDcEKj0Am5FA1U8mu0YIyaYWgntAdOudVoidLPiCJlC9Ynm1WPHkIvrMFgy3Sph8JEOXARvuNDWoYEXNyFL1G30020D0t41u'
+STRIPE_TEST_SECRET_KEY = os.environ.get("STRIPE_TEST_SECRET_KEY", "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")
+
+STRIPE_PUBLIC_KEY = 'pk_live_51ObDcEKj0Am5FA1Us8UnfXT52W1sKFd1sha6Gl8RUVSF9oNbdroLJlgQXo80wKXN58u3zSyU8YXSC8QjOWAWcZej00GYSJP8SB'
+
+STRIPE_PRIVATE_KEY = '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'
+
 DJSTRIPE_WEBHOOK_SECRET = 'whsec_84219e91f49eaacb54edaedc816f3712bb2afc053b6bbfafe657e5028681b036'
+
 DJSTRIPE_USE_NATIVE_JSONFIELD = True
 
 

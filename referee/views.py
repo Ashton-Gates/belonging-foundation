@@ -35,7 +35,7 @@ def submit_referral(request):
                 'You have been nominated for a scholarship',
                 f"Message content. Referee ID: {referee_instance.referee_id if referee_instance else 'N/A'}",
 
-                'from@example.com',
+                'ashtonkinnell8@gmail.com',
                 [form.cleaned_data['nominee_email']],
                 fail_silently=False,
             )

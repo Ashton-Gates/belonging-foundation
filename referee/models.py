@@ -69,5 +69,7 @@ class Referral(models.Model):
         }
 
 
-    def __str__(self):
-        return f"{self.user.username} ({self.referee_id})"
+def __str__(self):
+    if self.user is None:
+        return f"User is None ({self.referee_id})"
+    return f"{self.user.username} ({self.referee_id})"
